@@ -32,5 +32,15 @@
                 child.Render();
             }
         }
+
+        virtual public void Destroy()
+        {
+            foreach (var child in Childs)
+            {
+                child.Destroy();
+            }
+
+            Childs.Clear();
+        }
     }
 }

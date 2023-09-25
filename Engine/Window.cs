@@ -1,9 +1,5 @@
-﻿using Raylib_cs;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Engine._Builder;
+using Raylib_cs;
 
 namespace Engine
 {
@@ -12,23 +8,28 @@ namespace Engine
         public string Name { get; set; }
         public int Width { get; set; }
         public int Height { get; set; }
+        public bool Fullscreen { get; set; }
 
         private static Window? _instance;
 
-        private Window(string name, int width, int height)
+        private Window(string name, int width, int height, bool fullscreen)
         {
             Name = name;
             Width = width;
             Height = height;
+            Fullscreen = fullscreen;
         }
 
-        public static Window GetInstance(string name = "Default", int width = 1280, int height = 720)
+        public static Window GetInstance()
         {
-            if (_instance == null)
-            {
-                _instance = new Window(name, width, height);
-                return _instance;
-            }
+            _instance ??= new WindowBuilder().Build();
+            return _instance;
+        }
+
+        public static Window GetInstance(string name, int width,
+            int height, bool fullscreen)
+        {
+            _instance ??= new Window(name, width, height, fullscreen);
 
             return _instance;
         }
@@ -36,6 +37,11 @@ namespace Engine
         public void Init()
         {
             Raylib.InitWindow(Width, Height, Name);
+
+            if (Raylib.IsWindowFullscreen() != Fullscreen)
+            {
+                Raylib.ToggleFullscreen();
+            }
         }
 
         public void Close()
