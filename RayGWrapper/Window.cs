@@ -1,7 +1,6 @@
 ﻿using Raylib_cs;
-using System.Numerics;
 
-namespace Engine
+namespace RayG
 {
     public static class Window
     {
@@ -35,5 +34,4 @@ namespace Engine
             Raylib.CloseWindow();
         }
     }
-
 }

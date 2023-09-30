@@ -1,4 +1,4 @@
-﻿namespace Engine
+﻿namespace RayG
 {
     public class GameObject : IDisposable
     {
@@ -68,28 +68,28 @@
             //Collision Tree
             foreach (var child in Childs)
             {
-                if (child is ICollisor collisionChild)
+                if (child is ICollisor collisorChild)
                 {
-                    for (int i = collisionChild.Collisor.Colliders.Count - 1; i >= 0; i--)
+                    for (int i = collisorChild.Collisor.Colliders.Count - 1; i >= 0; i--)
                     {
-                        var c = collisionChild.Collisor.Colliders[i];
-                        if (!collisionChild.Collisor.IsColliding(c))
+                        var collider = collisorChild.Collisor.Colliders[i];
+                        if (!collisorChild.Collisor.IsColliding(collider))
                         {
-                            collisionChild.Collisor.Colliders.RemoveAt(i);
-                            collisionChild.OnCollisionExit(c);
+                            collisorChild.Collisor.Colliders.RemoveAt(i);
+                            collisorChild.OnCollisionExit(collider);
                         }
                     }
 
                     foreach (var otherChild in Childs)
                     {
-                        if (otherChild is ICollisor otherCollisionChild 
-                            && otherCollisionChild != collisionChild 
-                            && !collisionChild.Collisor.Colliders.Contains(otherCollisionChild.Collisor))
+                        if (otherChild is ICollisor otherCollisorChild 
+                            && otherCollisorChild != collisorChild 
+                            && !collisorChild.Collisor.Colliders.Contains(otherCollisorChild.Collisor))
                         {
-                            if (collisionChild.Collisor.IsColliding(otherCollisionChild.Collisor))
+                            if (collisorChild.Collisor.IsColliding(otherCollisorChild.Collisor))
                             {
-                                collisionChild.Collisor.Colliders.Add(otherCollisionChild.Collisor);
-                                collisionChild.OnCollisionEnter(otherCollisionChild.Collisor);
+                                collisorChild.Collisor.Colliders.Add(otherCollisorChild.Collisor);
+                                collisorChild.OnCollisionEnter(otherCollisorChild.Collisor);
                             }
                         }
                     }

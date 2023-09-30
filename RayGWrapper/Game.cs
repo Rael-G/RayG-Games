@@ -1,6 +1,6 @@
 ﻿using Raylib_cs;
 
-namespace Engine
+namespace RayG
 {
     public class Game
     {
@@ -10,7 +10,6 @@ namespace Engine
         {
             GameObject = gameObject;
         }
-
 
         public void Run()
         {

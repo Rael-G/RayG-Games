@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Numerics;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Numerics;
 
-namespace Engine
+namespace RayG
 {
     public interface ICollisor
     {
@@ -30,13 +25,14 @@ namespace Engine
             Colliders = new List<Collisor> { };
         }
 
-        public bool IsColliding(Collisor collisor)
+        public bool IsColliding(Collisor collider)
         {
+            //AABB
             return
-               Position.X < collisor.Position.X + collisor.Area.X &&
-               Position.X + Area.X > collisor.Position.X &&
-               Position.Y <  collisor.Position.Y + collisor.Area.Y &&
-               Position.Y + Area.Y > collisor.Position.Y;
+               Position.X < collider.Position.X + collider.Area.X &&
+               Position.X + Area.X > collider.Position.X &&
+               Position.Y <  collider.Position.Y + collider.Area.Y &&
+               Position.Y + Area.Y > collider.Position.Y;
         }
 
         public override bool Equals(object? obj)
@@ -45,7 +41,6 @@ namespace Engine
             {
                 return false;
             }
-
             Collisor other = (Collisor)obj;
             return Position.Equals(other.Position) && Area.Equals(other.Area);
         }
