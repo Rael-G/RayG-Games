@@ -2,32 +2,39 @@
 
 namespace Engine
 {
-    public class Game : GameObject
+    public class Game
     {
-        private Window Window { get; set; }
+        GameObject GameObject { get; set; }
 
-        public Game(List<GameObject> gameObjects, Window window)
+        public Game(GameObject gameObject)
         {
-            Childs = gameObjects;
-            Window = window;
+            GameObject = gameObject;
         }
+
 
         public void Run()
         {
+            GameObject.Config();
+
             Window.Init();
 
-            Start();
+            GameObject.Start();
 
             while (!Raylib.WindowShouldClose())
             {
-                Update();
+                GameObject.Update();
 
                 Raylib.BeginDrawing();
-                Render();
+
+                GameObject.Render();
+                GameObject.Canvas();
+
                 Raylib.EndDrawing();
             }
 
+            GameObject.Dispose();
+
             Window.Close();
-        }
+        }   
     }
 }
