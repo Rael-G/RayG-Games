@@ -1,14 +1,14 @@
-﻿namespace RayG
+﻿using RayG.Interfaces;
+
+namespace RayG
 {
     public class GameObject : IDisposable
     {
         public List<GameObject> Childs { get; set; }
-        public GameObject? Parent { get; set; }
 
         public GameObject(GameObject? parent = null)
         {
             Childs = new List<GameObject>();
-            Parent = parent;
         }
 
         public virtual void Config()

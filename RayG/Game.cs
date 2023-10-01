@@ -16,6 +16,7 @@ namespace RayG
             GameObject.Config();
 
             Window.Init();
+            Raylib.InitAudioDevice();
 
             GameObject.Start();
 
@@ -33,6 +34,7 @@ namespace RayG
 
             GameObject.Dispose();
 
+            Raylib.CloseAudioDevice();
             Window.Close();
         }   
     }

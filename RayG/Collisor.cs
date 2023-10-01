@@ -2,14 +2,6 @@
 
 namespace RayG
 {
-    public interface ICollisor
-    {
-        Collisor Collisor { get; set; }
-
-        void OnCollisionEnter(Collisor collisor);
-        void OnCollisionExit(Collisor collisor);
-    }
-
     public class Collisor
     {
         public Vector2 Position { get; set; }
