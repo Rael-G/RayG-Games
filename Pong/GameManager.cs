@@ -44,8 +44,8 @@ namespace Pong
         public override void Config()
         {
             Window.Name = "Pong";
-            Window.Width = 1600;
-            Window.Height = 900;
+            Window.Width = 800;
+            Window.Height = 450;
             Raylib.SetTargetFPS(144);
 
             base.Config();
