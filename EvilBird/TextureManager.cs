@@ -43,6 +43,15 @@ namespace EvilBird
 
             Texture2D Scarecrow = Raylib.LoadTexture(_path + "Scarecrow.png");
             Textures.Add("Scarecrow", Scarecrow);
+
+            Texture2D WheatFarmBack = Raylib.LoadTexture(_path + "WheatFarmBack.png");
+            Textures.Add("WheatFarmBack", WheatFarmBack);
+
+            Texture2D WheatFarmMid = Raylib.LoadTexture(_path + "WheatFarmMid.png");
+            Textures.Add("WheatFarmMid", WheatFarmMid);
+
+            Texture2D WheatFarmFront = Raylib.LoadTexture(_path + "WheatFarmFront.png");
+            Textures.Add("WheatFarmFront", WheatFarmFront);
         }
 
         private void Unload()

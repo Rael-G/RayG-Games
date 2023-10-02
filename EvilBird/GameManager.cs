@@ -9,6 +9,8 @@ namespace EvilBird
         TextureManager textureManager;
         Camera camera;
         Player player;
+        Background background;
+
         public override void Config()
         {
             Window.Width = 1280;
@@ -23,12 +25,14 @@ namespace EvilBird
         {
             textureManager = new();
 
+            background = new Background(textureManager);
             player = new(textureManager);
             camera = new Camera(player._position);
-
+            
             var colisionLayer = new GameObject() { Childs = { player } };
             var logicLayer = new GameObject() { Childs = { textureManager, camera } };
             Childs.Add(logicLayer);
+            Childs.Add(background);
             Childs.Add(colisionLayer);
 
             base.Start();
@@ -36,10 +40,10 @@ namespace EvilBird
 
         public override void Render() 
         {
-            Raylib.ClearBackground(Color.DARKGRAY);
-
             Raylib.BeginMode2D(camera.Camera2d);
+            
             base.Render();
+
             Raylib.EndMode2D();
         }
     }
