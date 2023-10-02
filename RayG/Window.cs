@@ -10,12 +10,15 @@ namespace RayG
         private static int _height = 450;
         private static int _virtualWidth = _width;
         private static int _virtualHeight = _height;
+        private static ConfigFlags[] _flags = Array.Empty<ConfigFlags>();
 
         public static string Name { get => _name; set => _name = value; }
         public static int Width { get => Raylib.GetScreenWidth(); set => _width = value; }
         public static int Height { get => Raylib.GetScreenHeight(); set => _height = value; }
         public static int VirtualWidth { get => _virtualWidth; set => _virtualWidth = value; }
         public static int VirtualHeight { get => _virtualHeight; set => _virtualHeight = value; }
+        public static ConfigFlags[] Flags { set => _flags = value; }
+
         public static int Scale 
         { 
             get 
@@ -40,6 +43,11 @@ namespace RayG
         {
             Raylib.InitWindow(_width, _height, Name);
             Raylib.SetWindowMinSize(_virtualWidth, _virtualHeight);
+
+            foreach (var flag in _flags)
+            {
+                Raylib.SetWindowState(flag);
+            }
         }
 
         internal static void Close()
