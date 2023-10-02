@@ -1,0 +1,10 @@
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Target Name="CopyData" AfterTargets="Build">
+    <ItemGroup>
+      <AssetFiles Include="$(ProjectDir)\..\Assets\**\*.*" />
+    </ItemGroup>
+    <Copy
+      SourceFiles="@(AssetFiles)"
+      DestinationFolder="$(OutputPath)\Data\%(RecursiveDir)" />
+  </Target>
+</Project>
