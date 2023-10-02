@@ -8,16 +8,18 @@ namespace EvilBird
     {
         TextureManager textureManager;
         Camera camera;
-        Player player;
+        Bird player;
         Background background;
 
         public override void Config()
         {
-            Window.Width = 1280;
-            Window.Height = 960;
+            Window.Name = "EvilBird";
+            Window.Width = 1600;
+            Window.Height = 1200;
             Window.VirtualWidth = 320;
             Window.VirtualHeight = 240;
-            Window.Name = "EvilBird";
+            Window.Flags = new ConfigFlags[] { ConfigFlags.FLAG_VSYNC_HINT};
+            Raylib.SetTargetFPS(144);
             base.Config();
         }
 
@@ -27,13 +29,16 @@ namespace EvilBird
 
             background = new Background(textureManager);
             player = new(textureManager);
-            camera = new Camera(player._position);
-            
+            camera = new Camera();
+
+            var resourceLayer = new GameObject() { Childs = { textureManager } };
             var colisionLayer = new GameObject() { Childs = { player } };
-            var logicLayer = new GameObject() { Childs = { textureManager, camera } };
-            Childs.Add(logicLayer);
+            var logicLayer = new GameObject() { Childs = { camera } };
+            Childs.Add(resourceLayer);
             Childs.Add(background);
             Childs.Add(colisionLayer);
+            Childs.Add(logicLayer);
+
 
             base.Start();
         }

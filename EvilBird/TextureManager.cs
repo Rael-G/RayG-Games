@@ -38,8 +38,11 @@ namespace EvilBird
 
         private void Load()
         {
-            Texture2D EvilBird = Raylib.LoadTexture(_path + "EvilBird.png");
-            Textures.Add("EvilBird", EvilBird);
+            Texture2D EvilBirdRising = Raylib.LoadTexture(_path + "EvilBirdRising.png");
+            Textures.Add("EvilBirdRising", EvilBirdRising);
+
+            Texture2D EvilBirdFalling = Raylib.LoadTexture(_path + "EvilBirdFalling.png");
+            Textures.Add("EvilBirdFalling", EvilBirdFalling);
 
             Texture2D Scarecrow = Raylib.LoadTexture(_path + "Scarecrow.png");
             Textures.Add("Scarecrow", Scarecrow);
