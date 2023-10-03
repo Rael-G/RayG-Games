@@ -15,6 +15,8 @@ namespace EvilBird
         TextureManager textureManager;
         ObstacleManager obstacleManager;
 
+        GameObject collisionLayer;
+
         public override void Config()
         {
             Window.Name = "EvilBird";
@@ -37,15 +39,21 @@ namespace EvilBird
             obstacleManager = new(textureManager);
 
             var resourceLayer = new GameObject() { Childs = { textureManager } };
-            var colisionLayer = new GameObject() { Childs = { player, obstacleManager } };
+            collisionLayer = new GameObject() { Childs = { player, obstacleManager } };
             var logicLayer = new GameObject() { Childs = { camera } };
             Childs.Add(resourceLayer);
             Childs.Add(background);
-            Childs.Add(colisionLayer);
+            Childs.Add(collisionLayer);
             Childs.Add(logicLayer);
 
 
             base.Start();
+        }
+
+        public override void Update()
+        {
+            collisionLayer.Collision();
+            base.Update();
         }
 
         public override void Render() 

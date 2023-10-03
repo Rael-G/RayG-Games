@@ -1,11 +1,12 @@
 ﻿using EvilBird.Resources;
 using RayG;
+using RayG.Interfaces;
 using Raylib_cs;
 using System.Numerics;
 
 namespace EvilBird.Entities.Obstacles
 {
-    internal abstract class ScarecrowBase : GameObject
+    internal abstract class ScarecrowBase : GameObject, ICollisor
     {
         private float _initialPosition;
         private float _speed;
@@ -13,6 +14,8 @@ namespace EvilBird.Entities.Obstacles
         public Vector2 Position;
         protected Texture2D Texture;
         protected Vector2 ResetPos;
+
+        public Collisor Collisor { get; set; }
 
         public ScarecrowBase(float initialPosition, Texture2D texture)
         {
@@ -23,12 +26,21 @@ namespace EvilBird.Entities.Obstacles
         public override void Start()
         {
             _speed = 100;
+            Collisor = new(Position, new Vector2(Texture.width / 2, Texture.height), "Scarecrow");
         }
 
         public override void Update()
         {
             Position.X += -_speed * Raylib.GetFrameTime();
+            
             base.Update();
+        }
+
+        public override void Render()
+        {
+            //Draw Collisor
+            Raylib.DrawRectangle((int)Collisor.Position.X, (int)Collisor.Position.Y,
+                (int)Collisor.Area.X, (int)Collisor.Area.Y, Color.VIOLET);
         }
 
         public void BeginPosition(float spawn)
@@ -42,6 +54,16 @@ namespace EvilBird.Entities.Obstacles
         {
             Position = ResetPos;
             Position.Y += spawn;
+        }
+
+        public void OnCollisionEnter(Collisor collisor)
+        {
+            
+        }
+
+        public void OnCollisionExit(Collisor collisor)
+        {
+           
         }
     }
 }

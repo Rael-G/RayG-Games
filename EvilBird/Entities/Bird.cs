@@ -15,6 +15,7 @@ namespace EvilBird.Entities
         public float _gravity = 12;
         public float _fallForce = 0;
         public float _jumpForce = 150;
+        public bool _dead = false;
 
         private TextureManager _textureManager;
         private Texture2D TextureRising;
@@ -24,7 +25,6 @@ namespace EvilBird.Entities
         public Bird(TextureManager textureManager) 
         {
             _textureManager = textureManager;
-            Collisor = new(_position, _size, "Bird");
         }
 
         public override void Start()
@@ -34,6 +34,9 @@ namespace EvilBird.Entities
 
             _size = new Vector2(TextureRising.width, TextureRising.height);
             _position = new Vector2(Window.VirtualWidth / 2 - _size.X / 2, Window.VirtualHeight / 2 - _size.Y / 2);
+
+            Collisor = new(_position, new Vector2(_size.X, _size.Y / 2), "Bird");
+
             base.Start();
         }
 
@@ -42,15 +45,22 @@ namespace EvilBird.Entities
             _fallForce += _gravity * Raylib.GetFrameTime();
             _position.Y += _fallForce;
 
-            if (Raylib.IsKeyPressed(KeyboardKey.KEY_SPACE))
+            if (Raylib.IsKeyPressed(KeyboardKey.KEY_SPACE) && !_dead)
             {
                 _fallForce = -2.5f;
             }
+
+            Collisor.Position = _position;
+            Collisor.Position += new Vector2(0, _size.Y / 4) ;
             base.Update();
         }
 
         public override void Render()
         {
+            //Draw Collisor
+            //Raylib.DrawRectangle((int)Collisor.Position.X, (int)Collisor.Position.Y,
+            //    (int)Collisor.Area.X, (int)Collisor.Area.Y, Color.RED);
+
             if (_fallForce > 0)
             {
                 Raylib.DrawTexture(TextureFalling, (int)_position.X, (int)_position.Y, Color.WHITE);
@@ -64,7 +74,10 @@ namespace EvilBird.Entities
 
         public void OnCollisionEnter(Collisor collisor)
         {
-
+            if (collisor.Layer == "Scarecrow")
+            {
+                 _dead = true;
+            }
         }
 
         public void OnCollisionExit(Collisor collisor)
