@@ -60,41 +60,6 @@ namespace RayG
             }
 
             Childs.Clear();
-        }
-
-        public void Collision()
-        {
-            //TO STUDY:
-            //Collision Tree
-            foreach (var child in Childs)
-            {
-                if (child is ICollisor collisorChild)
-                {
-                    for (int i = collisorChild.Collisor.Colliders.Count - 1; i >= 0; i--)
-                    {
-                        var collider = collisorChild.Collisor.Colliders[i];
-                        if (!collisorChild.Collisor.IsColliding(collider))
-                        {
-                            collisorChild.Collisor.Colliders.RemoveAt(i);
-                            collisorChild.OnCollisionExit(collider);
-                        }
-                    }
-
-                    foreach (var otherChild in Childs)
-                    {
-                        if (otherChild is ICollisor otherCollisorChild 
-                            && otherCollisorChild != collisorChild 
-                            && !collisorChild.Collisor.Colliders.Contains(otherCollisorChild.Collisor))
-                        {
-                            if (collisorChild.Collisor.IsColliding(otherCollisorChild.Collisor))
-                            {
-                                collisorChild.Collisor.Colliders.Add(otherCollisorChild.Collisor);
-                                collisorChild.OnCollisionEnter(otherCollisorChild.Collisor);
-                            }
-                        }
-                    }
-                }
-            }
-        }
+        } 
     }
 }
