@@ -1,21 +1,18 @@
-﻿using RayG;
+﻿using EvilBird.Resources;
+using RayG;
 using RayG.Interfaces;
 using Raylib_cs;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Numerics;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace EvilBird
+
+namespace EvilBird.Entities
 {
     internal class Bird : GameObject, ICollisor
 
     { 
         public Vector2 _size;
         public Vector2 _position;
-        public float _gravity = 10;
+        public float _gravity = 12;
         public float _fallForce = 0;
         public float _jumpForce = 150;
 
@@ -27,7 +24,7 @@ namespace EvilBird
         public Bird(TextureManager textureManager) 
         {
             _textureManager = textureManager;
-            Collisor = new(_position, _size, "Player");
+            Collisor = new(_position, _size, "Bird");
         }
 
         public override void Start()
@@ -47,7 +44,7 @@ namespace EvilBird
 
             if (Raylib.IsKeyPressed(KeyboardKey.KEY_SPACE))
             {
-                _fallForce = -3;
+                _fallForce = -2.5f;
             }
             base.Update();
         }

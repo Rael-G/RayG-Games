@@ -1,15 +1,19 @@
-﻿using RayG;
+﻿using EvilBird.Entities;
+using EvilBird.Entities.Obstacles;
+using EvilBird.GameLogic;
+using EvilBird.Resources;
+using RayG;
 using Raylib_cs;
-using System.Numerics;
 
 namespace EvilBird
 {
     internal class GameManager : GameObject
     {
-        TextureManager textureManager;
         Camera camera;
         Bird player;
         Background background;
+        TextureManager textureManager;
+        ObstacleManager obstacleManager;
 
         public override void Config()
         {
@@ -25,14 +29,15 @@ namespace EvilBird
 
         public override void Start()
         {
-            textureManager = new();
-
+            textureManager = new TextureManager();
             background = new Background(textureManager);
             player = new(textureManager);
             camera = new Camera();
 
+            obstacleManager = new(textureManager);
+
             var resourceLayer = new GameObject() { Childs = { textureManager } };
-            var colisionLayer = new GameObject() { Childs = { player } };
+            var colisionLayer = new GameObject() { Childs = { player, obstacleManager } };
             var logicLayer = new GameObject() { Childs = { camera } };
             Childs.Add(resourceLayer);
             Childs.Add(background);
@@ -50,6 +55,16 @@ namespace EvilBird
             base.Render();
 
             Raylib.EndMode2D();
+        }
+
+        public void OnCollisionEnter(Collisor collisor)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void OnCollisionExit(Collisor collisor)
+        {
+            throw new NotImplementedException();
         }
     }
 }

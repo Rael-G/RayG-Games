@@ -1,13 +1,9 @@
-﻿using RayG;
+﻿using EvilBird.Resources;
+using RayG;
 using Raylib_cs;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Numerics;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace EvilBird
+namespace EvilBird.Entities
 {
     internal class Background : GameObject
     {
@@ -28,21 +24,18 @@ namespace EvilBird
         private float scrollingMid;
         private float scrollingFront;
 
-        private float textureSize;
-
-        TextureManager TextureManager;
+        TextureManager _textureManager;
 
         public Background(TextureManager textureManager)
         {
-            TextureManager = textureManager;
+            _textureManager = textureManager;
         }
 
         public override void Start()
         {
-            TextureBack = TextureManager.GetTexture("WheatFarmBack");
-            TextureMid = TextureManager.GetTexture("WheatFarmMid");
-            TextureFront = TextureManager.GetTexture("WheatFarmFront");
-            textureSize = TextureFront.width;
+            TextureBack = _textureManager.GetTexture("WheatFarmBack");
+            TextureMid = _textureManager.GetTexture("WheatFarmMid");
+            TextureFront = _textureManager.GetTexture("WheatFarmFront");
             base.Start();
         }
 
