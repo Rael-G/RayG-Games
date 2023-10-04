@@ -16,8 +16,9 @@ namespace EvilBird.Entities.Obstacles
             var scarecrow1 = new ScarecrowControl(0, _textureManager);
             var scarecrow2 = new ScarecrowControl(Window.VirtualWidth / 2 - 16, _textureManager);
             var scarecrow3 = new ScarecrowControl(Window.VirtualWidth - 16, _textureManager);
-
-            Childs = new() { scarecrow1, scarecrow2, scarecrow3 };
+            var topWall = new Wall(0);
+            var bottomWall = new Wall(Window.VirtualHeight);
+            Childs = new() { scarecrow1, scarecrow2, scarecrow3, topWall, bottomWall };
 
             base.Start();
         }

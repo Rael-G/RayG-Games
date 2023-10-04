@@ -6,7 +6,7 @@ namespace RayG
     {
         public List<GameObject> Childs { get; set; }
 
-        public GameObject(GameObject? parent = null)
+        public GameObject()
         {
             Childs = new List<GameObject>();
         }

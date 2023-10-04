@@ -57,7 +57,6 @@ namespace EvilBird.Resources
             foreach (var texture in Textures)
             {
                 Raylib.UnloadTexture(texture.Value);
-
             }
             Textures.Clear();
         }

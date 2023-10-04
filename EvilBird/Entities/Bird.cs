@@ -9,10 +9,13 @@ namespace EvilBird.Entities
 {
     internal class Bird : GameObject, ICollisor
 
-    { 
+    {
+        public int Corn { get; set; }
+
         public Vector2 _size;
         public Vector2 _position;
-        public float _gravity = 12;
+        public bool gravityOn;
+        private float _gravity = 12;
         public float _fallForce = 0;
         public float _jumpForce = 150;
         public bool _dead = false;
@@ -45,7 +48,8 @@ namespace EvilBird.Entities
             _fallForce += _gravity * Raylib.GetFrameTime();
             _position.Y += _fallForce;
 
-            if (Raylib.IsKeyPressed(KeyboardKey.KEY_SPACE) && !_dead)
+            if (Raylib.IsMouseButtonPressed(MouseButton.MOUSE_BUTTON_LEFT) && !_dead
+                || Raylib.IsKeyPressed(KeyboardKey.KEY_SPACE))
             {
                 _fallForce = -2.5f;
             }
@@ -58,8 +62,8 @@ namespace EvilBird.Entities
         public override void Render()
         {
             //Draw Collisor
-            //Raylib.DrawRectangle((int)Collisor.Position.X, (int)Collisor.Position.Y,
-            //    (int)Collisor.Area.X, (int)Collisor.Area.Y, Color.RED);
+            Raylib.DrawRectangle((int)Collisor.Position.X, (int)Collisor.Position.Y,
+                (int)Collisor.Area.X, (int)Collisor.Area.Y, Color.RED);
 
             if (_fallForce > 0)
             {
@@ -72,11 +76,23 @@ namespace EvilBird.Entities
             base.Render();
         }
 
+        public override void Canvas()
+        {
+            Raylib.DrawText(Corn.ToString(),
+                Window.VirtualWidth / 2, Window.VirtualHeight * 25 / 100,
+                100, Color.WHITE);
+            base.Canvas();
+        }
+
         public void OnCollisionEnter(Collisor collisor)
         {
-            if (collisor.Layer == "Scarecrow")
+            if (collisor.Layer == "Scarecrow" || collisor.Layer == "Wall")
             {
-                 _dead = true;
+                _dead = true;
+            }
+            if (collisor.Layer == "Score")
+            {
+                Corn++;
             }
         }
 

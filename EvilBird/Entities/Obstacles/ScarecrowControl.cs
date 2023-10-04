@@ -8,6 +8,7 @@ namespace EvilBird.Entities.Obstacles
     {
         private ScarecrowDown sd;
         private ScarecrowUp su;
+        private ScarecrowScore sScore;
 
         private float _outOfScreen;
         private float _initialPosition;
@@ -25,9 +26,11 @@ namespace EvilBird.Entities.Obstacles
             _outOfScreen = -_texture.width * 2;
             sd = new(_initialPosition, _texture);
             su = new(_initialPosition, _texture);
+            sScore = new ScarecrowScore(_initialPosition);
 
             Childs.Add(sd);
             Childs.Add(su);
+            Childs.Add(sScore);
 
             base.Start();
 
@@ -36,6 +39,7 @@ namespace EvilBird.Entities.Obstacles
 
             sd.BeginPosition(randonSpawn);
             su.BeginPosition(randonSpawn);
+            sScore.BeginPosition(randonSpawn);
         }
 
         public override void Update()
@@ -47,6 +51,7 @@ namespace EvilBird.Entities.Obstacles
             {
                 sd.ResetPosition(randonSpawn);
                 su.ResetPosition(randonSpawn);
+                sScore.ResetPosition(randonSpawn);
             }
             base.Update();
         }
