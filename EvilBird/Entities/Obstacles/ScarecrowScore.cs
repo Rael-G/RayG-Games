@@ -25,8 +25,8 @@ namespace EvilBird.Entities.Obstacles
         public override void Render()
         {
             //Draw Collisor
-            Raylib.DrawRectangle((int)Collisor.Position.X, (int)Collisor.Position.Y,
-                (int)Collisor.Area.X, (int)Collisor.Area.Y, Color.YELLOW);
+            //Raylib.DrawRectangle((int)Collisor.Position.X, (int)Collisor.Position.Y,
+            //    (int)Collisor.Area.X, (int)Collisor.Area.Y, Color.YELLOW);
         }
     }
 }

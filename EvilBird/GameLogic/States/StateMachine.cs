@@ -91,14 +91,16 @@ namespace EvilBird.GameLogic.States
         }
 
         public void Stop()
-           {
+        {
+            var corns = PlayState.Corns;
+
             if (States.Childs.Contains(PlayState))
             {
                 States.Childs.Remove(PlayState);
                 PlayState.Dispose();
             }
 
-            ScoreState = new ScoreState(GameStateRef);
+            ScoreState = new ScoreState(GameStateRef, corns.ToString());
             States.Childs.Add(ScoreState);
             ScoreState.Start();
         }

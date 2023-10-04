@@ -9,6 +9,10 @@ namespace EvilBird.GameLogic.States
         GameStateRef GameStateRef { get; set; }
         int Count { get; set; }
 
+        const int _fontSize = 100;
+        int _textSize;
+        float _timer;
+
         public CountDownState(GameStateRef gameState) 
         {
             GameStateRef = gameState;
@@ -16,20 +20,31 @@ namespace EvilBird.GameLogic.States
 
         public override void Start()
         {
+            _textSize = Raylib.MeasureText(Count.ToString(), _fontSize);
+            _timer = 1;
             Count = 3;
         }
 
         public override void Update()
         {
-            //Every 1s Count--
-            //if (Count == -1)
-            GameStateRef.State = GameState.Play;
+            _timer -= Raylib.GetFrameTime();
+
+            if (_timer <= 0)
+            {
+                _timer = 1;
+                Count--;
+            }
+            if (Count < 1)
+            {
+                GameStateRef.State = GameState.Play;
+            }
         }
 
         public override void Canvas()
         {
-            Raylib.DrawText(Count.ToString(), Window.VirtualWidth / 2,
-                Window.VirtualHeight / 2, 50, Color.WHITE);
+            Raylib.DrawText(Count.ToString(), Window.Width / 2 - _textSize / 2,
+                Window.Height / 2 -_fontSize / 2, _fontSize, Color.WHITE);
+            base.Canvas();
         }
     }
 }

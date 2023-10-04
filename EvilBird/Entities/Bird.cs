@@ -62,8 +62,8 @@ namespace EvilBird.Entities
         public override void Render()
         {
             //Draw Collisor
-            Raylib.DrawRectangle((int)Collisor.Position.X, (int)Collisor.Position.Y,
-                (int)Collisor.Area.X, (int)Collisor.Area.Y, Color.RED);
+            //Raylib.DrawRectangle((int)Collisor.Position.X, (int)Collisor.Position.Y,
+            //    (int)Collisor.Area.X, (int)Collisor.Area.Y, Color.RED);
 
             if (_fallForce > 0)
             {
@@ -74,14 +74,6 @@ namespace EvilBird.Entities
                 Raylib.DrawTexture(TextureRising, (int)_position.X, (int)_position.Y, Color.WHITE);
             }
             base.Render();
-        }
-
-        public override void Canvas()
-        {
-            Raylib.DrawText(Corn.ToString(),
-                Window.VirtualWidth / 2, Window.VirtualHeight * 25 / 100,
-                100, Color.WHITE);
-            base.Canvas();
         }
 
         public void OnCollisionEnter(Collisor collisor)

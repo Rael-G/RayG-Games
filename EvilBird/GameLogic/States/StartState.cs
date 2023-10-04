@@ -34,7 +34,7 @@ namespace EvilBird.GameLogic.States
         public override void Canvas()
         {
             Raylib.DrawText(_msg, Window.Width / 2 - _textSize / 2, 
-                Window.Height / 2, _fontSize, Color.WHITE);
+                Window.Height / 2 - _fontSize / 2, _fontSize, Color.WHITE);
             base.Canvas();
         }
     }

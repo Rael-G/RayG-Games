@@ -9,7 +9,8 @@ namespace RayG
 {
     public static class Collisions
     {
-
+        //This system is a performance killer!
+        //TODO: Study Collisions Tree
         public static void Collision(this GameObject gameObject)
         {
             var colliders = gameObject.ColliderDetecter();
