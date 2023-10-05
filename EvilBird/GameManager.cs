@@ -11,6 +11,7 @@ namespace EvilBird
     {
         Camera Camera { get; set; }
         TextureManager TextureManager { get; set; }
+        AudioManager AudioManager { get; set; }
         Background Background { get; set; }
         StateMachine StateMachine { get; set; }
 
@@ -30,12 +31,14 @@ namespace EvilBird
         {
             Camera = new Camera();
             TextureManager = new TextureManager();
-            Background = new Background(TextureManager);
+            AudioManager = new AudioManager();
+            Background = new Background(TextureManager, AudioManager);
 
-            StateMachine = new(TextureManager);
+            StateMachine = new(TextureManager, AudioManager);
 
             Childs.Add(Camera);
             Childs.Add(TextureManager);
+            Childs.Add(AudioManager);
             Childs.Add(Background);
             Childs.Add(StateMachine);
 

@@ -14,6 +14,7 @@ namespace EvilBird.Entities
         private Vector2 Size;
 
         TextureManager _textureManager;
+        AudioManager _audioManager;
         const float _speed = 25;
         const int _scale = 2;
         const int _rotation = 0;
@@ -21,13 +22,15 @@ namespace EvilBird.Entities
         float scrollingMid;
         float scrollingFront;
 
-        public Background(TextureManager textureManager)
+        public Background(TextureManager textureManager , AudioManager audioManager)
         {
             _textureManager = textureManager;
+            _audioManager = audioManager;
         }
 
         public override void Start()
         {
+            _audioManager.StartMusic("Music");
             TextureMid = _textureManager.GetTexture("WheatFarmMid");
             TextureFront = _textureManager.GetTexture("WheatFarmFront");
 
@@ -37,7 +40,7 @@ namespace EvilBird.Entities
 
         public override void Update()
         {
-
+            _audioManager.UpdateMusic("Music");
             scrollingMid += _speed * Raylib.GetFrameTime();
             scrollingFront += _speed * Raylib.GetFrameTime();
 

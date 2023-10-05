@@ -16,12 +16,14 @@ namespace EvilBird.GameLogic.States
         ScoreState ScoreState;
 
         TextureManager _textureManager;
+        AudioManager _audioManager;
 
         GameObject States { get; set; }
 
-        public StateMachine(TextureManager textureManager) 
+        public StateMachine(TextureManager textureManager, AudioManager audioManager) 
         {
             _textureManager = textureManager;
+            _audioManager = audioManager;
             States = new GameObject();
             GameStateRef = new(GameState.Start);
             Childs.Add(States);
@@ -72,7 +74,7 @@ namespace EvilBird.GameLogic.States
                 ScoreState.Dispose();
             }
 
-            CountDownState = new(GameStateRef);
+            CountDownState = new(GameStateRef, _audioManager);
             States.Childs.Add(CountDownState);
             CountDownState.Start();
         }
@@ -85,7 +87,7 @@ namespace EvilBird.GameLogic.States
                 CountDownState.Dispose();
             }
 
-            PlayState = new(GameStateRef, new Bird(_textureManager), new ObstacleManager(_textureManager));
+            PlayState = new(GameStateRef, new Bird(_textureManager, _audioManager), new ObstacleManager(_textureManager));
             States.Childs.Add(PlayState);
             PlayState.Start();
         }

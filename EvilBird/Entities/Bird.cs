@@ -21,11 +21,13 @@ namespace EvilBird.Entities
 
         private const float _gravity = 12;
         private TextureManager _textureManager;
+        private AudioManager _audioManager;
 
-        public Bird(TextureManager textureManager) 
+        public Bird(TextureManager textureManager, AudioManager audioManager) 
         {
             Dead = false;
             _textureManager = textureManager;
+            _audioManager = audioManager;
         }
 
         public override void Start()
@@ -50,6 +52,7 @@ namespace EvilBird.Entities
                 || Raylib.IsKeyPressed(KeyboardKey.KEY_SPACE))
             {
                 FallForce = -2.5f;
+                _audioManager.PlaySound("Jump");
             }
 
             Collisor.Position = Position;
@@ -79,10 +82,12 @@ namespace EvilBird.Entities
             if (collisor.Layer == "Scarecrow" || collisor.Layer == "Wall")
             {
                 Dead = true;
+                _audioManager.PlaySound("Death");
             }
             if (collisor.Layer == "Score")
             {
                 Corn++;
+                _audioManager.PlaySound("Corn");
             }
         }
 

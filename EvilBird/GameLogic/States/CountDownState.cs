@@ -1,4 +1,5 @@
 ﻿using EvilBird.Enums;
+using EvilBird.Resources;
 using RayG;
 using Raylib_cs;
 
@@ -13,9 +14,12 @@ namespace EvilBird.GameLogic.States
         int textSize;
         float timer;
 
-        public CountDownState(GameStateRef gameState) 
+        AudioManager _audioManager;
+
+        public CountDownState(GameStateRef gameState, AudioManager audioManager) 
         {
             GameStateRef = gameState;
+            _audioManager = audioManager;
         }
 
         public override void Start()
@@ -33,6 +37,8 @@ namespace EvilBird.GameLogic.States
             {
                 timer = 1;
                 Count--;
+                _audioManager.PlaySound("Countdown");
+
             }
             if (Count < 1)
             {
