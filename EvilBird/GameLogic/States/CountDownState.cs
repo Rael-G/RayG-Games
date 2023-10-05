@@ -6,12 +6,12 @@ namespace EvilBird.GameLogic.States
 {
     internal class CountDownState : GameObject
     {
-        GameStateRef GameStateRef { get; set; }
-        int Count { get; set; }
+        GameStateRef GameStateRef;
+        int Count;
 
         const int _fontSize = 100;
-        int _textSize;
-        float _timer;
+        int textSize;
+        float timer;
 
         public CountDownState(GameStateRef gameState) 
         {
@@ -20,18 +20,18 @@ namespace EvilBird.GameLogic.States
 
         public override void Start()
         {
-            _textSize = Raylib.MeasureText(Count.ToString(), _fontSize);
-            _timer = 1;
+            textSize = Raylib.MeasureText(Count.ToString(), _fontSize);
+            timer = 1;
             Count = 3;
         }
 
         public override void Update()
         {
-            _timer -= Raylib.GetFrameTime();
+            timer -= Raylib.GetFrameTime();
 
-            if (_timer <= 0)
+            if (timer <= 0)
             {
-                _timer = 1;
+                timer = 1;
                 Count--;
             }
             if (Count < 1)
@@ -42,7 +42,7 @@ namespace EvilBird.GameLogic.States
 
         public override void Canvas()
         {
-            Raylib.DrawText(Count.ToString(), Window.Width / 2 - _textSize / 2,
+            Raylib.DrawText(Count.ToString(), Window.Width / 2 - textSize / 2,
                 Window.Height / 2 -_fontSize / 2, _fontSize, Color.WHITE);
             base.Canvas();
         }

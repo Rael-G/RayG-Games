@@ -6,6 +6,7 @@ namespace EvilBird.Entities.Obstacles
     internal class ObstacleManager : GameObject
     {
         TextureManager _textureManager;
+
         public ObstacleManager(TextureManager textureManager) 
         {
             _textureManager = textureManager;

@@ -6,8 +6,6 @@ namespace EvilBird.Entities.Obstacles
 {
     internal class ScarecrowScore : ScarecrowBase
     {
-        public int Score { get; private set; }
-
         public ScarecrowScore(float initialPosition) : base(initialPosition) { }
 
         public override void Start()

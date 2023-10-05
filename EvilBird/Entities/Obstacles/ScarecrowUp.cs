@@ -6,7 +6,7 @@ namespace EvilBird.Entities.Obstacles
 {
     internal class ScarecrowUp : ScarecrowBase
     {
-        protected Texture2D Texture;
+        Texture2D Texture { get; set; }
 
         public ScarecrowUp(float initialSpawn, Texture2D texture)
             : base(initialSpawn) 

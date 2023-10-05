@@ -8,25 +8,23 @@ using System.Numerics;
 namespace EvilBird.Entities
 {
     internal class Bird : GameObject, ICollisor
-
     {
-        public int Corn { get; set; }
+        public Collisor Collisor { get; set; }
+        public int Corn { get; private set; }
+        public bool Dead { get; private set; }
 
-        public Vector2 _size;
-        public Vector2 _position;
-        public bool gravityOn;
-        private float _gravity = 12;
-        public float _fallForce = 0;
-        public float _jumpForce = 150;
-        public bool _dead = false;
-
-        private TextureManager _textureManager;
+        private Vector2 Size;
+        private Vector2 Position;
+        private float FallForce;
         private Texture2D TextureRising;
         private Texture2D TextureFalling;
-        public Collisor Collisor { get; set; }
+
+        private const float _gravity = 12;
+        private TextureManager _textureManager;
 
         public Bird(TextureManager textureManager) 
         {
+            Dead = false;
             _textureManager = textureManager;
         }
 
@@ -34,28 +32,28 @@ namespace EvilBird.Entities
         {
             TextureRising = _textureManager.GetTexture("EvilBirdRising");
             TextureFalling = _textureManager.GetTexture("EvilBirdFalling");
+            Size = new Vector2(TextureRising.width, TextureRising.height);
+            Position = new Vector2(Window.VirtualWidth / 2 - Size.X / 2, 
+                Window.VirtualHeight / 2 - Size.Y / 2);
 
-            _size = new Vector2(TextureRising.width, TextureRising.height);
-            _position = new Vector2(Window.VirtualWidth / 2 - _size.X / 2, Window.VirtualHeight / 2 - _size.Y / 2);
-
-            Collisor = new(_position, new Vector2(_size.X, _size.Y / 2), "Bird");
+            Collisor = new(Position, new Vector2(Size.X, Size.Y / 2), "Bird");
 
             base.Start();
         }
 
         public override void Update()
         {
-            _fallForce += _gravity * Raylib.GetFrameTime();
-            _position.Y += _fallForce;
+            FallForce += _gravity * Raylib.GetFrameTime();
+            Position.Y += FallForce;
 
-            if (Raylib.IsMouseButtonPressed(MouseButton.MOUSE_BUTTON_LEFT) && !_dead
+            if (!Dead && Raylib.IsMouseButtonPressed(MouseButton.MOUSE_BUTTON_LEFT)
                 || Raylib.IsKeyPressed(KeyboardKey.KEY_SPACE))
             {
-                _fallForce = -2.5f;
+                FallForce = -2.5f;
             }
 
-            Collisor.Position = _position;
-            Collisor.Position += new Vector2(0, _size.Y / 4) ;
+            Collisor.Position = Position;
+            Collisor.Position += new Vector2(0, Size.Y / 4) ;
             base.Update();
         }
 
@@ -65,13 +63,13 @@ namespace EvilBird.Entities
             //Raylib.DrawRectangle((int)Collisor.Position.X, (int)Collisor.Position.Y,
             //    (int)Collisor.Area.X, (int)Collisor.Area.Y, Color.RED);
 
-            if (_fallForce > 0)
+            if (FallForce > 0)
             {
-                Raylib.DrawTexture(TextureFalling, (int)_position.X, (int)_position.Y, Color.WHITE);
+                Raylib.DrawTexture(TextureFalling, (int)Position.X, (int)Position.Y, Color.WHITE);
             }
             else
             {
-                Raylib.DrawTexture(TextureRising, (int)_position.X, (int)_position.Y, Color.WHITE);
+                Raylib.DrawTexture(TextureRising, (int)Position.X, (int)Position.Y, Color.WHITE);
             }
             base.Render();
         }
@@ -80,7 +78,7 @@ namespace EvilBird.Entities
         {
             if (collisor.Layer == "Scarecrow" || collisor.Layer == "Wall")
             {
-                _dead = true;
+                Dead = true;
             }
             if (collisor.Layer == "Score")
             {

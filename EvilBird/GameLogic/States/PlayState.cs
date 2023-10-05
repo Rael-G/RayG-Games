@@ -8,14 +8,14 @@ namespace EvilBird.GameLogic.States
 {
     internal class PlayState : GameObject
     {
-        GameStateRef GameStateRef { get; set; }
-        Bird Bird { get; set; }
-        ObstacleManager ObstacleManager { get; set; }
+        GameStateRef GameStateRef;
+        Bird Bird;
+        ObstacleManager ObstacleManager;
 
         public int Corns { get; private set; }
 
         const int _fontSize = 200;
-        int _textSize;
+        int textSize;
 
         public PlayState(GameStateRef gameState, Bird bird, ObstacleManager obstacleManager)
         {
@@ -27,7 +27,7 @@ namespace EvilBird.GameLogic.States
 
         public override void Start()
         {
-            _textSize = Raylib.MeasureText(Corns.ToString(), _fontSize);
+            textSize = Raylib.MeasureText(Corns.ToString(), _fontSize);
 
             Childs = new() { Bird,  ObstacleManager };
             base.Start();
@@ -36,7 +36,7 @@ namespace EvilBird.GameLogic.States
         public override void Update()
         {
             Corns = Bird.Corn;
-            if (Bird._dead == true)
+            if (Bird.Dead == true)
             {
                 GameStateRef.State = GameState.Score;
             }
@@ -46,7 +46,7 @@ namespace EvilBird.GameLogic.States
 
         public override void Canvas()
         {
-            Raylib.DrawText(Corns.ToString(), Window.Width / 2 - _textSize / 2,
+            Raylib.DrawText(Corns.ToString(), Window.Width / 2 - textSize / 2,
                 Window.Height * 15/100 - _fontSize / 2, _fontSize, Color.WHITE);
             base.Canvas();
         }

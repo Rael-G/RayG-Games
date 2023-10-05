@@ -7,13 +7,13 @@ namespace EvilBird.Entities.Obstacles
 {
     internal abstract class ScarecrowBase : GameObject, ICollisor
     {
-        private float _initialPosition;
-        private const float _speed = 100;
-        public Vector2 Position;
-        protected Vector2 ResetPos;
-        protected Vector2 Size;
-
         public Collisor Collisor { get; set; }
+        public Vector2 Position { get; set; }
+        protected Vector2 ResetPos { get; set; }
+        protected Vector2 Size { get; set; }
+
+        const float _speed = 100;
+        readonly float _initialPosition;
 
         public ScarecrowBase(float initialPosition)
         {
@@ -28,7 +28,7 @@ namespace EvilBird.Entities.Obstacles
 
         public override void Update()
         {
-            Position.X += -_speed * Raylib.GetFrameTime();
+            Position = new(Position.X - _speed * Raylib.GetFrameTime(), Position.Y);
             
             base.Update();
         }
@@ -43,14 +43,12 @@ namespace EvilBird.Entities.Obstacles
         public void BeginPosition(float spawn)
         {
             Position = ResetPos;
-            Position.X += _initialPosition;
-            Position.Y += spawn;
+            Position = new(Position.X + _initialPosition, Position.Y + spawn);
         }
 
         public void ResetPosition(float spawn)
         {
-            Position = ResetPos;
-            Position.Y += spawn;
+            Position = new(ResetPos.X, ResetPos.Y + spawn);
         }
 
         virtual public void OnCollisionEnter(Collisor collisor)

@@ -6,14 +6,16 @@ namespace EvilBird.Entities.Obstacles
 {
     internal class ScarecrowControl : GameObject
     {
-        private ScarecrowDown sd;
-        private ScarecrowUp su;
-        private ScarecrowScore sScore;
+        private ScarecrowDown ScarecrowDown { get; set; }
+        private ScarecrowUp ScarecorwUp { get; set; }
+        private ScarecrowScore ScarecrowScore { get; set; }
 
-        private float _outOfScreen;
-        private float _initialPosition;
+        readonly float _initialPosition;
+        Texture2D _texture;
+
+        float outOfScreen;
+
         private TextureManager _textureManager;
-        private Texture2D _texture;
 
         public ScarecrowControl(float initialPosition, TextureManager textureManager)
         {
@@ -23,35 +25,35 @@ namespace EvilBird.Entities.Obstacles
         public override void Start()
         {
             _texture = _textureManager.GetTexture("Scarecrow");
-            _outOfScreen = -_texture.width * 2;
-            sd = new(_initialPosition, _texture);
-            su = new(_initialPosition, _texture);
-            sScore = new ScarecrowScore(_initialPosition);
+            outOfScreen = -_texture.width * 2;
+            ScarecrowDown = new(_initialPosition, _texture);
+            ScarecorwUp = new(_initialPosition, _texture);
+            ScarecrowScore = new ScarecrowScore(_initialPosition);
 
-            Childs.Add(sd);
-            Childs.Add(su);
-            Childs.Add(sScore);
+            Childs.Add(ScarecrowDown);
+            Childs.Add(ScarecorwUp);
+            Childs.Add(ScarecrowScore);
 
             base.Start();
 
             var randonSpawn = Raylib.GetRandomValue
                 (-Window.VirtualHeight * 33 / 100, Window.VirtualHeight * 33 / 100);
 
-            sd.BeginPosition(randonSpawn);
-            su.BeginPosition(randonSpawn);
-            sScore.BeginPosition(randonSpawn);
+            ScarecrowDown.BeginPosition(randonSpawn);
+            ScarecorwUp.BeginPosition(randonSpawn);
+            ScarecrowScore.BeginPosition(randonSpawn);
         }
 
         public override void Update()
         {
             var randonSpawn = Raylib.GetRandomValue
-                (-Window.VirtualHeight * 33/100, Window.VirtualHeight * 33 / 100);
+                (-Window.VirtualHeight * 33 / 100, Window.VirtualHeight * 33 / 100);
 
-            if (sd.Position.X <= _outOfScreen)
+            if (ScarecrowDown.Position.X <= outOfScreen)
             {
-                sd.ResetPosition(randonSpawn);
-                su.ResetPosition(randonSpawn);
-                sScore.ResetPosition(randonSpawn);
+                ScarecrowDown.ResetPosition(randonSpawn);
+                ScarecorwUp.ResetPosition(randonSpawn);
+                ScarecrowScore.ResetPosition(randonSpawn);
             }
             base.Update();
         }

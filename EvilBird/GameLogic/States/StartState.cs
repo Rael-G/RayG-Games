@@ -6,11 +6,11 @@ namespace EvilBird.GameLogic.States
 {
     internal class StartState : GameObject
     {
-        GameStateRef GameStateRef { get; set; }
+        GameStateRef GameStateRef;
 
         const string _msg = "Press Space to Begin";
         const int _fontSize = 100;
-        int _textSize;
+        int textSize;
 
         public StartState(GameStateRef gameState)
         {
@@ -19,7 +19,7 @@ namespace EvilBird.GameLogic.States
 
         public override void Start()
         {
-            _textSize = Raylib.MeasureText(_msg, _fontSize);
+            textSize = Raylib.MeasureText(_msg, _fontSize);
             base.Start();
         }
 
@@ -33,7 +33,7 @@ namespace EvilBird.GameLogic.States
 
         public override void Canvas()
         {
-            Raylib.DrawText(_msg, Window.Width / 2 - _textSize / 2, 
+            Raylib.DrawText(_msg, Window.Width / 2 - textSize / 2, 
                 Window.Height / 2 - _fontSize / 2, _fontSize, Color.WHITE);
             base.Canvas();
         }

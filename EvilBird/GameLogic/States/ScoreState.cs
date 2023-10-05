@@ -6,16 +6,16 @@ namespace EvilBird.GameLogic.States
 {
     internal class ScoreState : GameObject
     {
-        GameStateRef GameStateRef { get; set; }
         string Corns { get; set; }
+        GameStateRef GameStateRef;
 
-        const string _caugthMsg = "You got caught";
+        const string _caugthMsg = "You got Caught";
         const string _restartMsg = "Press Space to Restart";
         const int _fontSize = 100;
 
-        int _cornMsgSize;
-        int _caughtMsgSize;
-        int _restartMsgSize;
+        int cornMsgSize;
+        int caughtMsgSize;
+        int restartMsgSize;
 
         public ScoreState(GameStateRef gameState, string corns) 
         {
@@ -25,15 +25,14 @@ namespace EvilBird.GameLogic.States
 
         public override void Start()
         {
-            _cornMsgSize = Raylib.MeasureText(Corns, _fontSize * 2);
-            _caughtMsgSize = Raylib.MeasureText(_caugthMsg, _fontSize);
-            _restartMsgSize = Raylib.MeasureText(_restartMsg, _fontSize);
+            cornMsgSize = Raylib.MeasureText(Corns, _fontSize * 2);
+            caughtMsgSize = Raylib.MeasureText(_caugthMsg, _fontSize);
+            restartMsgSize = Raylib.MeasureText(_restartMsg, _fontSize);
             base.Start();
         }
 
         public override void Update()
         {
-            //Wait Some seconds
             if (Raylib.IsKeyPressed(KeyboardKey.KEY_SPACE))
             {
                 GameStateRef.State = GameState.CountDown;
@@ -43,13 +42,13 @@ namespace EvilBird.GameLogic.States
 
         public override void Canvas()
         {
-            Raylib.DrawText(Corns.ToString(), Window.Width / 2 - _cornMsgSize / 2,
+            Raylib.DrawText(Corns.ToString(), Window.Width / 2 - cornMsgSize / 2,
                 Window.Height * 25 / 100 - _fontSize / 2, _fontSize * 2, Color.WHITE);
 
-            Raylib.DrawText(_caugthMsg, Window.Width / 2 - _caughtMsgSize / 2,
+            Raylib.DrawText(_caugthMsg, Window.Width / 2 - caughtMsgSize / 2,
                 Window.Height / 2 - _fontSize / 2, _fontSize, Color.WHITE);
 
-            Raylib.DrawText(_restartMsg, Window.Width / 2 - _restartMsgSize / 2,
+            Raylib.DrawText(_restartMsg, Window.Width / 2 - restartMsgSize / 2,
                 Window.Height * 75 / 100 - _fontSize / 2, _fontSize, Color.WHITE);
             base.Canvas();
         }

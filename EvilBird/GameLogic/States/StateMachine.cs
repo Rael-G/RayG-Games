@@ -8,20 +8,20 @@ namespace EvilBird.GameLogic.States
 {
     internal class StateMachine : GameObject
     {
-        GameState GameStateActual { get; set; }
-        GameStateRef GameStateRef { get; set; }
-        StartState StartState { get; set; }
-        CountDownState CountDownState { get; set; }
-        PlayState PlayState { get; set; }
-        ScoreState ScoreState { get; set; }
+        GameState GameStateActual;
+        GameStateRef GameStateRef;
+        StartState StartState;
+        CountDownState CountDownState;
+        PlayState PlayState;
+        ScoreState ScoreState;
 
-        TextureManager TextureManager { get; set; }
+        TextureManager _textureManager;
 
         GameObject States { get; set; }
 
         public StateMachine(TextureManager textureManager) 
         {
-            TextureManager = textureManager;
+            _textureManager = textureManager;
             States = new GameObject();
             GameStateRef = new(GameState.Start);
             Childs.Add(States);
@@ -85,7 +85,7 @@ namespace EvilBird.GameLogic.States
                 CountDownState.Dispose();
             }
 
-            PlayState = new(GameStateRef, new Bird(TextureManager), new ObstacleManager(TextureManager));
+            PlayState = new(GameStateRef, new Bird(_textureManager), new ObstacleManager(_textureManager));
             States.Childs.Add(PlayState);
             PlayState.Start();
         }
