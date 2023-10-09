@@ -11,6 +11,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RaylibExamples", "RaylibExa
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EvilBird", "EvilBird\EvilBird.csproj", "{DDAFD914-3E90-4FB3-ADA7-66DB146A04D0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Breakout", "Breakout\Breakout.csproj", "{015FF05C-EAF4-4A6F-B8FA-F5A2D7D865E9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{DDAFD914-3E90-4FB3-ADA7-66DB146A04D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DDAFD914-3E90-4FB3-ADA7-66DB146A04D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DDAFD914-3E90-4FB3-ADA7-66DB146A04D0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{015FF05C-EAF4-4A6F-B8FA-F5A2D7D865E9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{015FF05C-EAF4-4A6F-B8FA-F5A2D7D865E9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{015FF05C-EAF4-4A6F-B8FA-F5A2D7D865E9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{015FF05C-EAF4-4A6F-B8FA-F5A2D7D865E9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
