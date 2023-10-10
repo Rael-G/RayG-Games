@@ -10,5 +10,7 @@
   <ItemGroup>
     <ProjectReference Include="..\RayG\RayG.csproj" />
   </ItemGroup>
-
+	
+	<Import Project="../Build/CopyData.targets" />
+	
 </Project>
