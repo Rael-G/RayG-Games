@@ -20,7 +20,7 @@ namespace RayG
 
             GameObject.Start();
 
-            while (!Raylib.WindowShouldClose())
+            while (Window.Running)
             {
                 GameObject.Update();
 
