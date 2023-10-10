@@ -1,8 +1,10 @@
 ﻿using Breakout.Entities;
 using Breakout.GameLogic;
+using Breakout.GameLogic.States;
 using Breakout.Resources;
 using RayG;
 using Raylib_cs;
+
 
 namespace Breakout
 {
@@ -25,11 +27,13 @@ namespace Breakout
         {
             var textureManager = new TextureManager();
             var backgorund = new Background(textureManager);
+            var StateMachine = new StateMachine();
             camera = new Camera();
 
             Childs.Add(camera);
             Childs.Add(textureManager);
             Childs.Add(backgorund);
+            Childs.Add(StateMachine);
             base.Start();
         }
 
