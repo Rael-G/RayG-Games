@@ -1,5 +1,4 @@
-﻿using Pong.Resources;
-using RayG;
+﻿using RayG;
 using RayG.Interfaces;
 using Raylib_cs;
 using System.Numerics;
@@ -22,9 +21,9 @@ namespace Pong.Entities
         public bool Freeze { get; set; }
         public Vector2 BallPosition { get; set; }
         public Collisor Collisor { get; set; }
-        public AudioManager AudioManager { get; set; }
+        public SoundManager AudioManager { get; set; }
 
-        public Ball (AudioManager audioManager)
+        public Ball (SoundManager audioManager)
         {
             AudioManager = audioManager;
         }
@@ -55,7 +54,7 @@ namespace Pong.Entities
                 || BallPosition.Y + ballSize.Y >= bottomWall) 
             {
                 Invert(ref y);
-                AudioManager.Play("wall");
+                AudioManager.PlaySound("Wall");
             }
             
             base.Update();
@@ -84,7 +83,7 @@ namespace Pong.Entities
 
             Invert(ref x);
             ballSpeed *= 1.10f;
-            AudioManager.Play("pong");
+            AudioManager.PlaySound("Pong");
         }
 
         public void OnCollisionExit(Collisor collider)

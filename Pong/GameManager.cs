@@ -1,6 +1,5 @@
 ﻿using Pong.Entities;
 using Pong.GameLogic;
-using Pong.Resources;
 using RayG;
 using Raylib_cs;
 
@@ -15,18 +14,26 @@ namespace Pong
         private readonly Menu menu;
         private readonly Match match;
         private readonly StateMachine stateMachine;
-        private readonly AudioManager audioManager;
+        private readonly SoundManager audioManager;
         private readonly FontManager fontManager;
 
         private readonly Background background;
         private readonly GameObject defaultLayer;
+        private readonly GameObject resourceLayer;
         private readonly GameObject canvasLayer;
         private readonly GameObject logicLayer;
 
         public GameManager()
         {
-            audioManager = new AudioManager();
-            fontManager = new FontManager();
+            audioManager = new SoundManager(@"\Data\Pong\Audio\Sfx\", new string[]
+            {
+                "Pong.wav", "Wall.wav", "Score.wav"
+            });
+            fontManager = new FontManager(@"\Data\Pong\Fonts\", new string[]
+            {
+                "mecha.png"
+            });
+
             leftPaddle = new Paddle(true);
             rightPaddle = new Paddle(false);
             ball = new Ball(audioManager);
@@ -36,9 +43,10 @@ namespace Pong
             stateMachine = new StateMachine(score, ball, leftPaddle, rightPaddle, menu);
 
             background = new Background(Color.BLACK);
+            resourceLayer = new GameObject() { Childs = { audioManager } };
             defaultLayer = new GameObject() { Childs = { leftPaddle, rightPaddle, ball } };
             canvasLayer = new GameObject() { Childs = { score, menu } };
-            logicLayer = new GameObject() { Childs = { match, stateMachine, audioManager, fontManager } };
+            logicLayer = new GameObject() { Childs = { match, stateMachine, fontManager } };
         }
 
         public override void Config()
@@ -54,6 +62,7 @@ namespace Pong
         public override void Start()
         {
             Childs.Add(background);
+            Childs.Add(resourceLayer);
             Childs.Add(defaultLayer);
             Childs.Add(logicLayer);
             Childs.Add(canvasLayer);

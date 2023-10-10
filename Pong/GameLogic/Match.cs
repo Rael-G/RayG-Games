@@ -1,5 +1,4 @@
 ﻿using Pong.Entities;
-using Pong.Resources;
 using RayG;
 
 namespace Pong.GameLogic
@@ -11,8 +10,8 @@ namespace Pong.GameLogic
 
         private Ball Ball { get; set; }
         public Score Score { get; set; }
-        private AudioManager AudioManager { get; set; }
-        public Match(Ball ball, Score score, AudioManager audioManager)
+        private SoundManager AudioManager { get; set; }
+        public Match(Ball ball, Score score, SoundManager audioManager)
         {
             Ball = ball;
             Score = score;
@@ -27,7 +26,7 @@ namespace Pong.GameLogic
                 Ball.Direction();
                 Ball.Side(1, 1);
                 Score.RightScoreValue++;
-                AudioManager.Play("score");
+                AudioManager.PlaySound("Score");
             }
             else if (Ball.BallPosition.X >= rightWall)
             {
@@ -35,7 +34,7 @@ namespace Pong.GameLogic
                 Ball.Direction();
                 Ball.Side(0, 0);
                 Score.LeftScoreValue++;
-                AudioManager.Play("score");
+                AudioManager.PlaySound("Score");
             }
 
 

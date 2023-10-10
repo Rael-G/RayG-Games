@@ -1,5 +1,4 @@
-﻿using EvilBird.Resources;
-using RayG;
+﻿using RayG;
 using Raylib_cs;
 using System.Numerics;
 
@@ -14,7 +13,7 @@ namespace EvilBird.Entities
         private Vector2 Size;
 
         TextureManager _textureManager;
-        AudioManager _audioManager;
+        MusicManager _audioManager;
         const float _speed = 25;
         const int _scale = 2;
         const int _rotation = 0;
@@ -22,7 +21,7 @@ namespace EvilBird.Entities
         float scrollingMid;
         float scrollingFront;
 
-        public Background(TextureManager textureManager , AudioManager audioManager)
+        public Background(TextureManager textureManager , MusicManager audioManager)
         {
             _textureManager = textureManager;
             _audioManager = audioManager;

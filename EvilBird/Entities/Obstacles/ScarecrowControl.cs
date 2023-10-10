@@ -1,5 +1,4 @@
-﻿using EvilBird.Resources;
-using RayG;
+﻿using RayG;
 using Raylib_cs;
 
 namespace EvilBird.Entities.Obstacles

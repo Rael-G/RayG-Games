@@ -1,5 +1,4 @@
-﻿using EvilBird.Resources;
-using RayG;
+﻿using RayG;
 using RayG.Interfaces;
 using Raylib_cs;
 using System.Numerics;
@@ -21,9 +20,9 @@ namespace EvilBird.Entities
 
         private const float _gravity = 12;
         private TextureManager _textureManager;
-        private AudioManager _audioManager;
+        private SoundManager _audioManager;
 
-        public Bird(TextureManager textureManager, AudioManager audioManager) 
+        public Bird(TextureManager textureManager, SoundManager audioManager) 
         {
             Dead = false;
             _textureManager = textureManager;

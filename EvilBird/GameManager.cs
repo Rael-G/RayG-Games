@@ -1,7 +1,6 @@
 ﻿using EvilBird.Entities;
 using EvilBird.GameLogic;
 using EvilBird.GameLogic.States;
-using EvilBird.Resources;
 using RayG;
 using Raylib_cs;
 
@@ -11,7 +10,8 @@ namespace EvilBird
     {
         Camera Camera { get; set; }
         TextureManager TextureManager { get; set; }
-        AudioManager AudioManager { get; set; }
+        SoundManager SoundManager { get; set; }
+        MusicManager MusicManager { get; set; }
         Background Background { get; set; }
         StateMachine StateMachine { get; set; }
 
@@ -30,15 +30,27 @@ namespace EvilBird
         public override void Start()
         {
             Camera = new Camera();
-            TextureManager = new TextureManager();
-            AudioManager = new AudioManager();
-            Background = new Background(TextureManager, AudioManager);
+            TextureManager = new TextureManager(@"\Data\EvilBird\Textures\", new string[] 
+            { 
+                "EvilBirdRising.png", "EvilBirdFalling.png", "Scarecrow.png", 
+                "WheatFarmMid.png", "WheatFarmFront.png" 
+            });
+            SoundManager = new SoundManager(@"\Data\EvilBird\Audio\Sound\", new string[]
+            {
+                "Countdown.wav", "Death.wav", "Jump.wav", "Corn.wav"
+            });
+            MusicManager = new MusicManager(@"\Data\EvilBird\Audio\Music\", new string[]
+            {
+                "Music.mp3"
+            });
+            Background = new Background(TextureManager, MusicManager);
 
-            StateMachine = new(TextureManager, AudioManager);
+            StateMachine = new(TextureManager, SoundManager);
 
             Childs.Add(Camera);
             Childs.Add(TextureManager);
-            Childs.Add(AudioManager);
+            Childs.Add(MusicManager);
+            Childs.Add(SoundManager);
             Childs.Add(Background);
             Childs.Add(StateMachine);
 

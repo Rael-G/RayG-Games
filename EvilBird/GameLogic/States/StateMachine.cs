@@ -1,7 +1,6 @@
 ﻿using EvilBird.Entities;
 using EvilBird.Entities.Obstacles;
 using EvilBird.Enums;
-using EvilBird.Resources;
 using RayG;
 
 namespace EvilBird.GameLogic.States
@@ -16,11 +15,11 @@ namespace EvilBird.GameLogic.States
         ScoreState ScoreState;
 
         TextureManager _textureManager;
-        AudioManager _audioManager;
+        SoundManager _audioManager;
 
         GameObject States { get; set; }
 
-        public StateMachine(TextureManager textureManager, AudioManager audioManager) 
+        public StateMachine(TextureManager textureManager, SoundManager audioManager) 
         {
             _textureManager = textureManager;
             _audioManager = audioManager;

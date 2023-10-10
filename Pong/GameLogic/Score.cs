@@ -1,5 +1,4 @@
-﻿using Pong.Resources;
-using RayG;
+﻿using RayG;
 using Raylib_cs;
 using System.Numerics;
 
