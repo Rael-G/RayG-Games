@@ -7,6 +7,9 @@ namespace Breakout.Resources
     {
         private int _scale;
 
+        public Texture2D Texture { get; private set; }
+        public int Width { get => (int)Source.width; }
+        public int Height { get => (int)Source.height;  }
         public Rectangle Source { get; private set; }
         public Vector2 Axis { get; set; }
         bool CenterAxis { get; set; }
@@ -20,8 +23,9 @@ namespace Breakout.Resources
             }
         }
 
-        public Sprite(Rectangle source, int scale, bool centerAxis = false)
+        public Sprite(Texture2D texture, Rectangle source, int scale, bool centerAxis = false)
         {
+            Texture = texture;
             Source = source;
             Scale = scale;
             SetAxis();

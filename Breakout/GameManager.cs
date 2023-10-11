@@ -10,7 +10,10 @@ namespace Breakout
 {
     internal class GameManager : GameObject
     {
-        Camera camera;
+        Camera Camera;
+        TextureManager TextureManager;
+        SoundManager SoundManager;
+        SpriteSheet SpriteSheet;
 
         public override void Config()
         {
@@ -23,35 +26,41 @@ namespace Breakout
             base.Config();
         }
 
-        public override void Start()
+        public override void Awake()
         {
-            var textureManager = new TextureManager(@"Data\Breakout\Textures\", new string[]
+            TextureManager = new TextureManager(@"Data\Breakout\Textures\", new string[]
             {
                 "Breakout.png", "RedBlueGirl.png"
             });
-            var soundManager = new SoundManager(@"Data\Breakout\Audio\Sounds\", new string[]
+            SoundManager = new SoundManager(@"Data\Breakout\Audio\Sounds\", new string[]
             {
                 "Select.wav"
             });
-            var backgorund = new Background(textureManager);
-            var StateMachine = new StateMachine(soundManager);
-            //var spriteSheet = new SpriteSheet(textureManager);
-            camera = new Camera();
 
-            Blocks blocks = new Blocks(textureManager);
+            SpriteSheet = new SpriteSheet(TextureManager);
 
-            Childs.Add(camera);
-            Childs.Add(textureManager);
-            Childs.Add(soundManager);
+            Camera = new Camera();
+            Childs.Add(TextureManager);
+            Childs.Add(SoundManager);
+            Childs.Add(SpriteSheet);
+            Childs.Add(Camera);
+
+            base.Awake();
+        }
+
+        public override void Start()
+        {
+            var backgorund = new Background(TextureManager);
+            var StateMachine = new StateMachine(SoundManager, SpriteSheet);
+            
             Childs.Add(backgorund);
             Childs.Add(StateMachine);
-            Childs.Add(blocks);
             base.Start();
         }
 
         public override void Render()
         {
-            Raylib.BeginMode2D(camera.Camera2d);
+            Raylib.BeginMode2D(Camera.Camera2d);
             base.Render();
             Raylib.EndMode2D();
         }

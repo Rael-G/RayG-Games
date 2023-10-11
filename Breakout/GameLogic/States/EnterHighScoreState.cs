@@ -1,8 +1,11 @@
-﻿using RayG;
+﻿using Breakout.GameLogic.States.Enums;
 
 namespace Breakout.GameLogic.States
 {
-    internal class EnterHighScoreState : GameObject
+    internal class EnterHighScoreState : StateBase
     {
+        public EnterHighScoreState(GameStateRef state) : base(state)
+        {
+        }
     }
 }

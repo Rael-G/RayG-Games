@@ -1,4 +1,4 @@
-﻿namespace Breakout.GameLogic.States
+﻿namespace Breakout.GameLogic.States.Enums
 {
     internal enum GameState
     {
@@ -16,9 +16,9 @@
     {
         public GameState State { get; set; }
 
-        public GameStateRef(GameState state) 
-        {  
-            State = state; 
+        public GameStateRef(GameState state)
+        {
+            State = state;
         }
     }
 }

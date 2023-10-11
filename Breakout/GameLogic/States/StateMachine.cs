@@ -1,4 +1,6 @@
-﻿using RayG;
+﻿using Breakout.GameLogic.States.Enums;
+using Breakout.Resources;
+using RayG;
 
 namespace Breakout.GameLogic.States
 {
@@ -9,12 +11,17 @@ namespace Breakout.GameLogic.States
 
         StartState StartState;
         HighScoreState HighScoreState;
+        PaddleSelectState PaddleSelectState;
+        ServeState ServeState;
+        PlayState PlayState;
 
         SoundManager _soundManager;
+        SpriteSheet _spriteSheet;
 
-        public StateMachine(SoundManager soundManager) 
+        public StateMachine(SoundManager soundManager, SpriteSheet spriteSheet) 
         {
             _soundManager = soundManager;
+            _spriteSheet = spriteSheet;
         }
 
         public override void Start()
@@ -78,17 +85,41 @@ namespace Breakout.GameLogic.States
 
         private void PaddleSelect()
         {
+            if (Childs.Contains(StartState))
+            {
+                Childs.Remove(StartState);
+                StartState.Dispose();
+            }
 
+            PaddleSelectState = new(StateRef);
+            Childs.Add(PaddleSelectState);
+            PaddleSelectState.Start();
         }
 
         private void Serve()
         {
+            if (Childs.Contains(PaddleSelectState))
+            {
+                Childs.Remove(PaddleSelectState);
+                PaddleSelectState.Dispose();
+            }
 
+            ServeState = new(StateRef);
+            Childs.Add(ServeState);
+            ServeState.Start();
         }
 
         private void Play()
         {
+            if (Childs.Contains(ServeState))
+            {
+                Childs.Remove(ServeState);
+                ServeState.Dispose();
+            }
 
+            PlayState = new(StateRef, _spriteSheet);
+            Childs.Add(PlayState);
+            PlayState.Start();
         }
 
         private void Victory()

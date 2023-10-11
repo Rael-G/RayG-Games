@@ -7,11 +7,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RayG", "RayG\RayG.csproj", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Pong", "Pong\Pong.csproj", "{1A74FCAA-8F81-4E76-AB3D-AEA48CF54E14}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RaylibExamples", "RaylibExamples\RaylibExamples.csproj", "{14A633D3-CDEE-421C-B417-060D9F7B8F85}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EvilBird", "EvilBird\EvilBird.csproj", "{DDAFD914-3E90-4FB3-ADA7-66DB146A04D0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Breakout", "Breakout\Breakout.csproj", "{015FF05C-EAF4-4A6F-B8FA-F5A2D7D865E9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Breakout", "Breakout\Breakout.csproj", "{015FF05C-EAF4-4A6F-B8FA-F5A2D7D865E9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,10 +25,6 @@ Global
 		{1A74FCAA-8F81-4E76-AB3D-AEA48CF54E14}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1A74FCAA-8F81-4E76-AB3D-AEA48CF54E14}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1A74FCAA-8F81-4E76-AB3D-AEA48CF54E14}.Release|Any CPU.Build.0 = Release|Any CPU
-		{14A633D3-CDEE-421C-B417-060D9F7B8F85}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{14A633D3-CDEE-421C-B417-060D9F7B8F85}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{14A633D3-CDEE-421C-B417-060D9F7B8F85}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{14A633D3-CDEE-421C-B417-060D9F7B8F85}.Release|Any CPU.Build.0 = Release|Any CPU
 		{DDAFD914-3E90-4FB3-ADA7-66DB146A04D0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{DDAFD914-3E90-4FB3-ADA7-66DB146A04D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DDAFD914-3E90-4FB3-ADA7-66DB146A04D0}.Release|Any CPU.ActiveCfg = Release|Any CPU

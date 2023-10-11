@@ -1,18 +1,19 @@
-﻿using RayG;
+﻿using Breakout.GameLogic.States.Enums;
+using RayG;
 using Raylib_cs;
 using System.Numerics;
 
 namespace Breakout.GameLogic.States
 {
-    internal class StartState : GameObject
+    internal class StartState : StateBase
     {
-        GameStateRef State { get; set; }
-
         const string breakoutMsg = "Breakout";
         const string startMsg = "Start";
         const string highScoreMsg = "High Score";
         const int breakoutHeight = 150;
         const int optionsHeight = 50;
+
+        int highlated;
 
         int breakoutWidth;
         int startWidth;
@@ -26,14 +27,14 @@ namespace Breakout.GameLogic.States
 
         SoundManager _soundManager;
 
-        public StartState(GameStateRef state, SoundManager soundManager) 
+        public StartState(GameStateRef state, SoundManager soundManager) : base(state)
         {
-            State = state;
             _soundManager = soundManager;
         }
 
         public override void Start()
         {
+            highlated = 1;
             breakoutWidth = Raylib.MeasureText(breakoutMsg, breakoutHeight);
             startWidth = Raylib.MeasureText(startMsg, optionsHeight);
             highScoreWidth = Raylib.MeasureText(highScoreMsg, optionsHeight);
@@ -46,17 +47,31 @@ namespace Breakout.GameLogic.States
 
         public override void Update()
         {
-            if(Raylib.IsKeyPressed(KeyboardKey.KEY_UP))
+            if (Raylib.IsKeyPressed(KeyboardKey.KEY_ENTER))
+            {
+                if (highlated == 1)
+                {
+                    StateRef.State = GameState.PaddleSelect;
+                    return;
+                }
+                else
+                {
+
+                }
+            }
+            if(Raylib.IsKeyPressed(KeyboardKey.KEY_UP) && highlated < 1)
             {
                 startColor = Color.BLUE;
                 highScoreColor = Color.WHITE;
                 _soundManager.PlaySound("Select");
+                highlated++;
             }
-            else if(Raylib.IsKeyPressed(KeyboardKey.KEY_DOWN))
+            else if(Raylib.IsKeyPressed(KeyboardKey.KEY_DOWN) && highlated > 0)
             {
                 startColor = Color.WHITE;
                 highScoreColor = Color.BLUE;
                 _soundManager.PlaySound("Select");
+                highlated--;
             }
             base.Update();
         }
