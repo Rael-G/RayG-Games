@@ -117,7 +117,7 @@ namespace Breakout.GameLogic.States
                 ServeState.Dispose();
             }
 
-            PlayState = new(StateRef, _spriteSheet);
+            PlayState = new(StateRef, _spriteSheet, _soundManager);
             Childs.Add(PlayState);
             PlayState.Start();
         }

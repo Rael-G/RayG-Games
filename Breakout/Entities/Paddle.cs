@@ -1,21 +1,18 @@
 ﻿using Breakout.Resources;
 using RayG;
+using RayG.Interfaces;
 using Raylib_cs;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Numerics;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Breakout.Entities
 {
-    internal class Paddle : GameObject
+    internal class Paddle : GameObject, ICollisor
     {
         Sprite Sprite;
         Rectangle Position;
 
-        const float speed = 100;
+        const float speed = 150;
+
+        public Collisor Collisor { get; set; }
 
         public Paddle(Sprite sprite)
         {
@@ -25,7 +22,9 @@ namespace Breakout.Entities
         public override void Start()
         {
             Position = new Rectangle(Window.VirtualWidth / 2 - Sprite.Width / 2, 
-                Window.VirtualHeight * 0.90f, Sprite.Width, Sprite.Height); 
+                Window.VirtualHeight * 0.90f, Sprite.Width, Sprite.Height);
+
+            Collisor = new((int)Position.x, (int)Position.y, Sprite.Width, Sprite.Height, "Paddle");
             base.Start();
         }
 
@@ -40,6 +39,7 @@ namespace Breakout.Entities
             {
                 Position.x += speed * deltatime;
             }
+            Collisor.Position = new(Position.x, Position.y);
             base.Update();
         }
 
@@ -47,6 +47,16 @@ namespace Breakout.Entities
         {
             Raylib.DrawTexturePro(Sprite.Texture, Sprite.Source, Position, Sprite.Axis, 0, Color.WHITE);
             base.Render();
+        }
+
+        public void OnCollisionEnter(Collisor collisor)
+        {
+
+        }
+
+        public void OnCollisionExit(Collisor collisor)
+        {
+
         }
     }
 }

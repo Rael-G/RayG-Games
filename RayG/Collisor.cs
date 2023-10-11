@@ -17,6 +17,14 @@ namespace RayG
             Colliders = new List<Collisor> { };
         }
 
+        public Collisor(int positionX, int positionY, int width, int height, string layer = "")
+        {
+            Position = new Vector2(positionX, positionY);
+            Area = new Vector2(width, height);
+            Layer = layer;
+            Colliders = new List<Collisor> { };
+        }
+
         public bool IsColliding(Collisor collider)
         {
             //AABB

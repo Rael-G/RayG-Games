@@ -12,6 +12,8 @@ namespace Breakout.Resources
         public const int Red = 2;
         public const int Violet = 3;
         public const int Yellow = 4;
+        public const int Black = 5;
+        public const int Orange = 6;
 
         //Strenght
         public const int Weak = 0;
@@ -28,13 +30,20 @@ namespace Breakout.Resources
         int sectionWidth = 16;
         int sectionHeight = 8;
 
-        //  Color 0-4 / Strenght 0-3
+        /// <summary>
+        ///  Color 0-4 / Strenght 0-3
+        /// </summary>
         public Sprite[,] Blocks { get; private set; }
 
         /// <summary>
         ///   Size 0-3 / Color 0-3
         /// </summary>
         public Sprite[,] Paddles { get; private set; }
+
+        /// <summary>
+        /// Color 0-6
+        /// </summary>
+        public Sprite[] Balls { get; private set; }
 
         TextureManager _textureManager;
         Texture2D _texture;
@@ -45,6 +54,7 @@ namespace Breakout.Resources
 
             Blocks = new Sprite[5, 4];
             Paddles = new Sprite[4, 4];
+            Balls = new Sprite[7];
         }
 
         public override void Awake()
@@ -61,6 +71,8 @@ namespace Breakout.Resources
             Paddles = Arrange(Paddles, Medium, sectionWidth, sectionHeight * 4, 2, true);
             Paddles = Arrange(Paddles, Large, sectionWidth * 3, sectionHeight * 4, 3, true);
             Paddles = Arrange(Paddles, ExtraLarge, 0, sectionHeight * 5, 4, true);
+
+            Balls = ArrangeCustom(Balls, 7, sectionWidth * 3, sectionHeight * 3, 3, 3);
 
             base.Awake();
         }
@@ -93,6 +105,21 @@ namespace Breakout.Resources
             }
 
             return matrix;
+        }
+
+        private Sprite[] ArrangeCustom(Sprite[] array, int quantity, int srcX, int srcY, int width, int height)
+        {
+            Rectangle source;
+            Sprite sprite;
+
+            for (int i = 0; i < quantity; i++)
+            {
+                source = new Rectangle(srcX, srcY, width, height);
+                sprite = new Sprite(_texture, source, 1);
+                array[i] = sprite;
+                srcX += width;
+            }
+            return array;
         }
     }
 }

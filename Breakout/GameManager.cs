@@ -34,7 +34,7 @@ namespace Breakout
             });
             SoundManager = new SoundManager(@"Data\Breakout\Audio\Sounds\", new string[]
             {
-                "Select.wav"
+                "Select.wav", "Wall.wav"
             });
 
             SpriteSheet = new SpriteSheet(TextureManager);
@@ -51,11 +51,17 @@ namespace Breakout
         public override void Start()
         {
             var backgorund = new Background(TextureManager);
-            var StateMachine = new StateMachine(SoundManager, SpriteSheet);
+            var stateMachine = new StateMachine(SoundManager, SpriteSheet);
             
             Childs.Add(backgorund);
-            Childs.Add(StateMachine);
+            Childs.Add(stateMachine);
+
             base.Start();
+        }
+
+        public override void Update()
+        {
+            base.Update();
         }
 
         public override void Render()
