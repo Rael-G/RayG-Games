@@ -7,47 +7,21 @@ namespace Pong
 {
     internal class GameManager : GameObject
     {
-        private readonly Ball ball;
-        private readonly Paddle leftPaddle;
-        private readonly Paddle rightPaddle;
-        private readonly Score score;
-        private readonly Menu menu;
-        private readonly Match match;
-        private readonly StateMachine stateMachine;
-        private readonly SoundManager audioManager;
-        private readonly FontManager fontManager;
+        private Ball ball;
+        private Paddle leftPaddle;
+        private Paddle rightPaddle;
+        private Score score;
+        private Menu menu;
+        private Match match;
+        private StateMachine stateMachine;
+        private SoundManager audioManager;
+        private FontManager fontManager;
 
-        private readonly Background background;
-        private readonly GameObject defaultLayer;
-        private readonly GameObject resourceLayer;
-        private readonly GameObject canvasLayer;
-        private readonly GameObject logicLayer;
-
-        public GameManager()
-        {
-            audioManager = new SoundManager(@"\Data\Pong\Audio\Sfx\", new string[]
-            {
-                "Pong.wav", "Wall.wav", "Score.wav"
-            });
-            fontManager = new FontManager(@"\Data\Pong\Fonts\", new string[]
-            {
-                "mecha.png"
-            });
-
-            leftPaddle = new Paddle(true);
-            rightPaddle = new Paddle(false);
-            ball = new Ball(audioManager);
-            score = new Score(fontManager);
-            menu = new Menu(fontManager);
-            match = new(ball, score, audioManager);
-            stateMachine = new StateMachine(score, ball, leftPaddle, rightPaddle, menu);
-
-            background = new Background(Color.BLACK);
-            resourceLayer = new GameObject() { Childs = { audioManager } };
-            defaultLayer = new GameObject() { Childs = { leftPaddle, rightPaddle, ball } };
-            canvasLayer = new GameObject() { Childs = { score, menu } };
-            logicLayer = new GameObject() { Childs = { match, stateMachine, fontManager } };
-        }
+        private Background background;
+        private GameObject defaultLayer;
+        private GameObject resourceLayer;
+        private GameObject canvasLayer;
+        private GameObject logicLayer;
 
         public override void Config()
         {
@@ -59,10 +33,40 @@ namespace Pong
             base.Config();
         }
 
+        public override void Awake()
+        {
+            audioManager = new SoundManager(@"\Data\Pong\Audio\Sfx\", new string[]
+            {
+                "Pong.wav", "Wall.wav", "Score.wav"
+            });
+            fontManager = new FontManager(@"\Data\Pong\Fonts\", new string[]
+            {
+                "mecha.png"
+            });
+
+            resourceLayer = new GameObject() { Childs = { audioManager, fontManager } };
+            Childs.Add(resourceLayer);
+
+            base.Awake();
+        }
+
         public override void Start()
         {
+            leftPaddle = new Paddle(true);
+            rightPaddle = new Paddle(false);
+            ball = new Ball(audioManager);
+            score = new Score(fontManager);
+            menu = new Menu(fontManager);
+            match = new(ball, score, audioManager);
+            stateMachine = new StateMachine(score, ball, leftPaddle, rightPaddle, menu);
+
+            background = new Background(Color.BLACK);
+            
+            defaultLayer = new GameObject() { Childs = { leftPaddle, rightPaddle, ball } };
+            canvasLayer = new GameObject() { Childs = { score, menu } };
+            logicLayer = new GameObject() { Childs = { match, stateMachine } };
+
             Childs.Add(background);
-            Childs.Add(resourceLayer);
             Childs.Add(defaultLayer);
             Childs.Add(logicLayer);
             Childs.Add(canvasLayer);

@@ -27,13 +27,13 @@ namespace EvilBird
             base.Config();
         }
 
-        public override void Start()
+        public override void Awake()
         {
             Camera = new Camera();
-            TextureManager = new TextureManager(@"\Data\EvilBird\Textures\", new string[] 
-            { 
-                "EvilBirdRising.png", "EvilBirdFalling.png", "Scarecrow.png", 
-                "WheatFarmMid.png", "WheatFarmFront.png" 
+            TextureManager = new TextureManager(@"\Data\EvilBird\Textures\", new string[]
+            {
+                "EvilBirdRising.png", "EvilBirdFalling.png", "Scarecrow.png",
+                "WheatFarmMid.png", "WheatFarmFront.png"
             });
             SoundManager = new SoundManager(@"\Data\EvilBird\Audio\Sound\", new string[]
             {
@@ -43,14 +43,20 @@ namespace EvilBird
             {
                 "Music.mp3"
             });
-            Background = new Background(TextureManager, MusicManager);
-
-            StateMachine = new(TextureManager, SoundManager);
 
             Childs.Add(Camera);
             Childs.Add(TextureManager);
             Childs.Add(MusicManager);
             Childs.Add(SoundManager);
+
+            base.Awake();
+        }
+
+        public override void Start()
+        {
+            Background = new Background(TextureManager, MusicManager);
+            StateMachine = new(TextureManager, SoundManager);
+           
             Childs.Add(Background);
             Childs.Add(StateMachine);
 
