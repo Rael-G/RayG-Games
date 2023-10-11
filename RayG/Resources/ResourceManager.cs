@@ -21,10 +21,10 @@ namespace RayG
             Names = names;
         }
 
-        public override void Start()
+        public override void Awake()
         {
             Load();
-            base.Start();
+            base.Awake();
         }
 
         public override void Dispose()

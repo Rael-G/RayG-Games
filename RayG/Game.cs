@@ -18,6 +18,7 @@ namespace RayG
             Window.Init();
             Raylib.InitAudioDevice();
 
+            GameObject.Awake();
             GameObject.Start();
 
             while (Window.Running)

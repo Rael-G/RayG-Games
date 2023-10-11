@@ -19,6 +19,14 @@ namespace RayG
             }
         }
 
+        public virtual void Awake()
+        {
+            foreach (var child in Childs)
+            {
+                child.Awake();
+            }
+        }
+
         public virtual void Start()
         {
             foreach (var child in Childs)
