@@ -25,15 +25,27 @@ namespace Breakout
 
         public override void Start()
         {
-            var textureManager = new TextureManager();
+            var textureManager = new TextureManager(@"Data\Breakout\Textures\", new string[]
+            {
+                "Breakout.png", "RedBlueGirl.png"
+            });
+            var soundManager = new SoundManager(@"Data\Breakout\Audio\Sounds\", new string[]
+            {
+                "Select.wav"
+            });
             var backgorund = new Background(textureManager);
-            var StateMachine = new StateMachine();
+            var StateMachine = new StateMachine(soundManager);
+            //var spriteSheet = new SpriteSheet(textureManager);
             camera = new Camera();
+
+            Blocks blocks = new Blocks(textureManager);
 
             Childs.Add(camera);
             Childs.Add(textureManager);
+            Childs.Add(soundManager);
             Childs.Add(backgorund);
             Childs.Add(StateMachine);
+            Childs.Add(blocks);
             base.Start();
         }
 

@@ -10,7 +10,12 @@ namespace Breakout.GameLogic.States
         StartState StartState;
         HighScoreState HighScoreState;
 
-        public StateMachine() { }
+        SoundManager _soundManager;
+
+        public StateMachine(SoundManager soundManager) 
+        {
+            _soundManager = soundManager;
+        }
 
         public override void Start()
         {
@@ -66,7 +71,7 @@ namespace Breakout.GameLogic.States
                 HighScoreState.Dispose();
             }
 
-            StartState = new(StateRef);
+            StartState = new(StateRef, _soundManager);
             Childs.Add(StartState);
             StartState.Start();
         }

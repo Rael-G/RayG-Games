@@ -24,9 +24,12 @@ namespace Breakout.GameLogic.States
         Color startColor = Color.BLUE;
         Color highScoreColor = Color.WHITE;
 
-        public StartState(GameStateRef state) 
+        SoundManager _soundManager;
+
+        public StartState(GameStateRef state, SoundManager soundManager) 
         {
             State = state;
+            _soundManager = soundManager;
         }
 
         public override void Start()
@@ -47,11 +50,13 @@ namespace Breakout.GameLogic.States
             {
                 startColor = Color.BLUE;
                 highScoreColor = Color.WHITE;
+                _soundManager.PlaySound("Select");
             }
             else if(Raylib.IsKeyPressed(KeyboardKey.KEY_DOWN))
             {
                 startColor = Color.WHITE;
                 highScoreColor = Color.BLUE;
+                _soundManager.PlaySound("Select");
             }
             base.Update();
         }
