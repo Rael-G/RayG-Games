@@ -6,8 +6,11 @@ namespace RayG
     {
         public SoundManager(string path, string[] names) : base(path, names) { }
 
-        public void PlaySound(string name)
+        public void PlaySound(string name, float volume = 1f, float pitch = 1f)
         {
+            var sound = Resources[name];
+            Raylib.SetSoundVolume(sound, volume);
+            Raylib.SetSoundPitch(sound, pitch);
             Raylib.PlaySound(Resources[name]);
         }
 

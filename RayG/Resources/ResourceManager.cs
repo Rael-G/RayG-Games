@@ -9,7 +9,7 @@ namespace RayG
         protected string Path 
         { 
             get => _path;
-            set => _path = Directory.GetCurrentDirectory() + "//" + value;
+            set => _path = Directory.GetCurrentDirectory() + "\\" + value;
         }
         protected string[] Names { get; set; }
         protected Dictionary<string, T> Resources { get; }

@@ -6,11 +6,12 @@ namespace RayG
     {
         public MusicManager(string path, string[] names) : base(path, names) { }
 
-        public void StartMusic(string name)
+        public void StartMusic(string name, float volume = 1f, float pitch = 1f)
         {
             var song = Resources[name];
+            Raylib.SetMusicVolume(song, volume);
+            Raylib.SetMusicPitch(song, pitch);
             Raylib.PlayMusicStream(song);
-            
         }
 
         public void UpdateMusic(string name)
