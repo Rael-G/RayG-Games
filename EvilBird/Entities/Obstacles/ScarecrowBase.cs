@@ -1,5 +1,4 @@
 ﻿using RayG;
-using RayG.Interfaces;
 using Raylib_cs;
 using System.Numerics;
 
@@ -51,7 +50,7 @@ namespace EvilBird.Entities.Obstacles
             Position = new(ResetPos.X, ResetPos.Y + spawn);
         }
 
-        virtual public void OnCollisionEnter(Collisor collisor)
+        virtual public void OnCollisionEnter(Collision collision)
         {
             
         }

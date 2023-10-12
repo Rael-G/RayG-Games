@@ -1,5 +1,4 @@
 ﻿using RayG;
-using RayG.Interfaces;
 using Raylib_cs;
 using System.Numerics;
 
@@ -67,7 +66,7 @@ namespace Pong.Entities
             base.Render();
         }
 
-        public void OnCollisionEnter(Collisor collider)
+        public void OnCollisionEnter(Collision collision)
         {
             var max = 10;
             var min = 1;

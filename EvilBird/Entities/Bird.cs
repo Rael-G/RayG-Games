@@ -1,5 +1,4 @@
 ﻿using RayG;
-using RayG.Interfaces;
 using Raylib_cs;
 using System.Numerics;
 
@@ -76,14 +75,14 @@ namespace EvilBird.Entities
             base.Render();
         }
 
-        public void OnCollisionEnter(Collisor collisor)
+        public void OnCollisionEnter(Collision collision)
         {
-            if (collisor.Layer == "Scarecrow" || collisor.Layer == "Wall")
+            if (collision.Collisor.Layer == "Scarecrow" || collision.Collisor.Layer == "Wall")
             {
                 Dead = true;
                 _audioManager.PlaySound("Death");
             }
-            if (collisor.Layer == "Score")
+            if (collision.Collisor.Layer == "Score")
             {
                 Corn++;
                 _audioManager.PlaySound("Corn");
