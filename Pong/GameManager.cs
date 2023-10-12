@@ -35,14 +35,8 @@ namespace Pong
 
         public override void Awake()
         {
-            audioManager = new SoundManager(@"\Data\Pong\Audio\Sfx\", new string[]
-            {
-                "Pong.wav", "Wall.wav", "Score.wav"
-            });
-            fontManager = new FontManager(@"\Data\Pong\Fonts\", new string[]
-            {
-                "mecha.png"
-            });
+            audioManager = new SoundManager(@"\Data\Pong\Audio\Sfx\");
+            fontManager = new FontManager(@"\Data\Pong\Fonts\");
 
             resourceLayer = new GameObject() { Childs = { audioManager, fontManager } };
             Childs.Add(resourceLayer);

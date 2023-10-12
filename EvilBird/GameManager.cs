@@ -30,19 +30,11 @@ namespace EvilBird
         public override void Awake()
         {
             Camera = new Camera();
-            TextureManager = new TextureManager(@"\Data\EvilBird\Textures\", new string[]
-            {
-                "EvilBirdRising.png", "EvilBirdFalling.png", "Scarecrow.png",
-                "WheatFarmMid.png", "WheatFarmFront.png"
-            });
-            SoundManager = new SoundManager(@"\Data\EvilBird\Audio\Sound\", new string[]
-            {
-                "Countdown.wav", "Death.wav", "Jump.wav", "Corn.wav"
-            });
-            MusicManager = new MusicManager(@"\Data\EvilBird\Audio\Music\", new string[]
-            {
-                "Music.mp3"
-            });
+            TextureManager = new TextureManager(@"\Data\EvilBird\Textures\");
+
+            SoundManager = new SoundManager(@"\Data\EvilBird\Audio\Sound\");
+
+            MusicManager = new MusicManager(@"\Data\EvilBird\Audio\Music\");
 
             Childs.Add(Camera);
             Childs.Add(TextureManager);
