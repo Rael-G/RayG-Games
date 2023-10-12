@@ -2,7 +2,6 @@
 using RayG;
 using RayG.Interfaces;
 using Raylib_cs;
-using System.Numerics;
 
 namespace Breakout.Entities
 {
@@ -93,6 +92,12 @@ namespace Breakout.Entities
             if (collisor.Layer == "Paddle")
             {
                 deltaY = -deltaY;
+                _soundManager.PlaySound("Paddle", 0.5f);
+            }
+
+            if (collisor.Layer == "Brick")
+            {
+                
             }
         }
 

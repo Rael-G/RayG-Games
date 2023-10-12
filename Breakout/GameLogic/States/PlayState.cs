@@ -11,6 +11,7 @@ namespace Breakout.GameLogic.States
         SpriteSheet _spriteSheet;
         Paddle Paddle;
         Ball Ball;
+        List<Brick> Bricks;
 
         GameObject CollisionLayer;
 
@@ -29,12 +30,22 @@ namespace Breakout.GameLogic.States
             CollisionLayer = new() { Childs = { Paddle, Ball } };
             Childs.Add(CollisionLayer);
 
+            var levelMaker = new LevelMaker(_soundManager, _spriteSheet);
+
+            Bricks = levelMaker.RandomLevel();
+            CollisionLayer.Childs.AddRange(Bricks);
+
             base.Start();
             Ball.Play();
         }
 
         public override void Update()
         {
+            if (!Bricks.Any(b => b.Life > 0))
+            {
+                //Victory
+            }
+
             CollisionLayer.Collision();
             base.Update();
         }

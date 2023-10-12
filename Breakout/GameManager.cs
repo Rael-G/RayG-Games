@@ -28,14 +28,9 @@ namespace Breakout
 
         public override void Awake()
         {
-            TextureManager = new TextureManager(@"Data\Breakout\Textures\", new string[]
-            {
-                "Breakout.png", "RedBlueGirl.png"
-            });
-            SoundManager = new SoundManager(@"Data\Breakout\Audio\Sounds\", new string[]
-            {
-                "Select.wav", "Wall.wav"
-            });
+            TextureManager = new TextureManager(@"Data\Breakout\Textures\");
+
+            SoundManager = new SoundManager(@"Data\Breakout\Audio\Sounds\");
 
             SpriteSheet = new SpriteSheet(TextureManager);
 
