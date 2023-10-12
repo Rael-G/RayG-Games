@@ -2,6 +2,9 @@
 
 namespace RayG
 {
+    /// <summary>
+    /// Provides configuration and management for the game window.
+    /// </summary>
     public static class Window
     {
         //Default Options
@@ -13,16 +16,45 @@ namespace RayG
         private static ConfigFlags[] _flags = Array.Empty<ConfigFlags>();
         private static bool _running = true;
 
-
+        /// <summary>
+        /// Gets or sets the name of the game window.
+        /// </summary>
         public static string Name { get => _name; set => _name = value; }
+
+        /// <summary>
+        /// Gets or sets the actual width of the game window.
+        /// </summary>
         public static int Width { get => Raylib.GetScreenWidth(); set => _width = value; }
+
+        /// <summary>
+        /// Gets or sets the actual height of the game window.
+        /// </summary>
         public static int Height { get => Raylib.GetScreenHeight(); set => _height = value; }
+
+        /// <summary>
+        /// Gets or sets the virtual width used for rendering and scaling.
+        /// </summary>
         public static int VirtualWidth { get => _virtualWidth; set => _virtualWidth = value; }
+
+        /// <summary>
+        /// Gets or sets the virtual height used for rendering and scaling.
+        /// </summary>
         public static int VirtualHeight { get => _virtualHeight; set => _virtualHeight = value; }
+
+        /// <summary>
+        /// Sets configuration flags for the game window.
+        /// </summary>
         public static ConfigFlags[] Flags { set => _flags = value; }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether the game window is currently running.
+        /// </summary>
         public static bool Running { get => !Raylib.WindowShouldClose() && _running; 
             set => _running = value; }
 
+        /// <summary>
+        /// Gets the current scaling factor based on the virtual and actual sizes.
+        /// </summary>
         public static int Scale 
         { 
             get 
@@ -36,6 +68,11 @@ namespace RayG
             } 
         }
 
+        /// <summary>
+        /// Resizes the game window to the specified width and height.
+        /// </summary>
+        /// <param name="width"></param>
+        /// <param name="height"></param>
         public static void ResizeWindow(int width, int height)
         {
             _width = width;

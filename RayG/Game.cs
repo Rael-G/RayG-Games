@@ -11,6 +11,10 @@ namespace RayG
             GameObject = gameObject;
         }
 
+        /// <summary>
+        /// Initiates and runs the game loop, handling game initialization, 
+        /// updates, rendering, and disposal.
+        /// </summary>
         public void Run()
         {
             GameObject.Config();

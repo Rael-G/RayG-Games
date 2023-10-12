@@ -2,6 +2,10 @@
 {
     public static class CollisionHandler
     {
+        /// <summary>
+        /// Performs collision detection and handling for a GameObject and its descendants.
+        /// </summary>
+        /// <param name="gameObject"></param>
         public static void Collision(this GameObject gameObject)
         {
             var collideable = gameObject.ColliderDetecter();

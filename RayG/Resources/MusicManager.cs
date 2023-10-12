@@ -6,6 +6,12 @@ namespace RayG
     {
         public MusicManager(string path) : base(path) { }
 
+        /// <summary>
+        /// Starts playing a music resource with optional volume and pitch settings.
+        /// </summary>
+        /// <param name="name">The name of the music resource to play.</param>
+        /// <param name="volume">The volume level (0.0 to 1.0, 1.0 by default).</param>
+        /// <param name="pitch">The pitch (speed) of playback (1.0 by default).</param>
         public void StartMusic(string name, float volume = 1f, float pitch = 1f)
         {
             var song = Resources[name];
@@ -14,6 +20,10 @@ namespace RayG
             Raylib.PlayMusicStream(song);
         }
 
+        /// <summary>
+        /// Updates the playback of a music resource; should be called once per frame.
+        /// </summary>
+        /// <param name="name">The name of the music resource to update.</param>
         public void UpdateMusic(string name)
         {
             var song = Resources[name];

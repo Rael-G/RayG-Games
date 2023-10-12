@@ -6,6 +6,11 @@ namespace RayG
     {
         public FontManager(string path) : base(path) { }
 
+        /// <summary>
+        /// Retrieves a font resource by its name.
+        /// </summary>
+        /// <param name="name">The name of the font resource to retrieve.</param>
+        /// <returns>The font resource identified by the specified name.</returns>
         public Font GetFont(string name)
         {
             return Resources[name];
