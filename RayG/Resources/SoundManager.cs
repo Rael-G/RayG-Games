@@ -4,7 +4,7 @@ namespace RayG
 {
     public class SoundManager : ResourceManager<Sound>
     {
-        public SoundManager(string path, string[] names) : base(path, names) { }
+        public SoundManager(string path) : base(path) { }
 
         public void PlaySound(string name, float volume = 1f, float pitch = 1f)
         {
@@ -16,12 +16,12 @@ namespace RayG
 
         protected override void Load()
         { 
-            foreach (var name in Names)
+            foreach (var file in Files)
             {
-                var sound = Raylib.LoadSound(Path + name);
+                var sound = Raylib.LoadSound(file);
 
-                var splitedName = name.Split('.');
-                Resources.Add(splitedName[0], sound);
+                var name = System.IO.Path.GetFileNameWithoutExtension(file);
+                Resources.Add(name, sound);
             }
         }
 

@@ -4,7 +4,7 @@ namespace RayG
 {
     public class MusicManager : ResourceManager<Music>
     {
-        public MusicManager(string path, string[] names) : base(path, names) { }
+        public MusicManager(string path) : base(path) { }
 
         public void StartMusic(string name, float volume = 1f, float pitch = 1f)
         {
@@ -22,12 +22,12 @@ namespace RayG
 
         protected override void Load()
         {
-            foreach (var name in Names)
+            foreach (var file in Files)
             {
-                var song = Raylib.LoadMusicStream(Path + name);
+                var song = Raylib.LoadMusicStream(file);
 
-                var splitedName = name.Split('.');
-                Resources.Add(splitedName[0], song);
+                var name = System.IO.Path.GetFileNameWithoutExtension(file);
+                Resources.Add(name, song);
             }
         }
 

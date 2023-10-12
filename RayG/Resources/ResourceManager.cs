@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using System.Xml.Linq;
 
 namespace RayG
 {
@@ -11,14 +12,14 @@ namespace RayG
             get => _path;
             set => _path = Directory.GetCurrentDirectory() + "\\" + value;
         }
-        protected string[] Names { get; set; }
+        protected string[] Files { get; set; }
         protected Dictionary<string, T> Resources { get; }
 
-        public ResourceManager(string path, string[] names)
+        public ResourceManager(string path)
         {
             Resources = new Dictionary<string, T>();
             Path = path;
-            Names = names;
+            Files = GetFiles();
         }
 
         public override void Awake()
@@ -36,5 +37,16 @@ namespace RayG
         protected abstract void Load();
 
         protected abstract void Unload();
+
+        private string[] GetFiles()
+        {
+            string[] files = Array.Empty<string>();
+            if (Directory.Exists(Path))
+            {
+                files = Directory.GetFiles(Path);
+            }
+
+            return files;
+        }
     }
 }

@@ -4,7 +4,7 @@ namespace RayG
 {
     public class TextureManager : ResourceManager<Texture2D>
     {
-        public TextureManager(string path, string[] names) : base(path, names) { }
+        public TextureManager(string path) : base(path) { }
 
         public Texture2D GetTexture(string name)
         {
@@ -13,12 +13,12 @@ namespace RayG
 
         protected override void Load()
         {
-            foreach (var name in Names)
+            foreach (var file in Files)
             {
-                var texture = Raylib.LoadTexture(Path + name);
+                var texture = Raylib.LoadTexture(file);
 
-                var splitedName = name.Split('.');
-                Resources.Add(splitedName[0], texture);
+                var name = System.IO.Path.GetFileNameWithoutExtension(file);
+                Resources.Add(name, texture);
             }
         }
 

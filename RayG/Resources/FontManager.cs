@@ -4,7 +4,7 @@ namespace RayG
 {
     public class FontManager : ResourceManager<Font>
     {
-        public FontManager(string path, string[] names) : base(path, names) { }
+        public FontManager(string path) : base(path) { }
 
         public Font GetFont(string name)
         {
@@ -13,12 +13,12 @@ namespace RayG
 
         protected override void Load()
         {
-            foreach (var name in Names)
+            foreach (var file in Files)
             {
-                var font = Raylib.LoadFont(Path + name);
+                var font = Raylib.LoadFont(file);
 
-                var splitedName = name.Split('.');
-                Resources.Add(splitedName[0], font);
+                var name = System.IO.Path.GetFileNameWithoutExtension(file);
+                Resources.Add(name, font);
             }
         }
 
