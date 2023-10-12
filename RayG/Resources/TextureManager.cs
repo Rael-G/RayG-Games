@@ -4,8 +4,14 @@ namespace RayG
 {
     public class TextureManager : ResourceManager<Texture2D>
     {
+        /// <param name="path">The path to the font resource files, relative to the location of the executable.</param>
         public TextureManager(string path) : base(path) { }
 
+        /// <summary>
+        /// Retrieves a texture resource by its name.
+        /// </summary>
+        /// <param name="name">The name of the texture resource to retrieve.</param>
+        /// <returns>The texture resource identified by the specified name.</returns>
         public Texture2D GetTexture(string name)
         {
             return Resources[name];

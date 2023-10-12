@@ -4,10 +4,29 @@ namespace RayG
 {
     public class Collisor
     {
+        /// <summary>
+        /// Position of the collisor in 2D space.
+        /// </summary>
         public Vector2 Position { get; set; }
+
+        /// <summary>
+        /// Area (dimensions) of the collisor in 2D space.
+        /// </summary>
         public Vector2 Area { get; set; }
+
+        /// <summary>
+        /// Layer to which the collisor belongs.
+        /// </summary>
         public string Layer { get; set; }
+
+        /// <summary>
+        /// List of collisors that the current collisor is in contact with.
+        /// </summary>
         public List<Collisor> Colliders { get; set; }
+
+        /// <summary>
+        /// Value indicating whether the collisor is active and participating in collisions.
+        /// </summary>
         public bool Active { get; set; }
 
         public Collisor(Vector2 position, Vector2 area, string layer = "")
@@ -28,9 +47,13 @@ namespace RayG
             Active = true;
         }
 
-        public bool IsColliding(Collisor collider)
+        /// <summary>
+        /// Checks if this collisor is colliding with another collisor using AABB collision detection.
+        /// </summary>
+        /// <param name="collider">The collisor to check for collision.</param>
+        /// <returns>True if a collision is detected; otherwise, false.</returns>
+        internal bool IsColliding(Collisor collider)
         {
-            //AABB
             if (Active && collider.Active)
             {
                 return
@@ -43,6 +66,12 @@ namespace RayG
             return false;
         }
 
+
+        /// <summary>
+        /// Determines the side of collision with another collisor.
+        /// </summary>
+        /// <param name="collider">The collisor to check for collision.</param>
+        /// <returns>The side of collision (e.g., Top, Bottom, Left, Right).</returns>
         public Side CollisionSide(Collisor collider)
         {
             var topCollision = Position.Y + Area.Y - collider.Position.Y;

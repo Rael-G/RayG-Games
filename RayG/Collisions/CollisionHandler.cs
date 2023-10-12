@@ -68,9 +68,7 @@
                                 if (colObject.Collisor.IsColliding(otherColObject.Collisor))
                                 {
                                     colObject.Collisor.Colliders.Add(otherColObject.Collisor);
-
-                                    var side = colObject.Collisor.CollisionSide(otherColObject.Collisor);
-                                    colObject.OnCollisionEnter(new Collision(otherColObject.Collisor, side));
+                                    colObject.OnCollisionEnter(otherColObject.Collisor);
                                 }
                             }
                         }

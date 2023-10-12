@@ -4,6 +4,7 @@ namespace RayG
 {
     public class SoundManager : ResourceManager<Sound>
     {
+        /// <param name="path">The path to the font resource files, relative to the location of the executable.</param>
         public SoundManager(string path) : base(path) { }
 
         /// <summary>

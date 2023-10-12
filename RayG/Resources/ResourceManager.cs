@@ -3,7 +3,6 @@
     public abstract class ResourceManager<T> : GameObject
     {
         private string _path;
-        //Relative to executable
         protected string Path 
         { 
             get => _path;

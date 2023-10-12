@@ -2,9 +2,19 @@
 {
     public interface ICollisor
     {
+        /// <summary>
+        /// The collisor associated with this object.
+        /// </summary>
         Collisor Collisor { get; set; }
 
-        void OnCollisionEnter(Collision collisor);
+        /// <summary>
+        /// Called when this object enters a collision with another collisor.
+        /// </summary>
+        void OnCollisionEnter(Collisor collisor);
+
+        /// <summary>
+        /// Called when this object exits a collision with another collisor.
+        /// </summary>
         void OnCollisionExit(Collisor collisor);
     }
 }
