@@ -8,14 +8,14 @@ namespace Breakout.GameLogic.States
 {
     internal class PlayState : StateBase
     {
-        SpriteSheet _spriteSheet;
+        readonly SpriteSheet _spriteSheet;
         Paddle Paddle;
         Ball Ball;
         List<Brick> Bricks;
 
         GameObject CollisionLayer;
 
-        SoundManager _soundManager;
+        readonly SoundManager _soundManager;
 
         public PlayState(GameStateRef state, SpriteSheet spriteSheet, SoundManager soundManager) : base(state)
         {

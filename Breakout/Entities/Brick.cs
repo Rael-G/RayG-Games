@@ -1,6 +1,5 @@
 ﻿using Breakout.Resources;
 using RayG;
-using RayG.Interfaces;
 using Raylib_cs;
 using System.Numerics;
 
@@ -48,16 +47,16 @@ namespace Breakout.Entities
             base.Render();
         }
 
-        public void OnCollisionEnter(Collisor collisor)
+        public void OnCollisionEnter(Collision collision)
         {
-            if (collisor.Layer == "Ball")
+            if (collision.Collisor.Layer == "Ball")
             {
                 _soundManager.PlaySound("Brick");
                 Life--;
             }
         }
 
-        public void OnCollisionExit(Collisor collisor)
+        public void OnCollisionExit(Collisor collider)
         {
 
         }

@@ -1,6 +1,5 @@
 ﻿using Breakout.Resources;
 using RayG;
-using RayG.Interfaces;
 using Raylib_cs;
 
 namespace Breakout.Entities
@@ -87,21 +86,31 @@ namespace Breakout.Entities
             }
         }
 
-        public void OnCollisionEnter(Collisor collisor)
+        public void OnCollisionEnter(Collision collision)
         {
-            if (collisor.Layer == "Paddle")
+            if (collision.Collisor.Layer == "Paddle")
             {
                 deltaY = -deltaY;
+                var n = Position.x - (collision.Collisor.Position.X + collision.Collisor.Area.X / 2);
+                deltaX = n * 12;
+
                 _soundManager.PlaySound("Paddle", 0.5f);
             }
 
-            if (collisor.Layer == "Brick")
+            if (collision.Collisor.Layer == "Brick")
             {
-                
+                if (collision.Side == Side.Top || collision.Side == Side.Bottom)
+                {
+                    deltaY = -deltaY;
+                }
+                else
+                {
+                    deltaX = -deltaX;
+                }
             }
         }
 
-        public void OnCollisionExit(Collisor collisor)
+        public void OnCollisionExit(Collisor collider)
         {
             
         }

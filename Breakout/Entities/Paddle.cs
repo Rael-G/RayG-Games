@@ -1,6 +1,5 @@
 ﻿using Breakout.Resources;
 using RayG;
-using RayG.Interfaces;
 using Raylib_cs;
 
 namespace Breakout.Entities
@@ -49,12 +48,12 @@ namespace Breakout.Entities
             base.Render();
         }
 
-        public void OnCollisionEnter(Collisor collisor)
+        public void OnCollisionEnter(Collision collision)
         {
 
         }
 
-        public void OnCollisionExit(Collisor collisor)
+        public void OnCollisionExit(Collisor collider)
         {
 
         }
