@@ -1,13 +1,6 @@
-﻿using RayG.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace RayG
+﻿namespace RayG
 {
-    public static class Collisions
+    public static class CollisionHandler
     {
         public static void Collision(this GameObject gameObject)
         {
@@ -50,18 +43,18 @@ namespace RayG
                         }
                     }
                 }
-            } 
+            }
         }
 
         //Verify if GameObjects are colliding with each other
         //  and calls OnCollisinoEnter
-        private static void CollisionChecker(List<GameObject> collideable )
+        private static void CollisionChecker(List<GameObject> collideable)
         {
             foreach (var gameObject in collideable)
             {
                 if (gameObject is ICollisor colObject)
                 {
-                    foreach(var otherGameObject in collideable)
+                    foreach (var otherGameObject in collideable)
                     {
                         if (otherGameObject is ICollisor otherColObject)
                         {
@@ -71,7 +64,9 @@ namespace RayG
                                 if (colObject.Collisor.IsColliding(otherColObject.Collisor))
                                 {
                                     colObject.Collisor.Colliders.Add(otherColObject.Collisor);
-                                    colObject.OnCollisionEnter(otherColObject.Collisor);
+
+                                    var side = colObject.Collisor.CollisionSide(otherColObject.Collisor);
+                                    colObject.OnCollisionEnter(new Collision(otherColObject.Collisor, side));
                                 }
                             }
                         }

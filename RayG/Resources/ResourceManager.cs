@@ -1,7 +1,4 @@
-﻿using System.IO;
-using System.Xml.Linq;
-
-namespace RayG
+﻿namespace RayG
 {
     public abstract class ResourceManager<T> : GameObject
     {

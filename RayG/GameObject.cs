@@ -1,6 +1,4 @@
-﻿using RayG.Interfaces;
-
-namespace RayG
+﻿namespace RayG
 {
     public class GameObject : IDisposable
     {
