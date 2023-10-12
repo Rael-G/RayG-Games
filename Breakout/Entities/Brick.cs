@@ -47,9 +47,9 @@ namespace Breakout.Entities
             base.Render();
         }
 
-        public void OnCollisionEnter(Collision collision)
+        public void OnCollisionEnter(Collisor collider)
         {
-            if (collision.Collisor.Layer == "Ball")
+            if (collider.Layer == "Ball")
             {
                 _soundManager.PlaySound("Brick");
                 Life--;

@@ -12,7 +12,7 @@ namespace EvilBird.Entities.Obstacles
             Collisor = new Collisor(new Vector2(0, positionY), new Vector2(Window.VirtualWidth, 1), "Wall");
         }
 
-        public void OnCollisionEnter(Collision collision)
+        public void OnCollisionEnter(Collisor collider)
         {
         }
 

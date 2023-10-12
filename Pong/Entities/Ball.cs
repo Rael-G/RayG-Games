@@ -66,7 +66,7 @@ namespace Pong.Entities
             base.Render();
         }
 
-        public void OnCollisionEnter(Collision collision)
+        public void OnCollisionEnter(Collisor collider)
         {
             var max = 10;
             var min = 1;

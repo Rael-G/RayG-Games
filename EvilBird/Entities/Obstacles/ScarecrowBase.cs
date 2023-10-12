@@ -50,7 +50,7 @@ namespace EvilBird.Entities.Obstacles
             Position = new(ResetPos.X, ResetPos.Y + spawn);
         }
 
-        virtual public void OnCollisionEnter(Collision collision)
+        virtual public void OnCollisionEnter(Collisor collider)
         {
             
         }

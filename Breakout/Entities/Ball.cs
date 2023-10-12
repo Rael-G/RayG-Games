@@ -86,20 +86,22 @@ namespace Breakout.Entities
             }
         }
 
-        public void OnCollisionEnter(Collision collision)
+        public void OnCollisionEnter(Collisor collider)
         {
-            if (collision.Collisor.Layer == "Paddle")
+            if (collider.Layer == "Paddle")
             {
                 deltaY = -deltaY;
-                var n = Position.x - (collision.Collisor.Position.X + collision.Collisor.Area.X / 2);
+                var n = Position.x - (collider.Position.X + collider.Area.X / 2);
                 deltaX = n * 12;
 
                 _soundManager.PlaySound("Paddle", 0.5f);
             }
 
-            if (collision.Collisor.Layer == "Brick")
+            var side = Collisor.CollisionSide(collider);
+
+            if (collider.Layer == "Brick")
             {
-                if (collision.Side == Side.Top || collision.Side == Side.Bottom)
+                if (side == Side.Top || side == Side.Bottom)
                 {
                     deltaY = -deltaY;
                 }

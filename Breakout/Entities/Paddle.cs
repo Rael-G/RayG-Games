@@ -48,7 +48,7 @@ namespace Breakout.Entities
             base.Render();
         }
 
-        public void OnCollisionEnter(Collision collision)
+        public void OnCollisionEnter(Collisor collider)
         {
 
         }

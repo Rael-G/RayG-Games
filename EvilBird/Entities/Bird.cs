@@ -75,14 +75,14 @@ namespace EvilBird.Entities
             base.Render();
         }
 
-        public void OnCollisionEnter(Collision collision)
+        public void OnCollisionEnter(Collisor collider)
         {
-            if (collision.Collisor.Layer == "Scarecrow" || collision.Collisor.Layer == "Wall")
+            if (collider.Layer == "Scarecrow" || collider.Layer == "Wall")
             {
                 Dead = true;
                 _audioManager.PlaySound("Death");
             }
-            if (collision.Collisor.Layer == "Score")
+            if (collider.Layer == "Score")
             {
                 Corn++;
                 _audioManager.PlaySound("Corn");
