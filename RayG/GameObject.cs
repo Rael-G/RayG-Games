@@ -2,11 +2,11 @@
 {
     public class GameObject : IDisposable
     {
-        public List<GameObject> Childs { get; set; }
+        public List<GameObject> Children { get; set; }
 
         public GameObject()
         {
-            Childs = new List<GameObject>();
+            Children = new List<GameObject>();
         }
 
         /// <summary>
@@ -14,7 +14,7 @@
         /// </summary>
         public virtual void Config()
         {
-            foreach (var child in Childs)
+            foreach (var child in Children)
             {
                 child.Config();
             }
@@ -25,7 +25,7 @@
         /// </summary>
         public virtual void Awake()
         {
-            foreach (var child in Childs)
+            foreach (var child in Children)
             {
                 child.Awake();
             }
@@ -36,7 +36,7 @@
         /// </summary>
         public virtual void Start()
         {
-            foreach (var child in Childs)
+            foreach (var child in Children)
             {
                 child.Start();
             }
@@ -47,7 +47,7 @@
         /// </summary>
         public virtual void Update()
         {
-            foreach (var child in Childs)
+            foreach (var child in Children)
             {
                 child.Update();
             }
@@ -58,7 +58,7 @@
         /// </summary>
         public virtual void Render()
         {
-            foreach (var child in Childs)
+            foreach (var child in Children)
             {
                 child.Render();
             }
@@ -69,7 +69,7 @@
         /// </summary>
         public virtual void Canvas()
         {
-            foreach (var child in Childs)
+            foreach (var child in Children)
             {
                 child.Canvas();
             }
@@ -81,12 +81,25 @@
         public virtual void Dispose()
         {
             GC.SuppressFinalize(this);
-            foreach (var child in Childs)
+            foreach (var child in Children)
             {
                 child.Dispose();
             }
 
-            Childs.Clear();
-        } 
+            Children.Clear();
+        }
+
+        /// <summary>
+        /// Disposes of the specified child GameObject, removing it from the collection.
+        /// </summary>
+        /// <param name="child">The child GameObject to dispose of.</param>
+        public void Dispose(GameObject child)
+        {
+            if (Children.Contains(child))
+            {
+                child.Dispose();
+                Children.Remove(child);
+            }
+        }
     }
 }

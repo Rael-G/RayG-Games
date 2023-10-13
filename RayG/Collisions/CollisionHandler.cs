@@ -17,7 +17,7 @@
         private static List<GameObject> ColliderDetecter(this GameObject gameObject)
         {
             List<GameObject> collideable = new();
-            foreach (var child in gameObject.Childs)
+            foreach (var child in gameObject.Children)
             {
                 collideable.AddRange(child.ColliderDetecter());
 
