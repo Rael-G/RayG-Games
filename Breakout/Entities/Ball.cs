@@ -10,6 +10,7 @@ namespace Breakout.Entities
     {
         Sprite Sprite { get; set; }
         public Collisor Collisor { get; set; }
+        public bool Dead { get; set; }
 
         readonly Vector2 _initialPosition = new Vector2(Window.VirtualWidth / 2, Window.VirtualHeight / 2);
 
@@ -18,13 +19,12 @@ namespace Breakout.Entities
         float deltaY, deltaX;
 
         SoundManager _soundManager;
-        GameController _gameController;
 
-        public Ball(Sprite sprite, SoundManager soundManager, GameController gameController) 
+        public Ball(Sprite sprite, SoundManager soundManager) 
         {
             Sprite = sprite;
+            Dead = false;
             _soundManager = soundManager;
-            _gameController = gameController;
         }
 
         public override void Start()
@@ -57,12 +57,14 @@ namespace Breakout.Entities
 
         public void Play()
         {
+            Dead = false;
             deltaX = Raylib.GetRandomValue(-200, 200);
             deltaY = Raylib.GetRandomValue(-50, -60);
         }
 
         public void Stop()
         {
+            Dead = true;
             Position.y = _initialPosition.Y;
             Position.x = _initialPosition.X;
             deltaX = 0;
@@ -94,7 +96,7 @@ namespace Breakout.Entities
             }
             else if (Position.y >= Window.VirtualHeight - Sprite.Height)
             {
-                _gameController.LostBall();
+                _soundManager.PlaySound("Death");
                 Stop();
             }
         }

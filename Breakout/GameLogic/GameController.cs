@@ -9,13 +9,12 @@ namespace Breakout.GameLogic
     internal class GameController : GameObject
     {
         int Level;
-        public int Hearts { get; private set; }
+        public bool Lost;
         public int Score { get; private set; }
-        public bool Lost { get; set; }
 
         Paddle Paddle;
         Ball Ball;
-        Health Health;
+        public Health Health;
         public List<Brick> Bricks;
 
         readonly SpriteSheet _spriteSheet;
@@ -27,29 +26,44 @@ namespace Breakout.GameLogic
         {
             _spriteSheet = spriteSheet;
             _soundManager = soundManager;
-            Hearts = 3;
             Score = 0;
         }
 
         public override void Start()
         {
+            Lost = false;
             Paddle = new(_spriteSheet.Paddles[SpriteSheet.Medium, SpriteSheet.Blue]);
-            Ball = new(_spriteSheet.Balls[Raylib.GetRandomValue(0, 6)], _soundManager, this);
-            Health = new(this, _spriteSheet.Hearts[0]);
+            Ball = new(_spriteSheet.Balls[Raylib.GetRandomValue(0, 6)], _soundManager);
+            Health = new(_spriteSheet.Hearts[0], 3);
             var levelMaker = new LevelMaker(_soundManager, _spriteSheet);
             Bricks = levelMaker.RandomLevel();
             CollisionLayer = new();
-            CollisionLayer.Children.AddStart(Paddle);
-            CollisionLayer.Children.AddStart(Ball);
-            CollisionLayer.Children.AddStart(Health);
-            CollisionLayer.Children.AddRange(Bricks);
+            CollisionLayer.Children.AddStart(Paddle, Ball, Health);
+            CollisionLayer.Children.AddRangeStart(Bricks);
 
             base.Start();
         }
 
         public override void Update()
         {
-            this.Collision();
+            if (Ball.Dead)
+            {
+                LostBall();
+                Ball.Dead = false;
+            }
+
+            var deadBricks = Bricks.FindAll(b => b.Dead);
+            if (deadBricks.Any())
+            {
+                foreach (var brick in deadBricks)
+                {
+                    IncreaseScore((brick.Tier + 1) * 10);
+                    Bricks.Remove(brick);
+                }
+                
+            }
+
+            CollisionLayer.Collision();
             base.Update();
         }
 
@@ -74,9 +88,9 @@ namespace Breakout.GameLogic
 
         public void LostBall()
         {
-            if (Hearts > 0)
+            if (Health.Hearts > 0)
             {
-                Hearts--;
+                Health.Hearts--;
                 Lost = true;
             }
         }

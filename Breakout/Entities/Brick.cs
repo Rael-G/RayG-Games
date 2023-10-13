@@ -1,4 +1,5 @@
-﻿using Breakout.Resources;
+﻿using Breakout.GameLogic;
+using Breakout.Resources;
 using RayG;
 using Raylib_cs;
 using System.Numerics;
@@ -12,7 +13,8 @@ namespace Breakout.Entities
         Sprite Sprite;
         Rectangle Position;
         public int Life;
-        int Tier;
+        public int Tier;
+        public bool Dead;
 
         SoundManager _soundManager;
 
@@ -21,6 +23,7 @@ namespace Breakout.Entities
             _soundManager = soundManager;
             Sprite = sprite;
             Tier = tier;
+            Dead = false;
             Position = new Rectangle(position.X, position.Y, Sprite.Width, Sprite.Height);
             Life = Tier + 1;
             Collisor = new Collisor(Position.x, Position.y, Position.width, Position.height, "Brick");
@@ -33,6 +36,7 @@ namespace Breakout.Entities
             if (Life <= 0) 
             {
                 Collisor.Active = false;
+                Dead = true;
             }
             base.Update();
         }
@@ -40,7 +44,7 @@ namespace Breakout.Entities
         public override void Render()
         {
             //Draw Collisor
-            Raylib.DrawRectangleV(Collisor.Position, Collisor.Area, Raylib_cs.Color.VIOLET);
+            //Raylib.DrawRectangleV(Collisor.Position, Collisor.Area, Raylib_cs.Color.VIOLET);
             if (Life > 0)
             {
                 Raylib.DrawTexturePro(Sprite.Texture, Sprite.Source, Position, Sprite.Axis, 0, Raylib_cs.Color.WHITE);

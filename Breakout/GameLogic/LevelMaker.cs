@@ -15,6 +15,7 @@ namespace Breakout.GameLogic
     {
         SoundManager _soundManager;
         SpriteSheet _spriteSheet;
+
         public LevelMaker(SoundManager soundManager, SpriteSheet spriteSheet)
         {
             _spriteSheet = spriteSheet;
