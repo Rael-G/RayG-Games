@@ -9,15 +9,18 @@ namespace RayG
     public static class GameObjectUtils
     {
         /// <summary>
-        /// Adds a GameObject to the list and initiates its Awake and Start methods.
+        /// Adds GameObjects to the list and initializes them by calling their Awake and Start methods.
         /// </summary>
         /// <param name="gameObjects">The list of GameObjects to add to.</param>
-        /// <param name="item">The GameObject to add and initialize.</param>
-        public static void AddStart(this List<GameObject> gameObjects, GameObject item)
+        /// <param name="items">The GameObjects to add and initialize.</param>
+        public static void AddStart(this List<GameObject> gameObjects, params GameObject[] items)
         {
-            gameObjects.Add(item);
-            item.Awake();
-            item.Start();
+            foreach (var item in items)
+            {
+                gameObjects.Add(item);
+                item.Awake();
+                item.Start();
+            }
         }
 
         /// <summary>
