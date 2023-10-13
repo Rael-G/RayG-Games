@@ -1,6 +1,8 @@
-﻿using Breakout.Resources;
+﻿using Breakout.GameLogic;
+using Breakout.Resources;
 using RayG;
 using Raylib_cs;
+using System.Numerics;
 
 namespace Breakout.Entities
 {
@@ -9,16 +11,20 @@ namespace Breakout.Entities
         Sprite Sprite { get; set; }
         public Collisor Collisor { get; set; }
 
+        readonly Vector2 _initialPosition = new Vector2(Window.VirtualWidth / 2, Window.VirtualHeight / 2);
+
         Rectangle Position;
 
         float deltaY, deltaX;
 
         SoundManager _soundManager;
+        GameController _gameController;
 
-        public Ball(Sprite sprite, SoundManager soundManager) 
+        public Ball(Sprite sprite, SoundManager soundManager, GameController gameController) 
         {
             Sprite = sprite;
             _soundManager = soundManager;
+            _gameController = gameController;
         }
 
         public override void Start()
@@ -55,6 +61,14 @@ namespace Breakout.Entities
             deltaY = Raylib.GetRandomValue(-50, -60);
         }
 
+        public void Stop()
+        {
+            Position.y = _initialPosition.Y;
+            Position.x = _initialPosition.X;
+            deltaX = 0;
+            deltaY = 0;
+        }
+
         private void WallCollision()
         {
             if (Position.x <= 0)
@@ -66,7 +80,7 @@ namespace Breakout.Entities
             }
             else if (Position.x >= Window.VirtualWidth - Sprite.Width)
             {
-                Position.x = Window.VirtualWidth - 3;
+                Position.x = Window.VirtualWidth - Sprite.Width;
                 deltaX = -deltaX;
                 _soundManager.PlaySound("Wall");
             }
@@ -80,9 +94,8 @@ namespace Breakout.Entities
             }
             else if (Position.y >= Window.VirtualHeight - Sprite.Height)
             {
-                Position.y = Window.VirtualHeight - 3;
-                deltaY = -deltaY;
-                _soundManager.PlaySound("Wall");
+                _gameController.LostBall();
+                Stop();
             }
         }
 
@@ -91,8 +104,9 @@ namespace Breakout.Entities
             if (collider.Layer == "Paddle")
             {
                 deltaY = -deltaY;
-                var n = Position.x - (collider.Position.X + collider.Area.X / 2);
-                deltaX = n * 12;
+                var diference = Position.x + Position.width / 2 - (collider.Position.X + collider.Area.X / 2);
+                deltaX = diference * 12;
+                deltaY *= 1.02f;
 
                 _soundManager.PlaySound("Paddle", 0.5f);
             }
@@ -109,7 +123,9 @@ namespace Breakout.Entities
                 {
                     deltaX = -deltaX;
                 }
+
             }
+
         }
 
         public void OnCollisionExit(Collisor collider)

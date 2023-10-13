@@ -39,6 +39,7 @@ namespace Breakout.Entities
 
         public override void Render()
         {
+            //Draw Collisor
             Raylib.DrawRectangleV(Collisor.Position, Collisor.Area, Raylib_cs.Color.VIOLET);
             if (Life > 0)
             {

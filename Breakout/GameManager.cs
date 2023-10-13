@@ -35,10 +35,10 @@ namespace Breakout
             SpriteSheet = new SpriteSheet(TextureManager);
 
             Camera = new Camera();
-            Childs.Add(TextureManager);
-            Childs.Add(SoundManager);
-            Childs.Add(SpriteSheet);
-            Childs.Add(Camera);
+            Children.Add(TextureManager);
+            Children.Add(SoundManager);
+            Children.Add(SpriteSheet);
+            Children.Add(Camera);
 
             base.Awake();
         }
@@ -48,8 +48,8 @@ namespace Breakout
             var backgorund = new Background(TextureManager);
             var stateMachine = new StateMachine(SoundManager, SpriteSheet);
             
-            Childs.Add(backgorund);
-            Childs.Add(stateMachine);
+            Children.Add(backgorund);
+            Children.Add(stateMachine);
 
             base.Start();
         }

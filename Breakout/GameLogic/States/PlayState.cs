@@ -8,45 +8,36 @@ namespace Breakout.GameLogic.States
 {
     internal class PlayState : StateBase
     {
-        readonly SpriteSheet _spriteSheet;
-        Paddle Paddle;
-        Ball Ball;
-        List<Brick> Bricks;
-
-        GameObject CollisionLayer;
-
-        readonly SoundManager _soundManager;
-
-        public PlayState(GameStateRef state, SpriteSheet spriteSheet, SoundManager soundManager) : base(state)
+        GameController _gameController;
+        public PlayState(GameStateRef state, GameController controller) : base(state)
         {
-            _spriteSheet = spriteSheet;
-            _soundManager = soundManager;
+            _gameController = controller;
         }
 
         public override void Start()
         {
-            Paddle = new(_spriteSheet.Paddles[SpriteSheet.Medium, SpriteSheet.Blue]);
-            Ball = new(_spriteSheet.Balls[Raylib.GetRandomValue(0, 6)], _soundManager);
-            CollisionLayer = new() { Childs = { Paddle, Ball } };
-            Childs.Add(CollisionLayer);
-
-            var levelMaker = new LevelMaker(_soundManager, _spriteSheet);
-
-            Bricks = levelMaker.RandomLevel();
-            CollisionLayer.Childs.AddRange(Bricks);
-
+            _gameController.Begin();
             base.Start();
-            Ball.Play();
         }
 
         public override void Update()
         {
-            if (!Bricks.Any(b => b.Life > 0))
+            if (!_gameController.Bricks.Any(b => b.Life > 0))
             {
-                //Victory
+                //VictoryState
             }
 
-            CollisionLayer.Collision();
+            if (_gameController.Hearts <= 0)
+            {
+                StateRef.State = GameState.GameOver;
+            }
+
+            if (_gameController.Lost)
+            {
+                StateRef.State = GameState.Serve;
+                _gameController.Lost = false;
+            }
+
             base.Update();
         }
     }

@@ -52,11 +52,10 @@ namespace Breakout.GameLogic.States
                 if (highlated == 1)
                 {
                     StateRef.State = GameState.PaddleSelect;
-                    return;
                 }
                 else
                 {
-
+                    StateRef.State = GameState.HighScore;
                 }
             }
             if(Raylib.IsKeyPressed(KeyboardKey.KEY_UP) && highlated < 1)

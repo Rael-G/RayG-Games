@@ -14,7 +14,10 @@ namespace Breakout.GameLogic.States
         PaddleSelectState PaddleSelectState;
         ServeState ServeState;
         PlayState PlayState;
+        GameOverState GameOverState;
+        EnterHighScoreState EnterHighScoreState;
 
+        GameController _gameController;
         SoundManager _soundManager;
         SpriteSheet _spriteSheet;
 
@@ -68,78 +71,107 @@ namespace Breakout.GameLogic.States
                 }
             }
             base.Update();
+
+            //Console.WriteLine($"State: {State}  StateRef: {StateRef.State}");
         }
 
         private void StartGame()
         {
-            if (Childs.Contains(HighScoreState))
+            if (Children.Contains(HighScoreState))
             {
-                Childs.Remove(HighScoreState);
-                HighScoreState.Dispose();
+                Dispose(HighScoreState);
             }
 
+            _gameController = new(_spriteSheet, _soundManager);
+            Children.AddStart(_gameController);
             StartState = new(StateRef, _soundManager);
-            Childs.Add(StartState);
-            StartState.Start();
+            Children.AddStart(StartState);
         }
 
         private void PaddleSelect()
         {
-            if (Childs.Contains(StartState))
+            if (Children.Contains(StartState))
             {
-                Childs.Remove(StartState);
-                StartState.Dispose();
+                Dispose(StartState);
             }
 
             PaddleSelectState = new(StateRef);
-            Childs.Add(PaddleSelectState);
-            PaddleSelectState.Start();
+            Children.AddStart(PaddleSelectState);
         }
 
         private void Serve()
         {
-            if (Childs.Contains(PaddleSelectState))
+            if (Children.Contains(PaddleSelectState))
             {
-                Childs.Remove(PaddleSelectState);
-                PaddleSelectState.Dispose();
+                Dispose(PaddleSelectState);
+            }
+            if (Children.Contains(PlayState))
+            {
+                Dispose(PlayState);
             }
 
             ServeState = new(StateRef);
-            Childs.Add(ServeState);
-            ServeState.Start();
+            Children.AddStart(ServeState);
         }
 
         private void Play()
         {
-            if (Childs.Contains(ServeState))
+            if (Children.Contains(ServeState))
             {
-                Childs.Remove(ServeState);
-                ServeState.Dispose();
+                Dispose(ServeState);
             }
 
-            PlayState = new(StateRef, _spriteSheet, _soundManager);
-            Childs.Add(PlayState);
-            PlayState.Start();
-        }
-
-        private void Victory()
-        {
-
+            PlayState = new(StateRef, _gameController);
+            Children.AddStart(PlayState);
         }
 
         private void GameOver()
         {
+            if (Children.Contains(PlayState))
+            {
+                Dispose(PlayState);
+            }
 
+            GameOverState = new(StateRef, _gameController);
+            Children.AddStart(GameOverState);
         }
 
         private void EnterHighScore()
         {
+            if (Children.Contains(GameOverState))
+            {
+                Dispose(GameOverState);
+            }
 
+            EnterHighScoreState = new(StateRef);
+            Children.AddStart(EnterHighScoreState);
         }
 
         private void HighScore()
         {
+            if (Children.Contains(EnterHighScoreState))
+            {
+                Dispose(EnterHighScoreState);
+            }
+            if (Children.Contains(StartState))
+            {
+                Dispose(StartState);
+            }
 
+            HighScoreState = new(StateRef);
+            Children.AddStart(HighScoreState);
+            
+        }
+
+        private void Victory()
+        {
+            if (Children.Contains(PlayState))
+            {
+                Dispose(PlayState);
+            }
+
+            //VictoryState = new(StateRef, _gameController);
+            //Children.AddStart(VictoryState);
         }
     }
 }
