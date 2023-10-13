@@ -29,7 +29,7 @@ namespace EvilBird.GameLogic.States
         {
             textSize = Raylib.MeasureText(Corns.ToString(), _fontSize);
 
-            Childs = new() { Bird,  ObstacleManager };
+            Children = new() { Bird,  ObstacleManager };
             base.Start();
         }
 

@@ -36,10 +36,10 @@ namespace EvilBird
 
             MusicManager = new MusicManager(@"\Data\EvilBird\Audio\Music\");
 
-            Childs.Add(Camera);
-            Childs.Add(TextureManager);
-            Childs.Add(MusicManager);
-            Childs.Add(SoundManager);
+            Children.Add(Camera);
+            Children.Add(TextureManager);
+            Children.Add(MusicManager);
+            Children.Add(SoundManager);
 
             base.Awake();
         }
@@ -49,8 +49,8 @@ namespace EvilBird
             Background = new Background(TextureManager, MusicManager);
             StateMachine = new(TextureManager, SoundManager);
            
-            Childs.Add(Background);
-            Childs.Add(StateMachine);
+            Children.Add(Background);
+            Children.Add(StateMachine);
 
             base.Start();
         }

@@ -25,7 +25,7 @@ namespace EvilBird.GameLogic.States
             _audioManager = audioManager;
             States = new GameObject();
             GameStateRef = new(GameState.Start);
-            Childs.Add(States);
+            Children.Add(States);
         }
 
         public override void Update()
@@ -56,38 +56,38 @@ namespace EvilBird.GameLogic.States
         public void StartGame()
         {
             StartState = new(GameStateRef);
-            States.Childs.Add(StartState);
+            States.Children.Add(StartState);
             StartState.Start();
         }
 
         public void CountDown()
         {
-            if (States.Childs.Contains(StartState))
+            if (States.Children.Contains(StartState))
             {
-                States.Childs.Remove(StartState);
+                States.Children.Remove(StartState);
                 StartState.Dispose();
             }
-            else if (States.Childs.Contains(ScoreState))
+            else if (States.Children.Contains(ScoreState))
             {
-                States.Childs.Remove(ScoreState);
+                States.Children.Remove(ScoreState);
                 ScoreState.Dispose();
             }
 
             CountDownState = new(GameStateRef, _audioManager);
-            States.Childs.Add(CountDownState);
+            States.Children.Add(CountDownState);
             CountDownState.Start();
         }
 
         public void Play()
         {
-            if (States.Childs.Contains(CountDownState))
+            if (States.Children.Contains(CountDownState))
             {
-                States.Childs.Remove(CountDownState);
+                States.Children.Remove(CountDownState);
                 CountDownState.Dispose();
             }
 
             PlayState = new(GameStateRef, new Bird(_textureManager, _audioManager), new ObstacleManager(_textureManager));
-            States.Childs.Add(PlayState);
+            States.Children.Add(PlayState);
             PlayState.Start();
         }
 
@@ -95,14 +95,14 @@ namespace EvilBird.GameLogic.States
         {
             var corns = PlayState.Corns;
 
-            if (States.Childs.Contains(PlayState))
+            if (States.Children.Contains(PlayState))
             {
-                States.Childs.Remove(PlayState);
+                States.Children.Remove(PlayState);
                 PlayState.Dispose();
             }
 
             ScoreState = new ScoreState(GameStateRef, corns.ToString());
-            States.Childs.Add(ScoreState);
+            States.Children.Add(ScoreState);
             ScoreState.Start();
         }
     }

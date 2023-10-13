@@ -29,9 +29,9 @@ namespace EvilBird.Entities.Obstacles
             ScarecorwUp = new(_initialPosition, _texture);
             ScarecrowScore = new ScarecrowScore(_initialPosition);
 
-            Childs.Add(ScarecrowDown);
-            Childs.Add(ScarecorwUp);
-            Childs.Add(ScarecrowScore);
+            Children.Add(ScarecrowDown);
+            Children.Add(ScarecorwUp);
+            Children.Add(ScarecrowScore);
 
             base.Start();
 

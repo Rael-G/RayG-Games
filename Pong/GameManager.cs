@@ -38,8 +38,8 @@ namespace Pong
             audioManager = new SoundManager(@"\Data\Pong\Audio\Sfx\");
             fontManager = new FontManager(@"\Data\Pong\Fonts\");
 
-            resourceLayer = new GameObject() { Childs = { audioManager, fontManager } };
-            Childs.Add(resourceLayer);
+            resourceLayer = new GameObject() { Children = { audioManager, fontManager } };
+            Children.Add(resourceLayer);
 
             base.Awake();
         }
@@ -56,14 +56,14 @@ namespace Pong
 
             background = new Background(Color.BLACK);
             
-            defaultLayer = new GameObject() { Childs = { leftPaddle, rightPaddle, ball } };
-            canvasLayer = new GameObject() { Childs = { score, menu } };
-            logicLayer = new GameObject() { Childs = { match, stateMachine } };
+            defaultLayer = new GameObject() { Children = { leftPaddle, rightPaddle, ball } };
+            canvasLayer = new GameObject() { Children = { score, menu } };
+            logicLayer = new GameObject() { Children = { match, stateMachine } };
 
-            Childs.Add(background);
-            Childs.Add(defaultLayer);
-            Childs.Add(logicLayer);
-            Childs.Add(canvasLayer);
+            Children.Add(background);
+            Children.Add(defaultLayer);
+            Children.Add(logicLayer);
+            Children.Add(canvasLayer);
 
             base.Start();
         }
