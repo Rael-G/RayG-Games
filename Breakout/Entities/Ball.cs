@@ -57,6 +57,8 @@ namespace Breakout.Entities
 
         public void Play()
         {
+            Stop();
+            Collisor.Active = true;
             Dead = false;
             deltaX = Raylib.GetRandomValue(-200, 200);
             deltaY = Raylib.GetRandomValue(-50, -60);
@@ -64,7 +66,7 @@ namespace Breakout.Entities
 
         public void Stop()
         {
-            Dead = true;
+            Collisor.Active = false;
             Position.y = _initialPosition.Y;
             Position.x = _initialPosition.X;
             deltaX = 0;
@@ -97,6 +99,7 @@ namespace Breakout.Entities
             else if (Position.y >= Window.VirtualHeight - Sprite.Height)
             {
                 _soundManager.PlaySound("Death");
+                Dead = true;
                 Stop();
             }
         }

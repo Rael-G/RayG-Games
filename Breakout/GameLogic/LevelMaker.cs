@@ -22,9 +22,11 @@ namespace Breakout.GameLogic
             _soundManager = soundManager;
         }
 
-        public List<Brick> RandomLevel()
+        public List<Brick> RandomLevel(int level)
         {
             var bricks = new List<Brick>();
+            var highesTier = Math.Min(SpriteSheet.Strongest, level / 5);
+            var highestColor = Math.Min(SpriteSheet.Yellow, level % 5 + 3);
             var rows = Raylib.GetRandomValue(1, 5);
             var cols = Raylib.GetRandomValue(7, 15);
             var brickWidth = 17;
@@ -38,8 +40,10 @@ namespace Breakout.GameLogic
             {
                 for (int j = 0; j < cols; j++)
                 {
-                    var brick = new Brick(_soundManager, _spriteSheet.Bricks[SpriteSheet.Blue, 
-                        SpriteSheet.Weak], SpriteSheet.Weak, pos);
+                    var color = Raylib.GetRandomValue(0, highestColor);
+                    var tier = Raylib.GetRandomValue(0, highesTier);
+                    var brick = new Brick(_soundManager, _spriteSheet.Bricks[color,
+                        tier], tier, pos);
                     bricks.Add(brick);
                     pos.X += brickWidth;
                 }
