@@ -1,8 +1,12 @@
 ﻿
 using Breakout.Entities;
+using Breakout.GameLogic.States.Enums;
 using Breakout.Resources;
 using RayG;
 using Raylib_cs;
+using System.Diagnostics.Metrics;
+using System.Threading;
+using System.Timers;
 
 namespace Breakout.GameLogic
 {
@@ -10,7 +14,9 @@ namespace Breakout.GameLogic
     {
         public int Level;
         public bool Lost;
-        public int Score { get; private set; }
+        public int Score { get; set; }
+        private float _timer;
+        public int Timer;
 
         Paddle Paddle;
         Ball Ball;
@@ -29,6 +35,7 @@ namespace Breakout.GameLogic
             _spriteSheet = spriteSheet;
             _soundManager = soundManager;
             Score = 0;
+            Timer = 60;
         }
 
         public override void Start()
@@ -51,6 +58,7 @@ namespace Breakout.GameLogic
         {
             Ui.Level = Level;
             Ui.Score = Score;
+            Ui.Timer = Timer;
             if (Ball.Dead)
             {
                 LostBall();
@@ -71,6 +79,7 @@ namespace Breakout.GameLogic
                 
             }
 
+            TimerCount();
             CollisionLayer.Collision();
             base.Update();
         }
@@ -83,7 +92,6 @@ namespace Breakout.GameLogic
                 Bricks = _levelMaker.RandomLevel(Level);
                 BricksLayer.Children.AddRangeStart(Bricks);
             }
-
             Ball.Play();
         }
         public void GameOver()
@@ -92,9 +100,23 @@ namespace Breakout.GameLogic
             BricksLayer.Dispose();
         }
 
+        private void TimerCount()
+        {
+            var deltatime = Raylib.GetFrameTime();
+            _timer -= deltatime;
+
+            if (_timer <= 0 && Timer > 0 && Ball.deltaY != 0)
+            {
+                _timer = 1;
+                Timer--;
+            }
+        }
+
         public void IncreaseLevel()
         {
+            BricksLayer.Dispose();
             Ball.Stop();
+            Timer = 60;
             Level++;
             Bricks = _levelMaker.RandomLevel(Level);
             BricksLayer.Children.AddRangeStart(Bricks);

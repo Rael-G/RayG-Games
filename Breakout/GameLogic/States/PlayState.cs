@@ -27,11 +27,16 @@ namespace Breakout.GameLogic.States
 
             if (!_gameController.Bricks.Any())
             {
-                 _gameController.IncreaseLevel();    
+                _gameController.Score += (int)(_gameController.Timer * _gameController.Level);
+                _gameController.IncreaseLevel();
                 StateRef.State = GameState.Serve;
             }
-
-            if (_gameController.Ui.Hearts <= 0)
+            else if(_gameController.Timer <= 0)
+            {
+                _gameController.IncreaseLevel();
+                StateRef.State = GameState.Serve;
+            }
+            else if (_gameController.Ui.Hearts <= 0)
             {
                 StateRef.State = GameState.GameOver;
             }

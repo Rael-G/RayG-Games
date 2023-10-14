@@ -16,7 +16,7 @@ namespace Breakout.Entities
 
         Rectangle Position;
 
-        float deltaY, deltaX;
+        public float deltaY, deltaX;
 
         SoundManager _soundManager;
 

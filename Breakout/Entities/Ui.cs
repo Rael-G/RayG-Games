@@ -12,6 +12,7 @@ namespace Breakout.Entities
         public int Hearts { get; set; }
         public int Level;
         public int Score;
+        public int Timer;
         float scoreWidth, levelWidth, height;
         int fontSize = 50;
         string levelMsg;
@@ -43,6 +44,7 @@ namespace Breakout.Entities
                 position.x += size + Window.Width * 0.005f;
             }
 
+            Raylib.DrawText(Timer.ToString(), (int)(Window.Width * 0.20f), (int)height, fontSize, Color.WHITE);
             Raylib.DrawText(levelMsg, (int)levelWidth, (int)height, fontSize, Color.WHITE);
             Raylib.DrawText(Score.ToString(), (int)scoreWidth, (int)height, fontSize, Color.WHITE);
 
