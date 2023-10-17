@@ -12,32 +12,37 @@ namespace Breakout.Entities
 
         Sprite Sprite;
         Rectangle Position;
-        public int Life;
+        public int Color;
         public int Tier;
         public bool Dead;
+        public int Score;
 
         SoundManager _soundManager;
+        SpriteSheet _spriteSheet;
+        ParticleSystem _particle;
 
-        public Brick(SoundManager soundManager, Sprite sprite, int tier, Vector2 position)
-        { 
+        public Brick(SoundManager soundManager, SpriteSheet spriteSheet, ParticleSystem particle, int color, int tier, Vector2 position)
+        {
+            _particle = particle;
             _soundManager = soundManager;
-            Sprite = sprite;
+            _spriteSheet = spriteSheet;
+            Color = color;
             Tier = tier;
             Dead = false;
-            Position = new Rectangle(position.X, position.Y, Sprite.Width, Sprite.Height);
-            Life = Tier + 1;
+            Position = new Rectangle(position.X, position.Y, SpriteSheet.Width, SpriteSheet.Height);
             Collisor = new Collisor(Position.x, Position.y, Position.width, Position.height, "Brick");
+        }
+
+        public override void Start()
+        {
+            base.Start();
         }
 
         public override void Update()
         {
             Collisor.Position = new Vector2(Position.x, Position.y);
+            Sprite = _spriteSheet.Bricks[Color, Tier];
 
-            if (Life <= 0) 
-            {
-                Collisor.Active = false;
-                Dead = true;
-            }
             base.Update();
         }
 
@@ -45,7 +50,10 @@ namespace Breakout.Entities
         {
             //Draw Collisor
             //Raylib.DrawRectangleV(Collisor.Position, Collisor.Area, Raylib_cs.Color.VIOLET);
-            if (Life > 0)
+
+            Raylib.DrawTexturePro(Sprite.Texture, Sprite.Source, Position, Sprite.Axis, 0, Raylib_cs.Color.WHITE);
+
+            if (!Dead)
             {
                 Raylib.DrawTexturePro(Sprite.Texture, Sprite.Source, Position, Sprite.Axis, 0, Raylib_cs.Color.WHITE);
             }
@@ -56,8 +64,31 @@ namespace Breakout.Entities
         {
             if (collider.Layer == "Ball")
             {
-                _soundManager.PlaySound("Brick");
-                Life--;
+                _particle.SetParticles(collider.Position.X, collider.Position.Y, 1, 1, ParticleSystem.Colors[Color], 0.5f);
+
+                if (Color == 0 && Tier > 0)
+                {
+                    Score = Tier * 200;
+                    Tier--;
+                    Color = SpriteSheet.Yellow;
+                    _soundManager.PlaySound("Brick");
+
+
+                }
+                else if(Color > 0)
+                {
+                    Score = 25;
+                    Color--;
+                    _soundManager.PlaySound("Brick");
+
+                }
+                else
+                {
+                    _soundManager.PlaySound("Explosion", 0.10f);
+                    Score = 25;
+                    Dead = true;
+                    Collisor.Active = false;
+                }
             }
         }
 

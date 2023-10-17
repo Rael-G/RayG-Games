@@ -25,6 +25,7 @@ namespace Breakout.GameLogic
 
         readonly SpriteSheet _spriteSheet;
         readonly SoundManager _soundManager;
+        readonly ParticleSystem _particleSystem;
         LevelMaker _levelMaker;
 
         GameObject CollisionLayer;
@@ -34,6 +35,7 @@ namespace Breakout.GameLogic
         {
             _spriteSheet = spriteSheet;
             _soundManager = soundManager;
+            _particleSystem = new ParticleSystem();
             Score = 0;
             Timer = 60;
         }
@@ -45,12 +47,12 @@ namespace Breakout.GameLogic
             Paddle = new(_spriteSheet.Paddles[SpriteSheet.Medium, SpriteSheet.Blue]);
             Ball = new(_spriteSheet.Balls[Raylib.GetRandomValue(0, 6)], _soundManager);
             Ui = new(_spriteSheet.Hearts[0], 3);
-            _levelMaker = new LevelMaker(_soundManager, _spriteSheet);
+            _levelMaker = new LevelMaker(_soundManager, _spriteSheet, _particleSystem);
             Bricks = _levelMaker.RandomLevel(Level);
             CollisionLayer = new();
             BricksLayer = new();
             CollisionLayer.Children.AddStart(Paddle, Ball, Ui, BricksLayer);
-
+            Children.Add(_particleSystem);
             base.Start();
         }
 
@@ -65,14 +67,18 @@ namespace Breakout.GameLogic
                 Ball.Dead = false;
             }
 
+            foreach(var b in Bricks) 
+            {
+                Score += b.Score;
+                b.Score = 0;
+            }
+
             var deadBricks = Bricks.FindAll(b => b.Dead == true);
-            //var deadBricks = Bricks.FindAll(b=> b.Dead == false);
 
             if (deadBricks.Any())
             {
                 foreach (var brick in deadBricks)
                 {
-                    IncreaseScore((brick.Tier + 1) * 10);
                     Bricks.Remove(brick);
                     BricksLayer.Dispose(brick);
                 }

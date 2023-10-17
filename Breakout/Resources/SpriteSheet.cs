@@ -27,8 +27,8 @@ namespace Breakout.Resources
         public const int Large = 2;
         public const int ExtraLarge = 3;
 
-        int sectionWidth = 16;
-        int sectionHeight = 8;
+        public const int Width = 16;
+        public const int Height = 8;
 
         /// <summary>
         ///  Color 0-5 / Strenght 0-3;
@@ -75,19 +75,19 @@ namespace Breakout.Resources
             _texture = _textureManager.GetTexture("Breakout");
 
             Bricks = ArrangeMatrix(Bricks, Blue, 0, 0, 1);
-            Bricks = ArrangeMatrix(Bricks, Green, sectionWidth * 4, 0, 1);
-            Bricks = ArrangeMatrix(Bricks, Red, sectionWidth * 2, sectionHeight, 1);
-            Bricks = ArrangeMatrix(Bricks, Violet, 0, sectionHeight * 2, 1);
-            Bricks = ArrangeMatrix(Bricks, Yellow, sectionWidth * 4, sectionHeight * 2, 1);
-            Bricks = ArrangeMatrix(Bricks, Black, sectionWidth * 2, sectionHeight * 3, 1);
+            Bricks = ArrangeMatrix(Bricks, Green, Width * 4, 0, 1);
+            Bricks = ArrangeMatrix(Bricks, Red, Width * 2, Height, 1);
+            Bricks = ArrangeMatrix(Bricks, Violet, 0, Height * 2, 1);
+            Bricks = ArrangeMatrix(Bricks, Yellow, Width * 4, Height * 2, 1);
+            Bricks = ArrangeMatrix(Bricks, Black, Width * 2, Height * 3, 1);
 
-            Paddles = ArrangeMatrix(Paddles, Small, 0, sectionHeight * 4, 1, true);
-            Paddles = ArrangeMatrix(Paddles, Medium, sectionWidth, sectionHeight * 4, 2, true);
-            Paddles = ArrangeMatrix(Paddles, Large, sectionWidth * 3, sectionHeight * 4, 3, true);
-            Paddles = ArrangeMatrix(Paddles, ExtraLarge, 0, sectionHeight * 5, 4, true);
+            Paddles = ArrangeMatrix(Paddles, Small, 0, Height * 4, 1, true);
+            Paddles = ArrangeMatrix(Paddles, Medium, Width, Height * 4, 2, true);
+            Paddles = ArrangeMatrix(Paddles, Large, Width * 3, Height * 4, 3, true);
+            Paddles = ArrangeMatrix(Paddles, ExtraLarge, 0, Height * 5, 4, true);
 
-            Balls = ArrangeArray(Balls, 7, sectionWidth * 4, sectionHeight * 3, 4, 4);
-            Hearts = ArrangeArray(Hearts, 2, sectionWidth * 4, sectionHeight * 5, sectionWidth / 2, sectionHeight);
+            Balls = ArrangeArray(Balls, 7, Width * 4, Height * 3, 4, 4);
+            Hearts = ArrangeArray(Hearts, 2, Width * 4, Height * 5, Width / 2, Height);
 
             base.Awake();
         }
@@ -99,23 +99,23 @@ namespace Breakout.Resources
 
             for (int i = 0; i < 4; i++)
             {
-                if (srcX >= sectionWidth * 6)
+                if (srcX >= Width * 6)
                 {
                     srcX = 0;
-                    srcY += sectionHeight;
+                    srcY += Height;
                 }
 
-                source = new Rectangle(srcX, srcY, sectionWidth * size, sectionHeight);
+                source = new Rectangle(srcX, srcY, Width * size, Height);
                 sprite = new Sprite(_texture, source, 1);
                 matrix[matrixLeft, i] = sprite;
                
                 if (!paddle)
                 {
-                    srcX += sectionWidth;
+                    srcX += Width;
                 }
                 else
                 {
-                    srcY += sectionHeight * 2;
+                    srcY += Height * 2;
                 }
             }
 
@@ -129,10 +129,10 @@ namespace Breakout.Resources
 
             for (int i = 0; i < quantity; i++)
             {
-                if (srcX >= sectionWidth * 6)
+                if (srcX >= Width * 6)
                 {
                     srcX = 0;
-                    srcY += sectionHeight;
+                    srcY += Height;
                 }
 
                 source = new Rectangle(srcX, srcY, width, height);

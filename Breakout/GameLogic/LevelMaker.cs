@@ -15,14 +15,16 @@ namespace Breakout.GameLogic
     {
         SoundManager _soundManager;
         SpriteSheet _spriteSheet;
+        ParticleSystem _particleSystem;
 
-        const int brickWidth = 17;
+        const float brickWidth = 16.2f;
         const int brickHeight = 9;
 
-        public LevelMaker(SoundManager soundManager, SpriteSheet spriteSheet)
+        public LevelMaker(SoundManager soundManager, SpriteSheet spriteSheet, ParticleSystem particleSystem)
         {
             _spriteSheet = spriteSheet;
             _soundManager = soundManager;
+            _particleSystem = particleSystem;
         }
 
         public List<Brick> RandomLevel(int level)
@@ -64,8 +66,8 @@ namespace Breakout.GameLogic
                     ColorTierHandler(out int color, out int tier, alternatePattern, ref alternateFlag,
                         solidColor, solidTier, alternateColor1, alternateColor2, alternateTier1, alternateTier2);
                     
-                    var brick = new Brick(_soundManager, _spriteSheet.Bricks[color,
-                        tier], tier, pos);
+                    var brick = new Brick(_soundManager, _spriteSheet, _particleSystem, color,
+                        tier, pos);
 
                     bricks.Add(brick);
                     pos.X += brickWidth;
