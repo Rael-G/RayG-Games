@@ -31,7 +31,7 @@ namespace Breakout.Entities
         {
             deltaX = 0;
             deltaY = 0;
-            Position = new (Window.VirtualWidth / 2 - 1, Window.VirtualHeight / 2 - 1, Sprite.Width, Sprite.Height);
+            Position = new (Window.VirtualWidth / 2 - 1, Window.VirtualHeight / 2 - 1, Sprite.Width * 0.75f, Sprite.Height * 0.75f);
             Collisor = new((int)Position.x, (int)Position.y, Sprite.Width, Sprite.Height, "Ball");
 
             base.Start();
@@ -98,7 +98,7 @@ namespace Breakout.Entities
             }
             else if (Position.y >= Window.VirtualHeight - Sprite.Height)
             {
-                _soundManager.PlaySound("Death");
+                _soundManager.PlaySound("Death", 0.20f);
                 Dead = true;
                 Stop();
             }
@@ -120,17 +120,29 @@ namespace Breakout.Entities
 
             if (collider.Layer == "Brick")
             {
-                if (side == Side.Top || side == Side.Bottom)
+                const int safeSpacing = 3;
+
+                if (side == Side.Top)
                 {
+                    Position.y = collider.Position.Y - Position.height - safeSpacing;
                     deltaY = -deltaY;
+                }
+                else if (side == Side.Bottom)
+                {
+                    Position.y = collider.Position.Y + collider.Area.Y + safeSpacing;
+                    deltaY = -deltaY;
+                }
+                else if (side == Side.Left)
+                {
+                    Position.x = collider.Position.X - Position.width - safeSpacing;
+                    deltaX = -deltaX;
                 }
                 else
                 {
+                    Position.x = collider.Position.X + collider.Area.X + safeSpacing;
                     deltaX = -deltaX;
                 }
-
             }
-
         }
 
         public void OnCollisionExit(Collisor collider)
