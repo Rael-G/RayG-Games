@@ -8,19 +8,28 @@ namespace Breakout.Entities
     internal class Background : GameObject
     {
         TextureManager _textureManager;
+        MusicManager _musicManager;
         Texture2D background;
 
         Vector2 position = new(0, 0);
 
-        public Background(TextureManager textureManager) 
+        public Background(TextureManager textureManager, MusicManager muicManager) 
         {
             _textureManager = textureManager;
+            _musicManager = muicManager;
         }
 
         public override void Start()
         {
             background = _textureManager.GetTexture("RedBlueGirl");
+            _musicManager.StartMusic("Music", 0.5f, 0.75f);
             base.Start();
+        }
+
+        public override void Update()
+        {
+            _musicManager.UpdateMusic("Music");
+            base.Update();
         }
 
         public override void Render()

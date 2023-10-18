@@ -6,7 +6,6 @@
         PaddleSelect,
         Serve,
         Play,
-        Victory,
         GameOver,
         EnterHighScore,
         HighScore

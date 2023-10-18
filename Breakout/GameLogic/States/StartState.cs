@@ -47,6 +47,10 @@ namespace Breakout.GameLogic.States
 
         public override void Update()
         {
+            if (Raylib.IsKeyPressed(KeyboardKey.KEY_ESCAPE))
+            {
+                Window.Running = false;
+            }
             if (Raylib.IsKeyPressed(KeyboardKey.KEY_ENTER))
             {
                 if (highlated == 1)

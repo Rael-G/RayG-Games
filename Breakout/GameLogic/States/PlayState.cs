@@ -24,6 +24,10 @@ namespace Breakout.GameLogic.States
 
         public override void Update()
         {
+            if (Raylib.IsKeyPressed(KeyboardKey.KEY_ESCAPE))
+            {
+                StateRef.State = GameState.GameOver;
+            }
 
             if (!_gameController.Bricks.Any())
             {

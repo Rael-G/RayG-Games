@@ -20,11 +20,14 @@ namespace Breakout.GameLogic.States
         GameController _gameController;
         SoundManager _soundManager;
         SpriteSheet _spriteSheet;
+        SaveManager<List<Score>> _saveManager;
 
         public StateMachine(SoundManager soundManager, SpriteSheet spriteSheet) 
         {
             _soundManager = soundManager;
             _spriteSheet = spriteSheet;
+            _saveManager = new(Path.Combine(Environment.GetFolderPath
+                (Environment.SpecialFolder.MyDocuments), "My Games", "Breakout"));
         }
 
         public override void Start()
@@ -55,9 +58,6 @@ namespace Breakout.GameLogic.States
                         break;
                     case GameState.Play:
                         Play();
-                        break;
-                    case GameState.Victory:
-                        Victory();
                         break;
                     case GameState.GameOver:
                         GameOver();
@@ -143,7 +143,7 @@ namespace Breakout.GameLogic.States
                 Dispose(GameOverState);
             }
 
-            EnterHighScoreState = new(StateRef);
+            EnterHighScoreState = new(StateRef, _gameController, _saveManager);
             Children.AddStart(EnterHighScoreState);
         }
 
@@ -158,20 +158,9 @@ namespace Breakout.GameLogic.States
                 Dispose(StartState);
             }
 
-            HighScoreState = new(StateRef);
+            HighScoreState = new(StateRef, _saveManager);
             Children.AddStart(HighScoreState);
             
-        }
-
-        private void Victory()
-        {
-            if (Children.Contains(PlayState))
-            {
-                Dispose(PlayState);
-            }
-
-            //VictoryState = new(StateRef, _gameController);
-            //Children.AddStart(VictoryState);
         }
     }
 }

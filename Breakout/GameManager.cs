@@ -13,6 +13,7 @@ namespace Breakout
         Camera Camera;
         TextureManager TextureManager;
         SoundManager SoundManager;
+        MusicManager MusicManager;
         SpriteSheet SpriteSheet;
 
         public override void Config()
@@ -32,11 +33,14 @@ namespace Breakout
 
             SoundManager = new SoundManager(@"Data\Breakout\Audio\Sounds\");
 
+            MusicManager = new MusicManager(@"Data\Breakout\Audio\Music\");
+
             SpriteSheet = new SpriteSheet(TextureManager);
 
             Camera = new Camera();
             Children.Add(TextureManager);
             Children.Add(SoundManager);
+            Children.Add(MusicManager);
             Children.Add(SpriteSheet);
             Children.Add(Camera);
 
@@ -45,7 +49,7 @@ namespace Breakout
 
         public override void Start()
         {
-            var backgorund = new Background(TextureManager);
+            var backgorund = new Background(TextureManager, MusicManager);
             var stateMachine = new StateMachine(SoundManager, SpriteSheet);
             
             Children.Add(backgorund);
