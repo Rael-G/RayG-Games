@@ -9,9 +9,6 @@ namespace Breakout.GameLogic.States
 {
     internal class EnterHighScoreState : StateBase
     {
-        GameController _controller;
-        SaveManager<List<Score>> _saveManager;
-
         int highlated = 0;
         byte[] letters = new byte[] { 65, 65, 65 };
         Color[] colors = new Color[]{ Color.WHITE, Color.WHITE, Color.WHITE};
@@ -24,6 +21,9 @@ namespace Breakout.GameLogic.States
         const int lettersHeight = 200;
         int lettersWidth;
         Vector2 lettersPos;
+
+        readonly GameController _controller;
+        readonly SaveManager<List<Score>> _saveManager;
 
         public EnterHighScoreState(GameStateRef state, GameController controller, 
             SaveManager<List<Score>> saveManager) : base(state)

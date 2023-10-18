@@ -7,8 +7,7 @@ namespace Breakout.GameLogic.States
 {
     internal class HighScoreState : StateBase
     {
-        readonly SaveManager<List<Score>> _saveManager;
-        List<Score> scores;
+        List<Score> Scores;
 
         const int fontSize = 40;
         int posX = Window.Width / 4;
@@ -19,7 +18,7 @@ namespace Breakout.GameLogic.States
         const int highScoresFontSize = 150;
         int highScoresSize;
 
-
+        readonly SaveManager<List<Score>> _saveManager;
 
         public HighScoreState(GameStateRef state, SaveManager<List<Score>> saveManager) : base(state) 
         {
@@ -47,15 +46,14 @@ namespace Breakout.GameLogic.States
             Raylib.DrawText(highScoresMsg, Window.Width / 2 - highScoresSize / 2, Window.Height / 5, highScoresFontSize, Color.WHITE);
 
             var pos = posY;
-            var lenght = Math.Min(scores.Count, 10);
+            var lenght = Math.Min(Scores.Count, 10);
             for(int i = 0; i < lenght; i++)
             {
-                var scoreTextSize = Raylib.MeasureText(scores[i].HighScore.ToString(), fontSize);
-                var nameTextSize = Raylib.MeasureText(scores[i].PlayerName, fontSize);
+                var scoreTextSize = Raylib.MeasureText(Scores[i].HighScore.ToString(), fontSize);
 
                 Raylib.DrawText($"{i + 1}.", posX, pos, fontSize, Color.WHITE);
-                Raylib.DrawText(scores[i].PlayerName, posX * 2 - spacing / 2, pos, fontSize, Color.WHITE);
-                Raylib.DrawText(scores[i].HighScore.ToString(), posX * 3 - scoreTextSize, pos, fontSize, Color.WHITE);
+                Raylib.DrawText(Scores[i].PlayerName, posX * 2 - spacing / 2, pos, fontSize, Color.WHITE);
+                Raylib.DrawText(Scores[i].HighScore.ToString(), posX * 3 - scoreTextSize, pos, fontSize, Color.WHITE);
                 pos += fontSize;
             }
             base.Canvas();
@@ -65,11 +63,11 @@ namespace Breakout.GameLogic.States
         {
             try
             {
-                scores = _saveManager.LoadDataAsync("Scores").Result;
+                Scores = _saveManager.LoadDataAsync("Scores").Result;
             }
             catch
             {
-                scores = new List<Score>();
+                Scores = new List<Score>();
             }
         }
     }

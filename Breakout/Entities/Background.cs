@@ -1,5 +1,4 @@
-﻿using Breakout.Resources;
-using RayG;
+﻿using RayG;
 using Raylib_cs;
 using System.Numerics;
 
@@ -7,9 +6,9 @@ namespace Breakout.Entities
 {
     internal class Background : GameObject
     {
-        TextureManager _textureManager;
-        MusicManager _musicManager;
-        Texture2D background;
+        readonly TextureManager _textureManager;
+        readonly MusicManager _musicManager;
+        Texture2D Texture;
 
         Vector2 position = new(0, 0);
 
@@ -21,7 +20,7 @@ namespace Breakout.Entities
 
         public override void Start()
         {
-            background = _textureManager.GetTexture("RedBlueGirl");
+            Texture = _textureManager.GetTexture("RedBlueGirl");
             _musicManager.StartMusic("Music", 0.5f, 0.75f);
             base.Start();
         }
@@ -35,7 +34,7 @@ namespace Breakout.Entities
         public override void Render()
         {
             Raylib.ClearBackground(Color.BLACK);
-            Raylib.DrawTextureEx(background, position, 0, 2, Color.WHITE);
+            Raylib.DrawTextureEx(Texture, position, 0, 2, Color.WHITE);
             base.Render();
         }
     }

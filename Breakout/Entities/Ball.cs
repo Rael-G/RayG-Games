@@ -1,5 +1,4 @@
-﻿using Breakout.GameLogic;
-using Breakout.Resources;
+﻿using Breakout.Resources;
 using RayG;
 using Raylib_cs;
 using System.Numerics;
@@ -8,29 +7,27 @@ namespace Breakout.Entities
 {
     internal class Ball : GameObject, ICollisor
     {
-        Sprite Sprite { get; set; }
         public Collisor Collisor { get; set; }
         public bool Dead { get; set; }
 
-        readonly Vector2 _initialPosition = new Vector2(Window.VirtualWidth / 2, Window.VirtualHeight / 2);
-
+        Sprite Sprite;
         Rectangle Position;
 
-        public float deltaY, deltaX;
+        readonly Vector2 initialPosition = new Vector2(Window.VirtualWidth / 2, Window.VirtualHeight / 2);
 
-        SoundManager _soundManager;
+        public float DeltaY;
+        public float DeltaX;
+
+        readonly SoundManager _soundManager;
 
         public Ball(Sprite sprite, SoundManager soundManager) 
         {
             Sprite = sprite;
-            Dead = false;
             _soundManager = soundManager;
         }
 
         public override void Start()
         {
-            deltaX = 0;
-            deltaY = 0;
             Position = new (Window.VirtualWidth / 2 - 1, Window.VirtualHeight / 2 - 1, Sprite.Width * 0.75f, Sprite.Height * 0.75f);
             Collisor = new((int)Position.x, (int)Position.y, Sprite.Width, Sprite.Height, "Ball");
 
@@ -40,8 +37,8 @@ namespace Breakout.Entities
         public override void Update()
         {
             var deltatime = Raylib.GetFrameTime();
-            Position.x += deltaX * deltatime;
-            Position.y += deltaY * deltatime;
+            Position.x += DeltaX * deltatime;
+            Position.y += DeltaY * deltatime;
 
             WallCollision();
             Collisor.Position = new(Position.x, Position.y);
@@ -60,17 +57,17 @@ namespace Breakout.Entities
             Stop();
             Collisor.Active = true;
             Dead = false;
-            deltaX = Raylib.GetRandomValue(-200, 200);
-            deltaY = Raylib.GetRandomValue(-50, -60);
+            DeltaX = Raylib.GetRandomValue(-200, 200);
+            DeltaY = Raylib.GetRandomValue(-50, -60);
         }
 
         public void Stop()
         {
             Collisor.Active = false;
-            Position.y = _initialPosition.Y;
-            Position.x = _initialPosition.X;
-            deltaX = 0;
-            deltaY = 0;
+            Position.y = initialPosition.Y;
+            Position.x = initialPosition.X;
+            DeltaX = 0;
+            DeltaY = 0;
         }
 
         private void WallCollision()
@@ -78,21 +75,21 @@ namespace Breakout.Entities
             if (Position.x <= 0)
             {
                 Position.x = 0;
-                deltaX = -deltaX;
+                DeltaX = -DeltaX;
                 _soundManager.PlaySound("Wall");
 
             }
             else if (Position.x >= Window.VirtualWidth - Sprite.Width)
             {
                 Position.x = Window.VirtualWidth - Sprite.Width;
-                deltaX = -deltaX;
+                DeltaX = -DeltaX;
                 _soundManager.PlaySound("Wall");
             }
 
             if (Position.y <= 0)
             {
                 Position.y = 0;
-                deltaY = -deltaY;
+                DeltaY = -DeltaY;
                 _soundManager.PlaySound("Wall");
 
             }
@@ -108,10 +105,10 @@ namespace Breakout.Entities
         {
             if (collider.Layer == "Paddle")
             {
-                deltaY = -deltaY;
+                DeltaY = -DeltaY;
                 var diference = Position.x + Position.width / 2 - (collider.Position.X + collider.Area.X / 2);
-                deltaX = diference * 12;
-                deltaY *= 1.02f;
+                DeltaX = diference * 12;
+                DeltaY *= 1.02f;
 
                 _soundManager.PlaySound("Paddle", 0.5f);
             }
@@ -125,22 +122,22 @@ namespace Breakout.Entities
                 if (side == Side.Top)
                 {
                     Position.y = collider.Position.Y - Position.height - safeSpacing;
-                    deltaY = -deltaY;
+                    DeltaY = -DeltaY;
                 }
                 else if (side == Side.Bottom)
                 {
                     Position.y = collider.Position.Y + collider.Area.Y + safeSpacing;
-                    deltaY = -deltaY;
+                    DeltaY = -DeltaY;
                 }
                 else if (side == Side.Left)
                 {
                     Position.x = collider.Position.X - Position.width - safeSpacing;
-                    deltaX = -deltaX;
+                    DeltaX = -DeltaX;
                 }
                 else
                 {
                     Position.x = collider.Position.X + collider.Area.X + safeSpacing;
-                    deltaX = -deltaX;
+                    DeltaX = -DeltaX;
                 }
             }
         }

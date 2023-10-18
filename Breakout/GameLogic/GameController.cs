@@ -1,28 +1,25 @@
-﻿
-using Breakout.Entities;
-using Breakout.GameLogic.States.Enums;
+﻿using Breakout.Entities;
 using Breakout.Resources;
 using RayG;
 using Raylib_cs;
-using System.Diagnostics.Metrics;
-using System.Threading;
-using System.Timers;
 
 namespace Breakout.GameLogic
 {
     internal class GameController : GameObject
     {
-        public int Level;
-        public bool Lost;
+        public int Level { get; private set; }
+        public bool Lost { get; set; }
         public int Score { get; set; }
+
+        public Ui Ui { get; private set; }
+        public List<Brick> Bricks { get; private set; }
+
         private float _timer;
-        public int Timer;
+        public int Timer { get; private set; }
 
         Paddle Paddle;
         Ball Ball;
-        public Ui Ui;
-        public List<Brick> Bricks;
-
+        
         readonly SpriteSheet _spriteSheet;
         readonly SoundManager _soundManager;
         readonly ParticleSystem _particleSystem;
@@ -38,19 +35,20 @@ namespace Breakout.GameLogic
             _particleSystem = new ParticleSystem();
             Score = 0;
             Timer = 60;
+            Level = 1;
         }
 
         public override void Start()
         {
-            Level = 1;
-            Lost = false;
             Paddle = new(_spriteSheet.Paddles[SpriteSheet.Medium, SpriteSheet.Blue]);
             Ball = new(_spriteSheet.Balls[Raylib.GetRandomValue(0, 6)], _soundManager);
             Ui = new(_spriteSheet.Hearts[0], 3);
+
             _levelMaker = new LevelMaker(_soundManager, _spriteSheet, _particleSystem);
             Bricks = _levelMaker.RandomLevel(Level);
             CollisionLayer = new();
             BricksLayer = new();
+
             CollisionLayer.Children.AddStart(Paddle, Ball, Ui, BricksLayer);
             Children.Add(_particleSystem);
             base.Start();
@@ -106,18 +104,6 @@ namespace Breakout.GameLogic
             BricksLayer.Dispose();
         }
 
-        private void TimerCount()
-        {
-            var deltatime = Raylib.GetFrameTime();
-            _timer -= deltatime;
-
-            if (_timer <= 0 && Timer > 0 && Ball.deltaY != 0)
-            {
-                _timer = 1;
-                Timer--;
-            }
-        }
-
         public void IncreaseLevel()
         {
             BricksLayer.Dispose();
@@ -128,17 +114,24 @@ namespace Breakout.GameLogic
             BricksLayer.Children.AddRangeStart(Bricks);
         }
 
-        public void IncreaseScore(int points)
-        {
-            Score += points;
-        }
-
-        public void LostBall()
+        private void LostBall()
         {
             if (Ui.Hearts > 0)
             {
                 Ui.Hearts--;
                 Lost = true;
+            }
+        }
+
+        private void TimerCount()
+        {
+            var deltatime = Raylib.GetFrameTime();
+            _timer -= deltatime;
+
+            if (_timer <= 0 && Timer > 0 && Ball.DeltaY != 0)
+            {
+                _timer = 1;
+                Timer--;
             }
         }
     }

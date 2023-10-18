@@ -6,12 +6,12 @@ namespace Breakout.Entities
 {
     internal class Paddle : GameObject, ICollisor
     {
+        public Collisor Collisor { get; set; }
+
         Sprite Sprite;
         Rectangle Position;
 
         const float speed = 150;
-
-        public Collisor Collisor { get; set; }
 
         public Paddle(Sprite sprite)
         {

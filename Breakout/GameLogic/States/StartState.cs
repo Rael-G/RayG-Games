@@ -14,27 +14,25 @@ namespace Breakout.GameLogic.States
         const int optionsHeight = 50;
 
         int highlated;
-
         int breakoutWidth;
         int startWidth;
         int highScoreWidth;
         Vector2 breakoutPosition;
         Vector2 startPosition;
         Vector2 highScorePosition;
-
         Color startColor = Color.BLUE;
         Color highScoreColor = Color.WHITE;
 
-        SoundManager _soundManager;
+        readonly SoundManager _soundManager;
 
         public StartState(GameStateRef state, SoundManager soundManager) : base(state)
         {
             _soundManager = soundManager;
+            highlated = 1;
         }
 
         public override void Start()
         {
-            highlated = 1;
             breakoutWidth = Raylib.MeasureText(breakoutMsg, breakoutHeight);
             startWidth = Raylib.MeasureText(startMsg, optionsHeight);
             highScoreWidth = Raylib.MeasureText(highScoreMsg, optionsHeight);
@@ -55,7 +53,7 @@ namespace Breakout.GameLogic.States
             {
                 if (highlated == 1)
                 {
-                    StateRef.State = GameState.PaddleSelect;
+                    StateRef.State = GameState.Serve;
                 }
                 else
                 {

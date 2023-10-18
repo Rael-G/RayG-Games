@@ -3,7 +3,6 @@
     internal enum GameState
     {
         Start,
-        PaddleSelect,
         Serve,
         Play,
         GameOver,

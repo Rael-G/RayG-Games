@@ -6,7 +6,7 @@ namespace Breakout.GameLogic.States
 {
     internal class GameOverState : StateBase
     {
-        GameController _gameController;
+        readonly GameController _gameController;
 
         public GameOverState(GameStateRef state, GameController gameController) : base(state)
         {

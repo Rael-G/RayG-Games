@@ -1,16 +1,12 @@
-﻿using Breakout.Entities;
-using Breakout.GameLogic.States.Enums;
-using Breakout.Resources;
-using RayG;
+﻿using Breakout.GameLogic.States.Enums;
 using Raylib_cs;
 
 namespace Breakout.GameLogic.States
 {
     internal class PlayState : StateBase
     {
-        GameController _gameController;
+        readonly GameController _gameController;
 
-        
         public PlayState(GameStateRef state, GameController controller) : base(state)
         {
             _gameController = controller;

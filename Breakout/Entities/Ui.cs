@@ -1,5 +1,4 @@
-﻿using Breakout.GameLogic;
-using Breakout.Resources;
+﻿using Breakout.Resources;
 using RayG;
 using Raylib_cs;
 
@@ -7,21 +6,24 @@ namespace Breakout.Entities
 {
     internal class Ui : GameObject
     {
-        Rectangle Position;
-        Sprite Sprite;
         public int Hearts { get; set; }
-        public int Level;
-        public int Score;
-        public int Timer;
+        public int Level { get; set; }
+        public int Score { get; set; }
+        public int Timer { get; set; }
+
+        Rectangle Position;
+        Sprite HearthSprite;
+
+        const int fontSize = 50;
+        readonly float size = Window.Width * 0.025f;
+
         float scoreWidth, levelWidth, height;
-        int fontSize = 50;
         string levelMsg;
 
-        float size = Window.Width * 0.025f;
         public Ui(Sprite sprite, int hearts) 
         { 
             Hearts = hearts;
-            Sprite = sprite;
+            HearthSprite = sprite;
             Position = new Rectangle(Window.Width * 0.05f, Window.Height * 0.05f, size, size);
         }
 
@@ -40,7 +42,7 @@ namespace Breakout.Entities
             var position = Position;
             for (int i = 0; i < Hearts; i++)
             {
-                Raylib.DrawTexturePro(Sprite.Texture, Sprite.Source, position, Sprite.Axis, 0, Color.WHITE);
+                Raylib.DrawTexturePro(HearthSprite.Texture, HearthSprite.Source, position, HearthSprite.Axis, 0, Color.WHITE);
                 position.x += size + Window.Width * 0.005f;
             }
 

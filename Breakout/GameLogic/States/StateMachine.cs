@@ -11,16 +11,15 @@ namespace Breakout.GameLogic.States
 
         StartState StartState;
         HighScoreState HighScoreState;
-        PaddleSelectState PaddleSelectState;
         ServeState ServeState;
         PlayState PlayState;
         GameOverState GameOverState;
         EnterHighScoreState EnterHighScoreState;
 
         GameController _gameController;
-        SoundManager _soundManager;
-        SpriteSheet _spriteSheet;
-        SaveManager<List<Score>> _saveManager;
+        readonly SoundManager _soundManager;
+        readonly SpriteSheet _spriteSheet;
+        readonly SaveManager<List<Score>> _saveManager;
 
         public StateMachine(SoundManager soundManager, SpriteSheet spriteSheet) 
         {
@@ -50,9 +49,6 @@ namespace Breakout.GameLogic.States
                     case GameState.Start:
                         StartGame();
                         break;
-                    case GameState.PaddleSelect:
-                        PaddleSelect();
-                        break;
                     case GameState.Serve:
                         Serve();
                         break;
@@ -71,8 +67,6 @@ namespace Breakout.GameLogic.States
                 }
             }
             base.Update();
-
-            //Console.WriteLine($"State: {State}  StateRef: {StateRef.State}");
         }
 
         private void StartGame()
@@ -88,22 +82,11 @@ namespace Breakout.GameLogic.States
             Children.AddStart(StartState);
         }
 
-        private void PaddleSelect()
+        private void Serve()
         {
             if (Children.Contains(StartState))
             {
                 Dispose(StartState);
-            }
-
-            PaddleSelectState = new(StateRef);
-            Children.AddStart(PaddleSelectState);
-        }
-
-        private void Serve()
-        {
-            if (Children.Contains(PaddleSelectState))
-            {
-                Dispose(PaddleSelectState);
             }
             if (Children.Contains(PlayState))
             {
@@ -160,7 +143,6 @@ namespace Breakout.GameLogic.States
 
             HighScoreState = new(StateRef, _saveManager);
             Children.AddStart(HighScoreState);
-            
         }
     }
 }

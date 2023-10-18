@@ -2,12 +2,7 @@
 using Breakout.Resources;
 using RayG;
 using Raylib_cs;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Numerics;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Breakout.GameLogic
 {
@@ -18,7 +13,7 @@ namespace Breakout.GameLogic
         ParticleSystem _particleSystem;
 
         const float brickWidth = 16.2f;
-        const int brickHeight = 9;
+        const float brickHeight = 8.2f;
 
         public LevelMaker(SoundManager soundManager, SpriteSheet spriteSheet, ParticleSystem particleSystem)
         {

@@ -1,5 +1,4 @@
-﻿using Breakout.GameLogic;
-using Breakout.Resources;
+﻿using Breakout.Resources;
 using RayG;
 using Raylib_cs;
 using System.Numerics;
@@ -10,16 +9,18 @@ namespace Breakout.Entities
     {
         public Collisor Collisor { get; set; }
 
+        public int Color { get; private set; }
+        public int Tier { get; private set; }
+        public bool Dead { get; private set; }
+        public int Score { get; set; }
+
         Sprite Sprite;
         Rectangle Position;
-        public int Color;
-        public int Tier;
-        public bool Dead;
-        public int Score;
+        
 
-        SoundManager _soundManager;
-        SpriteSheet _spriteSheet;
-        ParticleSystem _particle;
+        readonly SoundManager _soundManager;
+        readonly SpriteSheet _spriteSheet;
+        readonly ParticleSystem _particle;
 
         public Brick(SoundManager soundManager, SpriteSheet spriteSheet, ParticleSystem particle, int color, int tier, Vector2 position)
         {
@@ -28,14 +29,9 @@ namespace Breakout.Entities
             _spriteSheet = spriteSheet;
             Color = color;
             Tier = tier;
-            Dead = false;
+
             Position = new Rectangle(position.X, position.Y, SpriteSheet.Width, SpriteSheet.Height);
             Collisor = new Collisor(Position.x, Position.y, Position.width, Position.height, "Brick");
-        }
-
-        public override void Start()
-        {
-            base.Start();
         }
 
         public override void Update()
@@ -48,15 +44,8 @@ namespace Breakout.Entities
 
         public override void Render()
         {
-            //Draw Collisor
-            //Raylib.DrawRectangleV(Collisor.Position, Collisor.Area, Raylib_cs.Color.VIOLET);
-
             Raylib.DrawTexturePro(Sprite.Texture, Sprite.Source, Position, Sprite.Axis, 0, Raylib_cs.Color.WHITE);
 
-            if (!Dead)
-            {
-                Raylib.DrawTexturePro(Sprite.Texture, Sprite.Source, Position, Sprite.Axis, 0, Raylib_cs.Color.WHITE);
-            }
             base.Render();
         }
 
@@ -68,24 +57,21 @@ namespace Breakout.Entities
 
                 if (Color == 0 && Tier > 0)
                 {
-                    Score = Tier * 200;
+                    Score = Tier * 200 + 20;
                     Tier--;
                     Color = SpriteSheet.Yellow;
                     _soundManager.PlaySound("Brick");
-
-
                 }
                 else if(Color > 0)
                 {
-                    Score = 25;
+                    Score = Tier * 200 + 20;
                     Color--;
                     _soundManager.PlaySound("Brick");
-
                 }
                 else
                 {
                     _soundManager.PlaySound("Explosion", 0.10f);
-                    Score = 25;
+                    Score = Tier * 200 + 20;
                     Dead = true;
                     Collisor.Active = false;
                 }
