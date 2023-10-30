@@ -1,12 +1,12 @@
 ﻿namespace RayG
 {
-    public static class CollisionHandler
+    public static class Collision
     {
         /// <summary>
         /// Performs collision detection and handling for a GameObject and its descendants.
         /// </summary>
         /// <param name="gameObject"></param>
-        public static void Collision(this GameObject gameObject)
+        public static void StartCollision(this GameObject gameObject)
         {
             var collideable = gameObject.ColliderDetecter();
             CollisionCleaner(collideable);

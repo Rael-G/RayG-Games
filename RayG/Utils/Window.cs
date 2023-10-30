@@ -24,12 +24,22 @@ namespace RayG
         /// <summary>
         /// Gets or sets the actual width of the game window.
         /// </summary>
-        public static int Width { get => Raylib.GetScreenWidth(); set => _width = value; }
+        public static int Width 
+        { 
+            get => Raylib.GetScreenWidth() > 0 ?
+                Raylib.GetScreenWidth() : _width; 
+            set => _width = value; 
+        }
 
         /// <summary>
         /// Gets or sets the actual height of the game window.
         /// </summary>
-        public static int Height { get => Raylib.GetScreenHeight(); set => _height = value; }
+        public static int Height 
+        { 
+            get => Raylib.GetScreenHeight() > 0 ?
+                Raylib.GetScreenHeight() : _height;
+            set => _height = value; 
+        }
 
         /// <summary>
         /// Gets or sets the virtual width used for rendering and scaling.
@@ -55,15 +65,11 @@ namespace RayG
         /// <summary>
         /// Gets the current scaling factor based on the virtual and actual sizes.
         /// </summary>
-        public static int Scale 
+        public static float Scale 
         { 
             get 
             {
-                var scale = (_height + _width) / (VirtualHeight + VirtualWidth);
-                if (scale < 1)
-                {
-                    scale = 1;
-                }
+                float scale = (float)(Width + Height) / (float)(VirtualHeight + VirtualWidth);
                 return scale;
             } 
         }
