@@ -70,7 +70,7 @@ namespace Pong
 
         public override void Update()
         {
-            defaultLayer.Collision();
+            defaultLayer.StartCollision();
 
             base.Update();
         }

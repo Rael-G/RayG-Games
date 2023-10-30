@@ -18,10 +18,10 @@ namespace Breakout.GameLogic.States
 
         GameController _gameController;
         readonly SoundManager _soundManager;
-        readonly SpriteSheet _spriteSheet;
+        readonly SpriteSheetCustom _spriteSheet;
         readonly SaveManager<List<Score>> _saveManager;
 
-        public StateMachine(SoundManager soundManager, SpriteSheet spriteSheet) 
+        public StateMachine(SoundManager soundManager, SpriteSheetCustom spriteSheet) 
         {
             _soundManager = soundManager;
             _spriteSheet = spriteSheet;

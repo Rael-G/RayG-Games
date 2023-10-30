@@ -9,13 +9,13 @@ namespace Breakout.GameLogic
     internal class LevelMaker
     {
         SoundManager _soundManager;
-        SpriteSheet _spriteSheet;
+        SpriteSheetCustom _spriteSheet;
         ParticleSystem _particleSystem;
 
         const float brickWidth = 16.2f;
         const float brickHeight = 8.2f;
 
-        public LevelMaker(SoundManager soundManager, SpriteSheet spriteSheet, ParticleSystem particleSystem)
+        public LevelMaker(SoundManager soundManager, SpriteSheetCustom spriteSheet, ParticleSystem particleSystem)
         {
             _spriteSheet = spriteSheet;
             _soundManager = soundManager;
@@ -25,8 +25,8 @@ namespace Breakout.GameLogic
         public List<Brick> RandomLevel(int level)
         {
             var bricks = new List<Brick>();
-            var highestTier = Math.Min(SpriteSheet.Strongest, level / 5);
-            var highestColor = Math.Min(SpriteSheet.Yellow, level % 5 + 3);
+            var highestTier = Math.Min(SpriteSheetCustom.Strongest, level / 5);
+            var highestColor = Math.Min(SpriteSheetCustom.Yellow, level % 5 + 3);
             var rows = Raylib.GetRandomValue(3, 5);
             var cols = Raylib.GetRandomValue(7, 15);
 

@@ -14,7 +14,7 @@ namespace Breakout
         TextureManager TextureManager;
         SoundManager SoundManager;
         MusicManager MusicManager;
-        SpriteSheet SpriteSheet;
+        SpriteSheetCustom SpriteSheet;
 
         public override void Config()
         {
@@ -35,7 +35,7 @@ namespace Breakout
 
             MusicManager = new MusicManager(@"Data\Breakout\Audio\Music\");
 
-            SpriteSheet = new SpriteSheet(TextureManager);
+            SpriteSheet = new SpriteSheetCustom(TextureManager);
 
             Camera = new Camera();
             Children.Add(TextureManager);

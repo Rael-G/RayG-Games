@@ -20,7 +20,7 @@ namespace Breakout.GameLogic
         Paddle Paddle;
         Ball Ball;
         
-        readonly SpriteSheet _spriteSheet;
+        readonly SpriteSheetCustom _spriteSheet;
         readonly SoundManager _soundManager;
         readonly ParticleSystem _particleSystem;
         LevelMaker _levelMaker;
@@ -28,7 +28,7 @@ namespace Breakout.GameLogic
         GameObject CollisionLayer;
         GameObject BricksLayer;
 
-        public GameController(SpriteSheet spriteSheet, SoundManager soundManager)
+        public GameController(SpriteSheetCustom spriteSheet, SoundManager soundManager)
         {
             _spriteSheet = spriteSheet;
             _soundManager = soundManager;
@@ -40,7 +40,7 @@ namespace Breakout.GameLogic
 
         public override void Start()
         {
-            Paddle = new(_spriteSheet.Paddles[SpriteSheet.Medium, SpriteSheet.Blue]);
+            Paddle = new(_spriteSheet.Paddles[SpriteSheetCustom.Medium, SpriteSheetCustom.Blue]);
             Ball = new(_spriteSheet.Balls[Raylib.GetRandomValue(0, 6)], _soundManager);
             Ui = new(_spriteSheet.Hearts[0], 3);
 
@@ -84,7 +84,7 @@ namespace Breakout.GameLogic
             }
 
             TimerCount();
-            CollisionLayer.Collision();
+            CollisionLayer.StartCollision();
             base.Update();
         }
 

@@ -4,7 +4,7 @@ using Raylib_cs;
 
 namespace Breakout.Resources
 {
-    internal class SpriteSheet : GameObject
+    internal class SpriteSheetCustom : GameObject
     {
         //Colors
         public const int Blue = 0;
@@ -60,7 +60,7 @@ namespace Breakout.Resources
         TextureManager _textureManager;
         Texture2D _texture;
 
-        public SpriteSheet(TextureManager textureManager)
+        public SpriteSheetCustom(TextureManager textureManager)
         {
             _textureManager = textureManager;
 

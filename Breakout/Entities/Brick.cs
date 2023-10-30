@@ -19,10 +19,10 @@ namespace Breakout.Entities
         
 
         readonly SoundManager _soundManager;
-        readonly SpriteSheet _spriteSheet;
+        readonly SpriteSheetCustom _spriteSheet;
         readonly ParticleSystem _particle;
 
-        public Brick(SoundManager soundManager, SpriteSheet spriteSheet, ParticleSystem particle, int color, int tier, Vector2 position)
+        public Brick(SoundManager soundManager, SpriteSheetCustom spriteSheet, ParticleSystem particle, int color, int tier, Vector2 position)
         {
             _particle = particle;
             _soundManager = soundManager;
@@ -30,7 +30,7 @@ namespace Breakout.Entities
             Color = color;
             Tier = tier;
 
-            Position = new Rectangle(position.X, position.Y, SpriteSheet.Width, SpriteSheet.Height);
+            Position = new Rectangle(position.X, position.Y, SpriteSheetCustom.Width, SpriteSheetCustom.Height);
             Collisor = new Collisor(Position.x, Position.y, Position.width, Position.height, "Brick");
         }
 
@@ -59,7 +59,7 @@ namespace Breakout.Entities
                 {
                     Score = Tier * 200 + 20;
                     Tier--;
-                    Color = SpriteSheet.Yellow;
+                    Color = SpriteSheetCustom.Yellow;
                     _soundManager.PlaySound("Brick");
                 }
                 else if(Color > 0)

@@ -40,7 +40,7 @@ namespace EvilBird.GameLogic.States
             {
                 GameStateRef.State = GameState.Score;
             }
-            this.Collision();
+            this.StartCollision();
             base.Update();
         }
 
