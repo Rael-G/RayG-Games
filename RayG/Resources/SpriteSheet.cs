@@ -16,7 +16,15 @@ namespace RayG
             base.Awake();
         }
 
-        public Sprite[] ArrangeArrayEqual(int quantity, int width, int height, int scale = 1)
+        /// <summary>
+        /// Arranges an array of sprites with equal-sized frames from the sprite sheet.
+        /// </summary>
+        /// <param name="quantity">The number of sprites to arrange.</param>
+        /// <param name="width">The width of each sprite frame.</param>
+        /// <param name="height">The height of each sprite frame.</param>
+        /// <param name="scale">The scale factor for the sprites (optional, default is 1).</param>
+        /// <returns>An array of Sprite objects representing the arranged sprites.</returns>
+        public Sprite[] ArrangeArrayEqually(int quantity, int width, int height, int scale = 1)
         {
             Sprite[] sprites = new Sprite[quantity];
             Sprite sprite;
@@ -43,7 +51,16 @@ namespace RayG
             return sprites;
         }
 
-        public Sprite[,] ArrangeMatrixEqual(int rows, int columns, int width, int height, int scale = 1)
+        /// <summary>
+        /// Arranges a matrix of sprites with equal-sized frames from the sprite sheet.
+        /// </summary>
+        /// <param name="rows">The number of rows in the matrix.</param>
+        /// <param name="columns">The number of columns in the matrix.</param>
+        /// <param name="width">The width of each sprite frame.</param>
+        /// <param name="height">The height of each sprite frame.</param>
+        /// <param name="scale">The scale factor for the sprites (optional, default is 1).</param>
+        /// <returns>A 2D array of Sprite objects representing the arranged sprites in rows and columns.</returns>
+        public Sprite[,] ArrangeMatrixEqually(int rows, int columns, int width, int height, int scale = 1)
         {
             Sprite[,] sprites = new Sprite[rows, columns];
             Sprite sprite;
