@@ -19,7 +19,7 @@
             action();
         }
 
-        public static async Task InterpolateAsync(int duration, float from, float to, Action<float> target)
+        public static async Task InterpolateAsync(float duration, float from, float to, Action<float> target)
         {
             var distance = to - from;
             double currentTime = 0;
@@ -33,6 +33,7 @@
                 var value = from + t * distance;
                 target(value);
             }
+            target(to);
         }
 
         public static async void ChainAsync(IEnumerable<Func<Task>> tasks)
