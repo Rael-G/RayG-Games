@@ -43,13 +43,13 @@ namespace Match3.GameLogic
                 (int)_selector.height, Raylib.Fade(Color.RED, 0.8f));
 
             Raylib.DrawRectangle((int)_selected.x, (int)_selected.y, (int)_selected.width,
-                (int)_selected.height, Raylib.Fade(Color.BLUE, 0.6f));
+                (int)_selected.height, Raylib.Fade(Color.WHITE, 0.5f));
             base.Render();
         }
 
         private void Swap()
         {
-            if (Raylib.IsKeyPressed(KeyboardKey.KEY_ENTER))
+            if (Raylib.IsKeyPressed(KeyboardKey.KEY_SPACE))
             {
                 if (_selectedPosition == null)
                     Select();
@@ -57,12 +57,14 @@ namespace Match3.GameLogic
                 {
                     var selectedPosition = _selectedPosition.Value;
 
-                    _board.SwapBlocks(_board.Blocks[_selectorPosition.row, _selectorPosition.col],
-                        _board.Blocks[selectedPosition.row, selectedPosition.col]);
+                    var block = _board.Blocks[_selectorPosition.row, _selectorPosition.col];
+                    var otherBlock = _board.Blocks[selectedPosition.row, selectedPosition.col];
+
+                    _board.SwapInBoard(block, otherBlock);
 
                     Deselect();
 
-                    _resolver.Resolve();
+                    var resolve = Timing.AfterAsync(0.2f, () => _resolver.Resolve());
                 }
             }
         }
