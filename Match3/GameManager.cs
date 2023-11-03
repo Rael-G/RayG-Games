@@ -1,4 +1,5 @@
 ﻿using Match3.Entities;
+using Match3.GameLogic;
 using RayG;
 using Raylib_cs;
 
@@ -10,6 +11,7 @@ namespace Match3
         TextureManager _textureManager;
         SpriteSheet _spriteSheet;
         Board _board;
+        GameController _controller;
 
         public override void Config()
         {
@@ -38,15 +40,17 @@ namespace Match3
             var texture = _textureManager.GetTexture("Blocks");
             _spriteSheet = new SpriteSheet(texture);
             _board = new Board(_spriteSheet);
+            _controller = new(_board);
 
             Children.Add(_spriteSheet);
             Children.Add( _board );
+            Children.Add(_controller);
             base.Start();
         }
 
         public override void Render()
         {
-            Raylib.ClearBackground(Color.GRAY);
+            Raylib.ClearBackground(Raylib.GetColor(0x111111FF));
             Raylib.BeginMode2D(_camera.Camera2d);
             base.Render();
             Raylib.EndMode2D();

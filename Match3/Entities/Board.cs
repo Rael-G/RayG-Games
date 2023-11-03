@@ -6,9 +6,13 @@ namespace Match3.Entities
 {
     internal class Board : GameObject
     {
-        SpriteSheet _sheet;
+        public const int ROWS = 8;
+        public const int COLS = 8;
+
+        public Block[,] Blocks { get; private set; }
+
+        readonly SpriteSheet _sheet;
         Sprite[] _sprites;
-        Block[,] _blocks;
         
         public Board(SpriteSheet sheet) 
         {
@@ -18,28 +22,38 @@ namespace Match3.Entities
         public override void Start()
         {
             _sprites = _sheet.ArrangeArrayEqual(10, 16, 16);
-           GenerateBlocks();
+            GenerateBoard();
+
             base.Start();
         }
 
         public override void Render()
         {
-            foreach ( var block in _blocks ) 
+            foreach ( var block in Blocks ) 
             {
                 Raylib.DrawTexturePro(block.Sprite.Texture, block.Sprite.Source,
                     block.Position, block.Sprite.Axis, 0, Color.WHITE);
             }
             base.Render();
         }
-        private void GenerateBlocks()
+
+        public void SwapBlocks(Block block, Block otherBlock)
         {
-            _blocks = new Block[8, 8];
+            block.Swap(otherBlock);
+
+            Blocks[block.BoardPosition.Row, block.BoardPosition.Col] = block;
+            Blocks[otherBlock.BoardPosition.Row, otherBlock.BoardPosition.Col] = otherBlock;
+        }
+
+        private void GenerateBoard()
+        {
+            Blocks = new Block[8, 8];
             var x = Window.VirtualWidth * 0.40f;
             var y = Window.VirtualWidth * 0.05f;
-            for (int i = 0; i < 8; i++) 
+            for (int rows = 0; rows < ROWS; rows++) 
             {
                 var localX = x;
-                for (int j = 0; j < 8; j++)
+                for (int cols = 0; cols < COLS; cols++)
                 {
                     var position = new Vector2()
                     {
@@ -47,7 +61,7 @@ namespace Match3.Entities
                         Y = y,
                     };
                     var tile = Raylib.GetRandomValue(0, 9);
-                    _blocks[i, j] = new Block(tile, _sprites[tile], position);
+                    Blocks[rows, cols] = new Block(tile, _sprites[tile], position, rows, cols);
 
                     localX += 16;
                 }
