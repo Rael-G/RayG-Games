@@ -22,9 +22,10 @@ namespace RayG
         /// <param name="quantity">The number of sprites to arrange.</param>
         /// <param name="width">The width of each sprite frame.</param>
         /// <param name="height">The height of each sprite frame.</param>
+        /// <param name="centerAxis">Determines whether to center the origin axis of each sprite frame (optional, default is false).</param>
         /// <param name="scale">The scale factor for the sprites (optional, default is 1).</param>
         /// <returns>An array of Sprite objects representing the arranged sprites.</returns>
-        public Sprite[] ArrangeArrayEqually(int quantity, int width, int height, int scale = 1)
+        public Sprite[] ArrangeArrayEqually(int quantity, int width, int height, bool centerAxis = false, int scale = 1)
         {
             Sprite[] sprites = new Sprite[quantity];
             Sprite sprite;
@@ -43,7 +44,7 @@ namespace RayG
                 }
 
                 source = new Rectangle(srcX, srcY, width, height);
-                sprite = new Sprite(_texture, source, scale);
+                sprite = new Sprite(_texture, source, scale, centerAxis);
                 sprites[i] = sprite;
                 srcX += width;
             }
@@ -58,9 +59,10 @@ namespace RayG
         /// <param name="columns">The number of columns in the matrix.</param>
         /// <param name="width">The width of each sprite frame.</param>
         /// <param name="height">The height of each sprite frame.</param>
+        /// <param name="centerAxis">Determines whether to center the origin axis of each sprite frame (optional, default is false).</param>
         /// <param name="scale">The scale factor for the sprites (optional, default is 1).</param>
         /// <returns>A 2D array of Sprite objects representing the arranged sprites in rows and columns.</returns>
-        public Sprite[,] ArrangeMatrixEqually(int rows, int columns, int width, int height, int scale = 1)
+        public Sprite[,] ArrangeMatrixEqually(int rows, int columns, int width, int height, bool centerAxis = false, int scale = 1)
         {
             Sprite[,] sprites = new Sprite[rows, columns];
             Sprite sprite;
@@ -77,7 +79,7 @@ namespace RayG
                         break;
 
                     source = new Rectangle(srcX, srcY, width, height);
-                    sprite = new Sprite(_texture, source, scale);
+                    sprite = new Sprite(_texture, source, scale, centerAxis);
                     sprites[i,j] = sprite;
                     srcX += width;
                 }
