@@ -11,7 +11,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EvilBird", "EvilBird\EvilBi
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Breakout", "Breakout\Breakout.csproj", "{015FF05C-EAF4-4A6F-B8FA-F5A2D7D865E9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Match3", "Match3\Match3.csproj", "{C08CCB6F-58DC-41CE-AAC4-DC970E0081E2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Match3", "Match3\Match3.csproj", "{C08CCB6F-58DC-41CE-AAC4-DC970E0081E2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mario", "Mario\Mario.csproj", "{3EAFB23F-8E84-40EF-8269-ACBD1EE67B07}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{C08CCB6F-58DC-41CE-AAC4-DC970E0081E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C08CCB6F-58DC-41CE-AAC4-DC970E0081E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C08CCB6F-58DC-41CE-AAC4-DC970E0081E2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3EAFB23F-8E84-40EF-8269-ACBD1EE67B07}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3EAFB23F-8E84-40EF-8269-ACBD1EE67B07}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3EAFB23F-8E84-40EF-8269-ACBD1EE67B07}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3EAFB23F-8E84-40EF-8269-ACBD1EE67B07}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
