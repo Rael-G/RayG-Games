@@ -11,6 +11,7 @@
             var collideable = gameObject.ColliderDetecter();
             CollisionCleaner(collideable);
             CollisionChecker(collideable);
+            CollisionResolver(collideable);
         }
 
         //Finds all collisors within this GameObject.Childs recursively
@@ -35,7 +36,7 @@
         {
             foreach (var gameObject in Collideable)
             {
-                if (gameObject is ICollisor colObject)
+                if (gameObject is ICollisor colObject && !colObject.Collisor.Static)
                 {
                     for (int i = colObject.Collisor.Colliders.Count - 1; i >= 0; i--)
                     {
@@ -45,6 +46,8 @@
                             colObject.Collisor.Colliders.RemoveAt(i);
                             colObject.OnCollisionExit(collider);
                         }
+                        else
+                            colObject.OnCollision(collider);
                     }
                 }
             }
@@ -56,7 +59,7 @@
         {
             foreach (var gameObject in collideable)
             {
-                if (gameObject is ICollisor colObject)
+                if (gameObject is ICollisor colObject && !colObject.Collisor.Static)
                 {
                     foreach (var otherGameObject in collideable)
                     {
@@ -73,6 +76,17 @@
                             }
                         }
                     }
+                }
+            }
+        }
+
+        private static void CollisionResolver(List<GameObject> collideable)
+        {
+            foreach(var gameObject in collideable)
+            {
+                if (gameObject is ICollisor colObject && !colObject.Collisor.Static)
+                {
+                    colObject.Collisor.Resolve();
                 }
             }
         }

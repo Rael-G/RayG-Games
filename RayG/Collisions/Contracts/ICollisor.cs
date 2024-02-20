@@ -13,6 +13,11 @@
         void OnCollisionEnter(Collisor collisor);
 
         /// <summary>
+        /// Called when this object keeps collision with another collisor.
+        /// </summary>
+        void OnCollision(Collisor collisor);
+
+        /// <summary>
         /// Called when this object exits a collision with another collisor.
         /// </summary>
         void OnCollisionExit(Collisor collisor);
