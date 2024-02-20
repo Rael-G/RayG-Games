@@ -7,12 +7,18 @@
         /// </summary>
         /// <param name="interval">The interval between each execution of the action in seconds.</param>
         /// <param name="action">The action to be executed repeatedly.</param>
-        public static async Task EveryAsync(float interval, Action action)
+        /// <param name="cancellationToken">The cancellation token to stop the repeated execution.</param>
+        public static async Task EveryAsync(float interval, Action action, CancellationToken cancellationToken)
         {
-            int intervalInMillisecongs = (int)(interval *= 1000);
-            while (true)
+            int intervalInMilliseconds = (int)(interval * 1000);
+
+            while (!cancellationToken.IsCancellationRequested)
             {
-                await Task.Delay(intervalInMillisecongs);
+                await Task.Delay(intervalInMilliseconds, cancellationToken);
+
+                if (cancellationToken.IsCancellationRequested)
+                    break;
+
                 action();
             }
         }
