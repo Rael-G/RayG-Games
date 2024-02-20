@@ -146,5 +146,10 @@ namespace Breakout.Entities
         {
             
         }
+
+        public void OnCollision(Collisor collisor)
+        {
+
+        }
     }
 }

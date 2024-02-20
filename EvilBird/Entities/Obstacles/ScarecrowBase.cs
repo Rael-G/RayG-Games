@@ -59,5 +59,10 @@ namespace EvilBird.Entities.Obstacles
         {
            
         }
+
+        public void OnCollision(Collisor collisor)
+        {
+            
+        }
     }
 }

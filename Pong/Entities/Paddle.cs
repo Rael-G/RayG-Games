@@ -85,5 +85,10 @@ namespace Pong.Entities
         {
             
         }
+
+        public void OnCollision(Collisor collisor)
+        {
+            
+        }
     }
 }

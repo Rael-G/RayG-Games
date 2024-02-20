@@ -85,6 +85,11 @@ namespace Pong.Entities
             AudioManager.PlaySound("Pong");
         }
 
+        public void OnCollision(Collisor collisor)
+        {
+            
+        }
+
         public void OnCollisionExit(Collisor collider)
         {
         }
@@ -113,5 +118,7 @@ namespace Pong.Entities
             BallPosition = initialPosition;
             ballSpeed = initialBallSpeed;
         }
+
+        
     }
 }
