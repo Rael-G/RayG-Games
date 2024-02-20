@@ -45,11 +45,33 @@
         /// <summary>
         /// Updates this GameObject once per frame.
         /// </summary>
+        public virtual void EarlyUpdate()
+        {
+            foreach (var child in Children)
+            {
+                child.EarlyUpdate();
+            }
+        }
+
+        /// <summary>
+        /// Updates this GameObject once per frame.
+        /// </summary>
         public virtual void Update()
         {
             foreach (var child in Children)
             {
                 child.Update();
+            }
+        }
+
+        /// <summary>
+        /// Updates this GameObject once per frame.
+        /// </summary>
+        public virtual void LateUpdate()
+        {
+            foreach (var child in Children)
+            {
+                child.LateUpdate();
             }
         }
 

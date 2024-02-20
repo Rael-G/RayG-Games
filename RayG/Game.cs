@@ -27,7 +27,9 @@ namespace RayG
 
             while (Window.Running)
             {
+                GameObject.EarlyUpdate();
                 GameObject.Update();
+                GameObject.LateUpdate();
 
                 Raylib.BeginDrawing();
 
