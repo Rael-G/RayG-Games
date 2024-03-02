@@ -24,7 +24,7 @@
 
                 if (child is ICollisor colChild)
                 {
-                    collideable.Add(colChild as GameObject);
+                    collideable.Add((GameObject)colChild);
                 }
             }
             return collideable;

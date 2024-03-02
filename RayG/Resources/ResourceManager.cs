@@ -2,7 +2,7 @@
 {
     public abstract class ResourceManager<T> : GameObject
     {
-        private string _path;
+        private string _path = string.Empty;
         protected string Path 
         { 
             get => _path;
