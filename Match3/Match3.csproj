@@ -8,11 +8,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\RayG\RayG.csproj" />
+    <Folder Include="Resources\" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Resources\" />
+    <PackageReference Include="RayG" Version="1.0.0" />
   </ItemGroup>
 
     <Import Project="../Build/CopyData.targets" />

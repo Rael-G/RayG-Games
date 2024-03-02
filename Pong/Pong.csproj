@@ -8,11 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Raylib-cs" Version="6.0.0" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\RayG\RayG.csproj" />
+    <PackageReference Include="RayG" Version="1.0.0" />
   </ItemGroup>
 
 	<Import Project="../Build/CopyData.targets" />
