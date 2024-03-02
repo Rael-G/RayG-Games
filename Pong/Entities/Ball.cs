@@ -61,7 +61,7 @@ namespace Pong.Entities
 
         public override void Render()
         {
-            Raylib.DrawRectangleV(BallPosition, ballSize, Color.WHITE);
+            Raylib.DrawRectangleV(BallPosition, ballSize, Color.White);
 
             base.Render();
         }

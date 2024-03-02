@@ -20,8 +20,8 @@ namespace Breakout.GameLogic.States
         Vector2 breakoutPosition;
         Vector2 startPosition;
         Vector2 highScorePosition;
-        Color startColor = Color.BLUE;
-        Color highScoreColor = Color.WHITE;
+        Color startColor = Color.Blue;
+        Color highScoreColor = Color.White;
 
         readonly SoundManager _soundManager;
 
@@ -45,11 +45,11 @@ namespace Breakout.GameLogic.States
 
         public override void Update()
         {
-            if (Raylib.IsKeyPressed(KeyboardKey.KEY_ESCAPE))
+            if (Raylib.IsKeyPressed(KeyboardKey.Escape))
             {
                 Window.Running = false;
             }
-            if (Raylib.IsKeyPressed(KeyboardKey.KEY_ENTER))
+            if (Raylib.IsKeyPressed(KeyboardKey.Enter))
             {
                 if (highlated == 1)
                 {
@@ -60,17 +60,17 @@ namespace Breakout.GameLogic.States
                     StateRef.State = GameState.HighScore;
                 }
             }
-            if(Raylib.IsKeyPressed(KeyboardKey.KEY_UP) && highlated < 1)
+            if(Raylib.IsKeyPressed(KeyboardKey.Up) && highlated < 1)
             {
-                startColor = Color.BLUE;
-                highScoreColor = Color.WHITE;
+                startColor = Color.Blue;
+                highScoreColor = Color.White;
                 _soundManager.PlaySound("Select");
                 highlated++;
             }
-            else if(Raylib.IsKeyPressed(KeyboardKey.KEY_DOWN) && highlated > 0)
+            else if(Raylib.IsKeyPressed(KeyboardKey.Down) && highlated > 0)
             {
-                startColor = Color.WHITE;
-                highScoreColor = Color.BLUE;
+                startColor = Color.White;
+                highScoreColor = Color.Blue;
                 _soundManager.PlaySound("Select");
                 highlated--;
             }
@@ -79,7 +79,7 @@ namespace Breakout.GameLogic.States
 
         public override void Canvas()
         {
-            Raylib.DrawText(breakoutMsg, (int)breakoutPosition.X, (int)breakoutPosition.Y, breakoutHeight, Color.WHITE);
+            Raylib.DrawText(breakoutMsg, (int)breakoutPosition.X, (int)breakoutPosition.Y, breakoutHeight, Color.White);
             Raylib.DrawText(startMsg, (int)startPosition.X, (int)startPosition.Y, optionsHeight, startColor);
             Raylib.DrawText(highScoreMsg, (int)highScorePosition.X, (int)highScorePosition.Y, optionsHeight, highScoreColor);
             base.Canvas();

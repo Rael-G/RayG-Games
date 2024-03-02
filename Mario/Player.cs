@@ -44,15 +44,15 @@ namespace Mario
 
         public override void LateUpdate()
         {
-            Rectangle.x = Collisor.Position.X + Animation.Sprite[Animation.CurrentFrame].Axis.X;
-            Rectangle.y = Collisor.Position.Y + Animation.Sprite[Animation.CurrentFrame].Axis.Y;
+            Rectangle.X = Collisor.Position.X + Animation.Sprite[Animation.CurrentFrame].Axis.X;
+            Rectangle.Y = Collisor.Position.Y + Animation.Sprite[Animation.CurrentFrame].Axis.Y;
             base.LateUpdate();
         }
 
         public override void Render()
         {
             //Raylib.DrawRectangle((int)Collisor.Position.X, (int)Collisor.Position.Y, (int)Collisor.Area.X, (int)Collisor.Area.Y, Color.GRAY);
-            Raylib.DrawTexturePro(Animation.Sprite[Animation.CurrentFrame].Texture, Animation.Sprite[Animation.CurrentFrame].Source, Rectangle, Animation.Sprite[Animation.CurrentFrame].Axis, 0, Color.WHITE);
+            Raylib.DrawTexturePro(Animation.Sprite[Animation.CurrentFrame].Texture, Animation.Sprite[Animation.CurrentFrame].Source, Rectangle, Animation.Sprite[Animation.CurrentFrame].Axis, 0, Color.White);
             base.Render();
         }
 
@@ -72,7 +72,7 @@ namespace Mario
 
             x += HorizontalAxis() * SPEED * deltatime;
 
-            if (Raylib.IsKeyPressed(KeyboardKey.KEY_SPACE) && !Jumping)
+            if (Raylib.IsKeyPressed(KeyboardKey.Space) && !Jumping)
             {
                 FallForce = -JUMP_FORCE * deltatime;
             }
@@ -126,15 +126,15 @@ namespace Mario
         {
             float axis = 0;
 
-            if (Raylib.IsKeyDown(KeyboardKey.KEY_A) && Raylib.IsKeyDown(KeyboardKey.KEY_D))
+            if (Raylib.IsKeyDown(KeyboardKey.A) && Raylib.IsKeyDown(KeyboardKey.D))
             {
                 axis = 0;
             }
-            else if (Raylib.IsKeyDown(KeyboardKey.KEY_A))
+            else if (Raylib.IsKeyDown(KeyboardKey.A))
             {
                 axis = -1;
             }
-            else if (Raylib.IsKeyDown(KeyboardKey.KEY_D))
+            else if (Raylib.IsKeyDown(KeyboardKey.D))
             {
                 axis = 1;
             }

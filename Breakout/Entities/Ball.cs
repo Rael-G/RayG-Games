@@ -29,7 +29,7 @@ namespace Breakout.Entities
         public override void Start()
         {
             Position = new (Window.VirtualWidth / 2 - 1, Window.VirtualHeight / 2 - 1, Sprite.Width * 0.75f, Sprite.Height * 0.75f);
-            Collisor = new((int)Position.x, (int)Position.y, Sprite.Width, Sprite.Height, "Ball");
+            Collisor = new((int)Position.X, (int)Position.Y, Sprite.Width, Sprite.Height, "Ball");
 
             base.Start();
         }
@@ -37,18 +37,18 @@ namespace Breakout.Entities
         public override void Update()
         {
             var deltatime = Raylib.GetFrameTime();
-            Position.x += DeltaX * deltatime;
-            Position.y += DeltaY * deltatime;
+            Position.X += DeltaX * deltatime;
+            Position.Y += DeltaY * deltatime;
 
             WallCollision();
-            Collisor.Position = new(Position.x, Position.y);
+            Collisor.Position = new(Position.X, Position.Y);
 
             base.Update();
         }
 
         public override void Render()
         {
-            Raylib.DrawTexturePro(Sprite.Texture, Sprite.Source, Position, Sprite.Axis, 0, Color.WHITE);
+            Raylib.DrawTexturePro(Sprite.Texture, Sprite.Source, Position, Sprite.Axis, 0, Color.White);
             base.Render();
         }
 
@@ -64,36 +64,36 @@ namespace Breakout.Entities
         public void Stop()
         {
             Collisor.Active = false;
-            Position.y = initialPosition.Y;
-            Position.x = initialPosition.X;
+            Position.Y = initialPosition.Y;
+            Position.X = initialPosition.X;
             DeltaX = 0;
             DeltaY = 0;
         }
 
         private void WallCollision()
         {
-            if (Position.x <= 0)
+            if (Position.X <= 0)
             {
-                Position.x = 0;
+                Position.X = 0;
                 DeltaX = -DeltaX;
                 _soundManager.PlaySound("Wall");
 
             }
-            else if (Position.x >= Window.VirtualWidth - Sprite.Width)
+            else if (Position.X >= Window.VirtualWidth - Sprite.Width)
             {
-                Position.x = Window.VirtualWidth - Sprite.Width;
+                Position.X = Window.VirtualWidth - Sprite.Width;
                 DeltaX = -DeltaX;
                 _soundManager.PlaySound("Wall");
             }
 
-            if (Position.y <= 0)
+            if (Position.Y <= 0)
             {
-                Position.y = 0;
+                Position.Y = 0;
                 DeltaY = -DeltaY;
                 _soundManager.PlaySound("Wall");
 
             }
-            else if (Position.y >= Window.VirtualHeight - Sprite.Height)
+            else if (Position.Y >= Window.VirtualHeight - Sprite.Height)
             {
                 _soundManager.PlaySound("Death", 0.20f);
                 Dead = true;
@@ -106,7 +106,7 @@ namespace Breakout.Entities
             if (collider.Layer == "Paddle")
             {
                 DeltaY = -DeltaY;
-                var diference = Position.x + Position.width / 2 - (collider.Position.X + collider.Area.X / 2);
+                var diference = Position.X + Position.Width / 2 - (collider.Position.X + collider.Area.X / 2);
                 DeltaX = diference * 12;
                 DeltaY *= 1.02f;
 
@@ -121,22 +121,22 @@ namespace Breakout.Entities
 
                 if (side == Side.Top)
                 {
-                    Position.y = collider.Position.Y - Position.height - safeSpacing;
+                    Position.Y = collider.Position.Y - Position.Height - safeSpacing;
                     DeltaY = -DeltaY;
                 }
                 else if (side == Side.Bottom)
                 {
-                    Position.y = collider.Position.Y + collider.Area.Y + safeSpacing;
+                    Position.Y = collider.Position.Y + collider.Area.Y + safeSpacing;
                     DeltaY = -DeltaY;
                 }
                 else if (side == Side.Left)
                 {
-                    Position.x = collider.Position.X - Position.width - safeSpacing;
+                    Position.X = collider.Position.X - Position.Width - safeSpacing;
                     DeltaX = -DeltaX;
                 }
                 else
                 {
-                    Position.x = collider.Position.X + collider.Area.X + safeSpacing;
+                    Position.X = collider.Position.X + collider.Area.X + safeSpacing;
                     DeltaX = -DeltaX;
                 }
             }

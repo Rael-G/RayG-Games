@@ -20,7 +20,7 @@ namespace Breakout.GameLogic.States
 
         public override void Update()
         {
-            if (Raylib.IsKeyPressed(KeyboardKey.KEY_ESCAPE))
+            if (Raylib.IsKeyPressed(KeyboardKey.Escape))
             {
                 StateRef.State = GameState.GameOver;
             }

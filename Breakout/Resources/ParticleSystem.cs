@@ -13,7 +13,7 @@ namespace Breakout.Resources
     {
         public static Color[] Colors =
         {
-            Color.BLUE, Color.DARKGREEN, Color.RED, Color.VIOLET, Color.YELLOW, Color.BLACK, Color.ORANGE
+            Color.Blue, Color.DarkGreen, Color.Red, Color.Violet, Color.Yellow, Color.Black, Color.Orange
         };
 
         const int Max = 15;
@@ -42,7 +42,7 @@ namespace Breakout.Resources
 
         public override void Render()
         {
-            Raylib.BeginBlendMode(BlendMode.BLEND_ALPHA);
+            Raylib.BeginBlendMode(BlendMode.Alpha);
 
             for (int i = 0; i < Max; i++)
             {

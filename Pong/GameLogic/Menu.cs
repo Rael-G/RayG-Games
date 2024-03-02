@@ -25,9 +25,9 @@ namespace Pong.GameLogic
         public override void Start()
         {
             font = FontManager.GetFont("mecha");
-            fontColor = Color.WHITE;
+            fontColor = Color.White;
             fontSpacing = (int)(Window.Height * 0.5 / 100);
-            fontSize = font.baseSize * fontSpacing;
+            fontSize = font.BaseSize * fontSpacing;
 
             textPosition = new Vector2();
             textPosition.Y = Window.Height * 40 / 100;

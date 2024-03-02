@@ -55,8 +55,8 @@ namespace RayG
 
         public Collisor(Rectangle rectangle, string layer = "")
         {
-            Position = new Vector2(rectangle.x, rectangle.y);
-            Area = new Vector2(rectangle.width, rectangle.height);
+            Position = new Vector2(rectangle.X, rectangle.Y);
+            Area = new Vector2(rectangle.Width, rectangle.Height);
             Layer = layer;
             Colliders = new List<Collisor> { };
             Active = true;

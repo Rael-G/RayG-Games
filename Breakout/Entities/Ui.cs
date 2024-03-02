@@ -42,13 +42,13 @@ namespace Breakout.Entities
             var position = Position;
             for (int i = 0; i < Hearts; i++)
             {
-                Raylib.DrawTexturePro(HearthSprite.Texture, HearthSprite.Source, position, HearthSprite.Axis, 0, Color.WHITE);
-                position.x += size + Window.Width * 0.005f;
+                Raylib.DrawTexturePro(HearthSprite.Texture, HearthSprite.Source, position, HearthSprite.Axis, 0, Color.White);
+                position.X += size + Window.Width * 0.005f;
             }
 
-            Raylib.DrawText(Timer.ToString(), (int)(Window.Width * 0.20f), (int)height, fontSize, Color.WHITE);
-            Raylib.DrawText(levelMsg, (int)levelWidth, (int)height, fontSize, Color.WHITE);
-            Raylib.DrawText(Score.ToString(), (int)scoreWidth, (int)height, fontSize, Color.WHITE);
+            Raylib.DrawText(Timer.ToString(), (int)(Window.Width * 0.20f), (int)height, fontSize, Color.White);
+            Raylib.DrawText(levelMsg, (int)levelWidth, (int)height, fontSize, Color.White);
+            Raylib.DrawText(Score.ToString(), (int)scoreWidth, (int)height, fontSize, Color.White);
 
             base.Render();
         }

@@ -35,11 +35,11 @@ namespace RayG
 
             for (int i = 0; i < quantity; i++)
             {
-                if (srcX >= _texture.width)
+                if (srcX >= _texture.Width)
                 {
                     srcX = 0;
                     srcY += height;
-                    if (srcY >= _texture.height)
+                    if (srcY >= _texture.Height)
                         break;
                 }
 
@@ -75,7 +75,7 @@ namespace RayG
                 srcX = 0;
                 for (int j = 0; j < columns; j++)
                 {
-                    if (srcX >= _texture.width)
+                    if (srcX >= _texture.Width)
                         break;
 
                     source = new Rectangle(srcX, srcY, width, height);
@@ -84,7 +84,7 @@ namespace RayG
                     srcX += width;
                 }
                 srcY += height;
-                if (srcY >= _texture.height)
+                if (srcY >= _texture.Height)
                     break;
             }
 

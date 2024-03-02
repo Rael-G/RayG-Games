@@ -2,12 +2,6 @@
 using Pong.GameLogic.Enums;
 using RayG;
 using Raylib_cs;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using static System.Formats.Asn1.AsnWriter;
 
 namespace Pong.GameLogic
 {
@@ -40,24 +34,24 @@ namespace Pong.GameLogic
 
         public override void Update()
         {
-            if (gameState == GameState.Start && Raylib.IsKeyPressed(KeyboardKey.KEY_SPACE))
+            if (gameState == GameState.Start && Raylib.IsKeyPressed(KeyboardKey.Space))
             {
                 BeginGame();
             }
-            else if (gameState == GameState.Play && Raylib.IsKeyPressed(KeyboardKey.KEY_SPACE))
+            else if (gameState == GameState.Play && Raylib.IsKeyPressed(KeyboardKey.Space))
             {
                 PauseGame();
             }
-            else if (gameState == GameState.Pause && Raylib.IsKeyPressed(KeyboardKey.KEY_SPACE))
+            else if (gameState == GameState.Pause && Raylib.IsKeyPressed(KeyboardKey.Space))
             {
                 ContinueGame();
             }
 
-            if (gameState != GameState.Start && Raylib.IsKeyPressed(KeyboardKey.KEY_TAB))
+            if (gameState != GameState.Start && Raylib.IsKeyPressed(KeyboardKey.Tab))
             {
                 StartGame();
             }
-            else if (Raylib.IsKeyPressed(KeyboardKey.KEY_ESCAPE))
+            else if (Raylib.IsKeyPressed(KeyboardKey.Escape))
             {
                 QuitGame();
             }

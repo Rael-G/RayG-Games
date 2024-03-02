@@ -54,7 +54,7 @@ namespace Pong
             match = new(ball, score, audioManager);
             stateMachine = new StateMachine(score, ball, leftPaddle, rightPaddle, menu);
 
-            background = new Background(Color.BLACK);
+            background = new Background(Color.Black);
             
             defaultLayer = new GameObject() { Children = { leftPaddle, rightPaddle, ball } };
             canvasLayer = new GameObject() { Children = { score, menu } };

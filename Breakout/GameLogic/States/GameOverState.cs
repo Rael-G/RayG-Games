@@ -26,7 +26,7 @@ namespace Breakout.GameLogic.States
 
         public override void Update()
         {
-            if (Raylib.IsKeyPressed(KeyboardKey.KEY_SPACE))
+            if (Raylib.IsKeyPressed(KeyboardKey.Space))
             {
                 StateRef.State = GameState.EnterHighScore;
             }
@@ -35,7 +35,7 @@ namespace Breakout.GameLogic.States
 
         public override void Canvas()
         {
-            Raylib.DrawText(msg, Window.Width / 2 - width / 2, Window.Height / 2, fontSize, Color.WHITE);
+            Raylib.DrawText(msg, Window.Width / 2 - width / 2, Window.Height / 2, fontSize, Color.White);
             base.Canvas();
         }
     }

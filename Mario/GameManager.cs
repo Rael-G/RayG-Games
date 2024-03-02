@@ -81,7 +81,7 @@ namespace Mario
 
         public override void Render()
         {
-            Raylib.ClearBackground(Color.SKYBLUE);
+            Raylib.ClearBackground(Color.SkyBlue);
 
             Raylib.BeginMode2D(_camera.Camera2d);
             base.Render();

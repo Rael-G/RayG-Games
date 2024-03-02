@@ -24,7 +24,7 @@ namespace EvilBird.Entities.Obstacles
         public override void Start()
         {
             _texture = _textureManager.GetTexture("Scarecrow");
-            outOfScreen = -_texture.width * 2;
+            outOfScreen = -_texture.Width * 2;
             ScarecrowDown = new(_initialPosition, _texture);
             ScarecorwUp = new(_initialPosition, _texture);
             ScarecrowScore = new ScarecrowScore(_initialPosition);
@@ -125,8 +125,8 @@ namespace EvilBird.Entities.Obstacles
 
         //public override void Render()
         //{
-        //    Raylib.DrawTextureEx(_texture, PositionA, 0, 2, Color.WHITE);
-        //    Raylib.DrawTextureEx(_texture, PositionB, 180, 2, Color.WHITE);
+        //    Raylib.DrawTextureEx(_texture, PositionA, 0, 2, Color.White);
+        //    Raylib.DrawTextureEx(_texture, PositionB, 180, 2, Color.White);
         //    base.Render();
         //}
     }

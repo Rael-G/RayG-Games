@@ -32,7 +32,7 @@ namespace EvilBird.Entities
         {
             TextureRising = _textureManager.GetTexture("EvilBirdRising");
             TextureFalling = _textureManager.GetTexture("EvilBirdFalling");
-            Size = new Vector2(TextureRising.width, TextureRising.height);
+            Size = new Vector2(TextureRising.Width, TextureRising.Height);
             Position = new Vector2(Window.VirtualWidth / 2 - Size.X / 2, 
                 Window.VirtualHeight / 2 - Size.Y / 2);
 
@@ -46,8 +46,8 @@ namespace EvilBird.Entities
             FallForce += _gravity * Raylib.GetFrameTime();
             Position.Y += FallForce;
 
-            if (!Dead && Raylib.IsMouseButtonPressed(MouseButton.MOUSE_BUTTON_LEFT)
-                || Raylib.IsKeyPressed(KeyboardKey.KEY_SPACE))
+            if (!Dead && Raylib.IsMouseButtonPressed(MouseButton.Left)
+                || Raylib.IsKeyPressed(KeyboardKey.Space))
             {
                 FallForce = -2.5f;
                 _audioManager.PlaySound("Jump");
@@ -66,11 +66,11 @@ namespace EvilBird.Entities
 
             if (FallForce > 0)
             {
-                Raylib.DrawTexture(TextureFalling, (int)Position.X, (int)Position.Y, Color.WHITE);
+                Raylib.DrawTexture(TextureFalling, (int)Position.X, (int)Position.Y, Color.White);
             }
             else
             {
-                Raylib.DrawTexture(TextureRising, (int)Position.X, (int)Position.Y, Color.WHITE);
+                Raylib.DrawTexture(TextureRising, (int)Position.X, (int)Position.Y, Color.White);
             }
             base.Render();
         }

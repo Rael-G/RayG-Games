@@ -31,12 +31,12 @@ namespace Breakout.Entities
             Tier = tier;
 
             Position = new Rectangle(position.X, position.Y, SpriteSheetCustom.Width, SpriteSheetCustom.Height);
-            Collisor = new Collisor(Position.x, Position.y, Position.width, Position.height, "Brick");
+            Collisor = new Collisor(Position.X, Position.Y, Position.Width, Position.Height, "Brick");
         }
 
         public override void Update()
         {
-            Collisor.Position = new Vector2(Position.x, Position.y);
+            Collisor.Position = new Vector2(Position.X, Position.Y);
             Sprite = _spriteSheet.Bricks[Color, Tier];
 
             base.Update();
@@ -44,7 +44,7 @@ namespace Breakout.Entities
 
         public override void Render()
         {
-            Raylib.DrawTexturePro(Sprite.Texture, Sprite.Source, Position, Sprite.Axis, 0, Raylib_cs.Color.WHITE);
+            Raylib.DrawTexturePro(Sprite.Texture, Sprite.Source, Position, Sprite.Axis, 0, Raylib_cs.Color.White);
 
             base.Render();
         }

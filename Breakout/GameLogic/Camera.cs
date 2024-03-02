@@ -25,10 +25,10 @@ namespace Breakout.GameLogic
 
         public override void Update()
         {
-            Camera2d.target =Target;
-            Camera2d.offset = Offset;
-            Camera2d.zoom = Window.Scale;
-            Camera2d.rotation = 0;
+            Camera2d.Target =Target;
+            Camera2d.Offset = Offset;
+            Camera2d.Zoom = Window.Scale;
+            Camera2d.Rotation = 0;
 
             base.Update();
         }

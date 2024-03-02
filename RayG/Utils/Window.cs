@@ -90,7 +90,7 @@ namespace RayG
         {
             Raylib.InitWindow(_width, _height, Name);
             Raylib.SetWindowMinSize(_virtualWidth, _virtualHeight);
-            Raylib.SetExitKey(KeyboardKey.KEY_NULL);
+            Raylib.SetExitKey(KeyboardKey.Null);
             foreach (var flag in _flags)
             {
                 Raylib.SetWindowState(flag);

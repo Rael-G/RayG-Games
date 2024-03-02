@@ -28,7 +28,7 @@ namespace RayG
 
         public override void Render()
         {
-            Raylib.DrawTexturePro(Sprite.Texture, Sprite.Source, _rectangle, Sprite.Axis, 0, Color.WHITE);
+            Raylib.DrawTexturePro(Sprite.Texture, Sprite.Source, _rectangle, Sprite.Axis, 0, Color.White);
             base.Render();
         }
 
@@ -57,12 +57,12 @@ namespace RayG
                     tiles.Add(new(sprite, destination));
                 }
 
-                destination.x += map.TileWidth;
+                destination.X += map.TileWidth;
 
                 if (i == limit - 1)
                 {
-                    destination.x = 0;
-                    destination.y += map.TileHeight;
+                    destination.X = 0;
+                    destination.Y += map.TileHeight;
                     limit += map.MapWidth;
                 }
             }

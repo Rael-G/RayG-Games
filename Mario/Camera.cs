@@ -29,7 +29,7 @@ namespace Mario
         {
             Offset = new Vector2(Window.Width / 2, Window.Height / 2);
             Target = new Vector2(Player.Collisor.Position.X, Player.Collisor.Position.Y * 0.7f);
-            Camera2d.target = Target;
+            Camera2d.Target = Target;
             base.Start();
         }
 
@@ -38,21 +38,21 @@ namespace Mario
             Target = new Vector2(Player.Collisor.Position.X, Target.Y);
 
             var delta = Raylib.GetFrameTime();
-            Vector2 diff = Vector2.Subtract(new Vector2(Target.X, Target.Y), Camera2d.target);
+            Vector2 diff = Vector2.Subtract(new Vector2(Target.X, Target.Y), Camera2d.Target);
             float length = diff.Length();
 
             if (length > minEffectLength)
             {
                 float speed = Math.Max(fractionSpeed * length, minSpeed);
-                Target = Vector2.Add(Camera2d.target, Vector2.Multiply(diff, speed * delta / length));
+                Target = Vector2.Add(Camera2d.Target, Vector2.Multiply(diff, speed * delta / length));
                 Target.X = Math.Min(Target.X, max - Window.VirtualWidth / 2 / 2);
                 Target.X = Math.Max(Target.X, min + Window.VirtualWidth / 2 / 2);
-                Camera2d.target = Target;
+                Camera2d.Target = Target;
             }
 
-            Camera2d.offset = Offset;
-            Camera2d.zoom = Window.Scale;
-            Camera2d.rotation = 0;
+            Camera2d.Offset = Offset;
+            Camera2d.Zoom = Window.Scale;
+            Camera2d.Rotation = 0;
 
             base.Update();
         }

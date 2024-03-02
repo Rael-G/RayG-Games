@@ -33,8 +33,8 @@ namespace Breakout.Entities
 
         public override void Render()
         {
-            Raylib.ClearBackground(Color.BLACK);
-            Raylib.DrawTextureEx(Texture, position, 0, 2, Color.WHITE);
+            Raylib.ClearBackground(Color.Black);
+            Raylib.DrawTextureEx(Texture, position, 0, 2, Color.White);
             base.Render();
         }
     }

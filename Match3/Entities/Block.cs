@@ -18,20 +18,20 @@ namespace Match3.Entities
         {
             Tile = tile;
             Sprite = sprite;
-            Position = new Rectangle { width = Sprite.Width, height = Sprite.Height, 
-                x = position.X, y = position.Y};
+            Position = new Rectangle { Width = Sprite.Width, Height = Sprite.Height, 
+                X = position.X, Y = position.Y};
             BoardPosition = (row, col);
         }
 
         public void Swap(Vector2 position)
         {
-            var moveX = Timing.InterpolateAsync(DURATION, Position.x, position.X, (t) => 
+            var moveX = Timing.InterpolateAsync(DURATION, Position.X, position.X, (t) => 
             { 
-                Position = new Rectangle(t, Position.y, Position.height, Position.width); 
+                Position = new Rectangle(t, Position.Y, Position.Height, Position.Width); 
             });
-            var moveY = Timing.InterpolateAsync(DURATION, Position.y, position.Y, (t) => 
+            var moveY = Timing.InterpolateAsync(DURATION, Position.Y, position.Y, (t) => 
             { 
-                Position = new Rectangle(Position.x, t, Position.height, Position.width); 
+                Position = new Rectangle(Position.X, t, Position.Height, Position.Width); 
             });
         }
 
@@ -39,7 +39,7 @@ namespace Match3.Entities
         {
             var move = Timing.InterpolateAsync(DURATION, 0, position.Y, (t) =>
             {
-                Position = new Rectangle(Position.x, t, Position.height, Position.width);
+                Position = new Rectangle(Position.X, t, Position.Height, Position.Width);
             });
         }
     }

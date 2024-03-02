@@ -28,7 +28,7 @@ namespace EvilBird.Entities.Obstacles
         public override void Render()
         {
             base.Render();
-            Raylib.DrawTextureEx(Texture, Position, 0, -2, Color.WHITE);
+            Raylib.DrawTextureEx(Texture, Position, 0, -2, Color.White);
         }
     }
 }

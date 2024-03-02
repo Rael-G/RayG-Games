@@ -33,14 +33,14 @@ namespace Pong.Entities
             
             if (IsLeft)
             {
-                keyUp = KeyboardKey.KEY_W;
-                keyDown = KeyboardKey.KEY_S;
+                keyUp = KeyboardKey.W;
+                keyDown = KeyboardKey.S;
                 positionX = 10;
             }
             else
             {
-                keyUp = KeyboardKey.KEY_UP;
-                keyDown = KeyboardKey.KEY_DOWN;
+                keyUp = KeyboardKey.Up;
+                keyDown = KeyboardKey.Down;
                 positionX = 90;
             }
 
@@ -71,7 +71,7 @@ namespace Pong.Entities
 
         public override void Render()
         {
-            Raylib.DrawRectangleV(paddlePosition, paddleSize, Color.WHITE);
+            Raylib.DrawRectangleV(paddlePosition, paddleSize, Color.White);
 
             base.Render();
         }

@@ -11,7 +11,7 @@ namespace Breakout.GameLogic.States
     {
         int highlated = 0;
         byte[] letters = new byte[] { 65, 65, 65 };
-        Color[] colors = new Color[]{ Color.WHITE, Color.WHITE, Color.WHITE};
+        Color[] colors = new Color[]{ Color.White, Color.White, Color.White};
         string asciiLetters;
 
         const int messageHeigth = 100;
@@ -44,7 +44,7 @@ namespace Breakout.GameLogic.States
 
         public override void Update()
         {
-            if (Raylib.IsKeyPressed(KeyboardKey.KEY_ENTER))
+            if (Raylib.IsKeyPressed(KeyboardKey.Enter))
             {
                 List<Score> scores;
                 try
@@ -64,11 +64,11 @@ namespace Breakout.GameLogic.States
                 StateRef.State = GameState.HighScore;
             }
 
-            if (Raylib.IsKeyPressed(KeyboardKey.KEY_RIGHT) && highlated < 2)
+            if (Raylib.IsKeyPressed(KeyboardKey.Right) && highlated < 2)
             {
                 highlated++;
             }
-            if (Raylib.IsKeyPressed(KeyboardKey.KEY_LEFT) && highlated > 0)
+            if (Raylib.IsKeyPressed(KeyboardKey.Left) && highlated > 0)
             {
                 highlated--;
             }
@@ -83,7 +83,7 @@ namespace Breakout.GameLogic.States
 
         public override void Canvas()
         {
-            Raylib.DrawText(_controller.Score.ToString(), (int)messagePos.X, (int)messagePos.Y, messageHeigth, Color.WHITE);
+            Raylib.DrawText(_controller.Score.ToString(), (int)messagePos.X, (int)messagePos.Y, messageHeigth, Color.White);
 
             ASCIIEncoding asciiEncoding = new ASCIIEncoding();
             asciiLetters = asciiEncoding.GetString(letters);
@@ -100,7 +100,7 @@ namespace Breakout.GameLogic.States
 
         private void LetterDown()
         {
-            if (Raylib.IsKeyPressed(KeyboardKey.KEY_DOWN))
+            if (Raylib.IsKeyPressed(KeyboardKey.Down))
             {
                 letters[highlated]--;
                 if (letters[highlated] < 65)
@@ -113,7 +113,7 @@ namespace Breakout.GameLogic.States
 
         private void LetterUp()
         {
-            if (Raylib.IsKeyPressed(KeyboardKey.KEY_UP))
+            if (Raylib.IsKeyPressed(KeyboardKey.Up))
             {
                 letters[highlated]++;
                 if (letters[highlated] > 90)
@@ -129,11 +129,11 @@ namespace Breakout.GameLogic.States
             {
                 if (i == highlated)
                 {
-                    colors[i] = Color.BLUE;
+                    colors[i] = Color.Blue;
                 }
                 else
                 {
-                    colors[i] = Color.WHITE;
+                    colors[i] = Color.White;
 
                 }
             }

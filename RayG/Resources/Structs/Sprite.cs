@@ -16,12 +16,12 @@ namespace RayG
         /// <summary>
         /// Gets the width of the sprite.
         /// </summary>
-        public readonly int Width { get => (int)Source.width; }
+        public readonly int Width { get => (int)Source.Width; }
 
         /// <summary>
         /// Gets the height of the sprite.
         /// </summary>
-        public readonly int Height { get => (int)Source.height;  }
+        public readonly int Height { get => (int)Source.Height;  }
 
         /// <summary>
         /// Gets or sets the source rectangle of the sprite.
@@ -62,14 +62,14 @@ namespace RayG
         /// </summary>
         public void FlipHorizontally()
         {
-            Source = new Rectangle (Source.x, Source.y, Source.width * -1, Source.height);
+            Source = new Rectangle (Source.X, Source.Y, Source.Width * -1, Source.Height);
         }
 
         private void SetAxis()
         {
             if (_centerAxis)
             {
-                Axis = new(Source.width * Scale / 2, Source.height * Scale / 2);
+                Axis = new(Source.Width * Scale / 2, Source.Height * Scale / 2);
             }
             else
             {

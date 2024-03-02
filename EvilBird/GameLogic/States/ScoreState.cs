@@ -33,7 +33,7 @@ namespace EvilBird.GameLogic.States
 
         public override void Update()
         {
-            if (Raylib.IsKeyPressed(KeyboardKey.KEY_SPACE))
+            if (Raylib.IsKeyPressed(KeyboardKey.Space))
             {
                 GameStateRef.State = GameState.CountDown;
             }
@@ -43,13 +43,13 @@ namespace EvilBird.GameLogic.States
         public override void Canvas()
         {
             Raylib.DrawText(Corns.ToString(), Window.Width / 2 - cornMsgSize / 2,
-                Window.Height * 25 / 100 - _fontSize / 2, _fontSize * 2, Color.WHITE);
+                Window.Height * 25 / 100 - _fontSize / 2, _fontSize * 2, Color.White);
 
             Raylib.DrawText(_caugthMsg, Window.Width / 2 - caughtMsgSize / 2,
-                Window.Height / 2 - _fontSize / 2, _fontSize, Color.WHITE);
+                Window.Height / 2 - _fontSize / 2, _fontSize, Color.White);
 
             Raylib.DrawText(_restartMsg, Window.Width / 2 - restartMsgSize / 2,
-                Window.Height * 75 / 100 - _fontSize / 2, _fontSize, Color.WHITE);
+                Window.Height * 75 / 100 - _fontSize / 2, _fontSize, Color.White);
             base.Canvas();
         }
     }

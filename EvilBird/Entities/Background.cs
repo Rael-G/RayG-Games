@@ -33,7 +33,7 @@ namespace EvilBird.Entities
             TextureMid = _textureManager.GetTexture("WheatFarmMid");
             TextureFront = _textureManager.GetTexture("WheatFarmFront");
 
-            Size = new(TextureMid.width * 2, 0);
+            Size = new(TextureMid.Width * 2, 0);
             base.Start();
         }
 
@@ -43,11 +43,11 @@ namespace EvilBird.Entities
             scrollingMid += _speed * Raylib.GetFrameTime();
             scrollingFront += _speed * Raylib.GetFrameTime();
 
-            if (scrollingMid >= TextureMid.width * 2 )
+            if (scrollingMid >= TextureMid.Width * 2 )
             {
                 scrollingMid = 0;
             }
-            if (scrollingFront >= TextureFront.width)
+            if (scrollingFront >= TextureFront.Width)
             {
                 scrollingFront = 0;
             }
@@ -60,13 +60,13 @@ namespace EvilBird.Entities
 
         public override void Render()
         {
-            Raylib.ClearBackground(Color.GRAY);
+            Raylib.ClearBackground(Color.Gray);
 
-            Raylib.DrawTextureEx(TextureMid, PositionMid, _rotation, _scale, Color.WHITE);
-            Raylib.DrawTextureEx(TextureMid, PositionMid + Size, _rotation, _scale, Color.WHITE);
+            Raylib.DrawTextureEx(TextureMid, PositionMid, _rotation, _scale, Color.White);
+            Raylib.DrawTextureEx(TextureMid, PositionMid + Size, _rotation, _scale, Color.White);
 
-            Raylib.DrawTextureEx(TextureFront, PositionFront, _rotation, _scale, Color.WHITE);
-            Raylib.DrawTextureEx(TextureFront, PositionFront + Size, _rotation, _scale, Color.WHITE);
+            Raylib.DrawTextureEx(TextureFront, PositionFront, _rotation, _scale, Color.White);
+            Raylib.DrawTextureEx(TextureFront, PositionFront + Size, _rotation, _scale, Color.White);
 
             base.Render();
         }

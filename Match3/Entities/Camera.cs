@@ -25,15 +25,15 @@ namespace Match3.Entities
 
         public override void Update()
         {
-            Camera2d.target = Target;
-            Camera2d.offset = Offset;
-            Camera2d.zoom = Window.Scale;
+            Camera2d.Target = Target;
+            Camera2d.Offset = Offset;
+            Camera2d.Zoom = Window.Scale;
             var a = Window.Height;
             var b = Window.Width;
             var c = Window.VirtualHeight;
             var d = Window.VirtualWidth;
             float scale = (a + b) / (float)(c + d);
-            Camera2d.rotation = 0;
+            Camera2d.Rotation = 0;
 
             base.Update();
         }

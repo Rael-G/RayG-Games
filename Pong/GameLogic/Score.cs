@@ -27,8 +27,8 @@ namespace Pong.GameLogic
         {
             font = FontManager.GetFont("mecha");
             fontSpacing = Window.Height * 1 / 100;
-            fontColor = Color.WHITE;
-            fontSize = font.baseSize * fontSpacing;
+            fontColor = Color.White;
+            fontSize = font.BaseSize * fontSpacing;
 
             leftScorePosition = new Vector2(Window.Width * 20 / 100,
                 Window.Height * 10 / 100);

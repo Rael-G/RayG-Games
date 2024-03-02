@@ -34,7 +34,7 @@ namespace Breakout.GameLogic.States
 
         public override void Update()
         {
-            if (Raylib.IsKeyPressed(KeyboardKey.KEY_ESCAPE))
+            if (Raylib.IsKeyPressed(KeyboardKey.Escape))
             {
                 StateRef.State = GameState.Start;
             }
@@ -43,7 +43,7 @@ namespace Breakout.GameLogic.States
 
         public override void Canvas()
         {
-            Raylib.DrawText(highScoresMsg, Window.Width / 2 - highScoresSize / 2, Window.Height / 5, highScoresFontSize, Color.WHITE);
+            Raylib.DrawText(highScoresMsg, Window.Width / 2 - highScoresSize / 2, Window.Height / 5, highScoresFontSize, Color.White);
 
             var pos = posY;
             var lenght = Math.Min(Scores.Count, 10);
@@ -51,9 +51,9 @@ namespace Breakout.GameLogic.States
             {
                 var scoreTextSize = Raylib.MeasureText(Scores[i].HighScore.ToString(), fontSize);
 
-                Raylib.DrawText($"{i + 1}.", posX, pos, fontSize, Color.WHITE);
-                Raylib.DrawText(Scores[i].PlayerName, posX * 2 - spacing / 2, pos, fontSize, Color.WHITE);
-                Raylib.DrawText(Scores[i].HighScore.ToString(), posX * 3 - scoreTextSize, pos, fontSize, Color.WHITE);
+                Raylib.DrawText($"{i + 1}.", posX, pos, fontSize, Color.White);
+                Raylib.DrawText(Scores[i].PlayerName, posX * 2 - spacing / 2, pos, fontSize, Color.White);
+                Raylib.DrawText(Scores[i].HighScore.ToString(), posX * 3 - scoreTextSize, pos, fontSize, Color.White);
                 pos += fontSize;
             }
             base.Canvas();

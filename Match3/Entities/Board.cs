@@ -42,7 +42,7 @@ namespace Match3.Entities
                 float alpha = block.Dead ? 0f : 1;
 
                 Raylib.DrawTexturePro(block.Sprite.Texture, block.Sprite.Source,
-                block.Position, block.Sprite.Axis, 0, Raylib.ColorAlpha(Color.WHITE, alpha));
+                block.Position, block.Sprite.Axis, 0, Raylib.ColorAlpha(Color.White, alpha));
             }
             base.Render();
         }

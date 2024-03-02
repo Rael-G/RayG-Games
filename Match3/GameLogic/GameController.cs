@@ -39,17 +39,17 @@ namespace Match3.GameLogic
 
         public override void Render()
         {
-            Raylib.DrawRectangleLines((int)_selector.x, (int)_selector.y, (int)_selector.width, 
-                (int)_selector.height, Raylib.Fade(Color.RED, 0.8f));
+            Raylib.DrawRectangleLines((int)_selector.X, (int)_selector.Y, (int)_selector.Width, 
+                (int)_selector.Height, Raylib.Fade(Color.Red, 0.8f));
 
-            Raylib.DrawRectangle((int)_selected.x, (int)_selected.y, (int)_selected.width,
-                (int)_selected.height, Raylib.Fade(Color.WHITE, 0.5f));
+            Raylib.DrawRectangle((int)_selected.X, (int)_selected.Y, (int)_selected.Width,
+                (int)_selected.Height, Raylib.Fade(Color.White, 0.5f));
             base.Render();
         }
 
         private void Swap()
         {
-            if (Raylib.IsKeyPressed(KeyboardKey.KEY_SPACE))
+            if (Raylib.IsKeyPressed(KeyboardKey.Space))
             {
                 if (_selectedPosition == null)
                     Select();
@@ -83,18 +83,18 @@ namespace Match3.GameLogic
 
         private void Move()
         {
-            if (Raylib.IsKeyPressed(KeyboardKey.KEY_UP) && _selectorPosition.row > 0)
+            if (Raylib.IsKeyPressed(KeyboardKey.Up) && _selectorPosition.row > 0)
                 TryMove((_selectorPosition.row - 1, _selectorPosition.col));
 
-            if (Raylib.IsKeyPressed(KeyboardKey.KEY_DOWN) && _selectorPosition.row < Board.ROWS - 1)
+            if (Raylib.IsKeyPressed(KeyboardKey.Down) && _selectorPosition.row < Board.ROWS - 1)
                 TryMove((_selectorPosition.row + 1, _selectorPosition.col));
 
 
-            if (Raylib.IsKeyPressed(KeyboardKey.KEY_LEFT) && _selectorPosition.col > 0)
+            if (Raylib.IsKeyPressed(KeyboardKey.Left) && _selectorPosition.col > 0)
                 TryMove((_selectorPosition.row, _selectorPosition.col - 1));
 
 
-            if (Raylib.IsKeyPressed(KeyboardKey.KEY_RIGHT) && _selectorPosition.col < Board.COLS - 1 )
+            if (Raylib.IsKeyPressed(KeyboardKey.Right) && _selectorPosition.col < Board.COLS - 1 )
                 TryMove((_selectorPosition.row, _selectorPosition.col + 1));
         }
 

@@ -22,7 +22,7 @@ namespace EvilBird
             Window.Height = 1200;
             Window.VirtualWidth = 320;
             Window.VirtualHeight = 240;
-            Window.Flags = new ConfigFlags[] { ConfigFlags.FLAG_VSYNC_HINT};
+            Window.Flags = new ConfigFlags[] { ConfigFlags.VSyncHint};
             Raylib.SetTargetFPS(144);
             base.Config();
         }
