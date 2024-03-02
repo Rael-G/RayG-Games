@@ -1,7 +1,7 @@
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Target Name="CopyData" AfterTargets="Build">
     <ItemGroup>
-      <AssetFiles Include="$(ProjectDir)\..\Assets\**\*.*" />
+      <AssetFiles Include="$(ProjectDir)\..\..\assets\**\*.*" />
     </ItemGroup>
     <Copy
       SourceFiles="@(AssetFiles)"

@@ -11,6 +11,6 @@
     <PackageReference Include="RayG" Version="1.0.0" />
   </ItemGroup>
 
-    <Import Project="../Build/CopyData.targets" />
-	
+  <Import Project="../../build/CopyData.targets" />
+
 </Project>
